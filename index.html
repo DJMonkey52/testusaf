@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>USAF | Система отчетов</title>
+    <title>ARMY Delta | Система отчетов</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,45 +15,45 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+            background: linear-gradient(135deg, #051505 0%, #0a2a0a 50%, #0d2e0d 100%);
             min-height: 100vh;
             transition: background 0.3s ease;
         }
 
         body.light {
-            background: linear-gradient(135deg, #e8eef4 0%, #d4dee8 100%);
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
         }
 
         :root {
-            --glass-bg: rgba(18, 22, 35, 0.95);
-            --glass-border: rgba(212, 175, 55, 0.35);
+            --glass-bg: rgba(10, 25, 10, 0.95);
+            --glass-border: rgba(76, 175, 80, 0.35);
             --text-primary: #F0F3FA;
             --text-secondary: #B0C4B0;
             --text-muted: #8A9A8A;
-            --accent: #D4AF37;
-            --accent-glow: #E6C868;
-            --accent-dark: #B88F2A;
+            --accent: #4CAF50;
+            --accent-glow: #66BB6A;
+            --accent-dark: #2E7D32;
             --success: #10b981;
             --danger: #ef4444;
             --border-light: rgba(255, 255, 255, 0.06);
             --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
             --shadow-md: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
-            --input-bg: rgba(10, 12, 20, 0.9);
-            --card-hover: rgba(212, 175, 55, 0.12);
+            --input-bg: rgba(5, 20, 5, 0.9);
+            --card-hover: rgba(76, 175, 80, 0.12);
         }
 
         body.light {
-            --glass-bg: rgba(245, 245, 250, 0.95);
-            --glass-border: rgba(212, 175, 55, 0.25);
+            --glass-bg: rgba(245, 255, 245, 0.95);
+            --glass-border: rgba(76, 175, 80, 0.25);
             --text-primary: #1f2937;
             --text-secondary: #4b5563;
             --text-muted: #9ca3af;
-            --accent: #D4AF37;
-            --accent-glow: #B88F2A;
-            --accent-dark: #9a6d0a;
+            --accent: #4CAF50;
+            --accent-glow: #66BB6A;
+            --accent-dark: #388E3C;
             --border-light: rgba(0, 0, 0, 0.08);
             --input-bg: rgba(255, 255, 255, 0.95);
-            --card-hover: rgba(212, 175, 55, 0.08);
+            --card-hover: rgba(76, 175, 80, 0.08);
         }
 
         .container {
@@ -87,7 +87,7 @@
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            color: #1a1a1a;
+            color: white;
             box-shadow: var(--shadow-sm);
             animation: float 3s ease-in-out infinite;
         }
@@ -100,7 +100,7 @@
         .logo h1 {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #FFFFFF, var(--accent-glow));
+            background: linear-gradient(135deg, #FFFFFF, #A5D6A7);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -181,7 +181,7 @@
         .card-icon {
             width: 75px;
             height: 75px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(184, 143, 42, 0.15));
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.25), rgba(46, 125, 50, 0.15));
             border-radius: 26px;
             display: flex;
             align-items: center;
@@ -263,7 +263,7 @@
         }
 
         .card-header {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 143, 42, 0.08));
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.08));
             padding: 20px 28px;
             border-bottom: 1px solid var(--border-light);
         }
@@ -313,7 +313,7 @@
         .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
         }
 
         .period-row {
@@ -324,7 +324,7 @@
         }
 
         .period-info {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(76, 175, 80, 0.1);
             border-radius: 12px;
             padding: 10px 14px;
             text-align: center;
@@ -511,7 +511,7 @@
         }
 
         .add-proof-btn {
-            background: rgba(212, 175, 55, 0.18);
+            background: rgba(76, 175, 80, 0.18);
             border: 1px dashed var(--accent);
             border-radius: 10px;
             padding: 6px 12px;
@@ -526,7 +526,7 @@
         }
 
         .add-proof-btn:hover {
-            background: rgba(212, 175, 55, 0.3);
+            background: rgba(76, 175, 80, 0.3);
             transform: translateY(-1px);
         }
 
@@ -545,11 +545,11 @@
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: white;
         }
 
         .count-badge {
-            background: rgba(212, 175, 55, 0.18);
+            background: rgba(76, 175, 80, 0.18);
             padding: 5px 14px;
             border-radius: 30px;
             font-size: 0.8rem;
@@ -558,7 +558,7 @@
 
         .add-btn {
             width: 100%;
-            background: rgba(212, 175, 55, 0.12);
+            background: rgba(76, 175, 80, 0.12);
             border: 1px dashed var(--accent);
             border-radius: 16px;
             padding: 14px;
@@ -574,7 +574,7 @@
         }
 
         .add-btn:hover {
-            background: rgba(212, 175, 55, 0.25);
+            background: rgba(76, 175, 80, 0.25);
             transform: translateY(-2px);
         }
 
@@ -588,7 +588,7 @@
         }
 
         .total-points-bar {
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba(76, 175, 80, 0.15);
             border-radius: 16px;
             padding: 14px 20px;
             margin: 20px 0 16px;
@@ -622,7 +622,7 @@
             border-radius: 22px;
             font-size: 0.95rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: white;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -634,7 +634,7 @@
         .submit-btn:hover {
             transform: translateY(-3px);
             filter: brightness(1.05);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.5);
         }
 
         .submit-btn:disabled {
@@ -735,10 +735,10 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <div class="logo-icon"><i class="fas fa-fighter-jet"></i></div>
-                <h1>USAF</h1>
+                <div class="logo-icon"><i class="fas fa-gun"></i></div>
+                <h1>ARMY Delta</h1>
             </div>
-            <p class="subtitle">United States Air Force | Система подачи отчётов</p>
+            <p class="subtitle">Система подачи отчётов delta</p>
         </div>
 
         <div id="homePage" class="home-page">
@@ -761,190 +761,130 @@
                     <p>Повышение лётной категории</p>
                     <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
+                <div class="action-card" data-page="route">
+                    <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>🗺️ Отчёт о маршруте</h3>
+                    <p>Прохождение воздушного маршрута</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
             </div>
         </div>
 
         <!-- ЕЖЕНЕДЕЛЬНЫЙ ОТЧЁТ -->
         <div id="weeklyPage" class="form-page">
-            <div class="back-btn" onclick="showHome()">
-                <i class="fas fa-arrow-left"></i> На главную
-            </div>
+            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
             <div class="glass-card">
-                <div class="card-header">
-                    <h2><i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт USAF</h2>
-                </div>
+                <div class="card-header"><h2><i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт</h2></div>
                 <div class="card-body">
                     <div id="weeklyAlert"></div>
-                    <div class="input-group"><label>✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="weeklyNickname" placeholder="Введите имя и фамилию"></div>
-                    <div class="input-group">
-                        <label>🏅 ЗВАНИЕ / ДОЛЖНОСТЬ</label>
-                        <select id="weeklyRank">
-                            <option value="">-- Выберите звание --</option>
-                            <option value="Рядовой">Рядовой</option>
-                            <option value="Капрал">Капрал</option>
-                            <option value="Сержант">Сержант</option>
-                            <option value="Лейтенант">Лейтенант</option>
-                            <option value="Капитан">Капитан</option>
-                            <option value="Майор">Майор</option>
-                            <option value="Подполковник">Подполковник</option>
-                            <option value="Полковник">Полковник</option>
-                        </select>
-                    </div>
+                    <div class="input-group"><label>🎮 ИГРОВОЙ НИКНЕЙМ</label><input type="text" id="weeklyNickname" placeholder="Введите никнейм"></div>
+                    <div class="input-group"><label>🏅 РАНГ СОТРУДНИКА</label><input type="text" id="weeklyRank" placeholder="Ваше звание"></div>
                     <div class="period-row">
                         <div class="input-group"><label>📅 ДАТА НАЧАЛА</label><input type="date" id="weeklyDateStart"></div>
                         <div class="input-group"><label>📅 ДАТА ОКОНЧАНИЯ</label><input type="date" id="weeklyDateEnd"></div>
                     </div>
                     <div class="period-info" id="weeklyPeriodInfo"></div>
-
                     <div style="margin-top: 24px;">
-                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);">
-                            <i class="fas fa-clipboard-list"></i> 📋 АКТИВНОСТИ (БАЛЛЫ НАЧИСЛЯЮТСЯ АВТОМАТИЧЕСКИ)
-                        </label>
+                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);"><i class="fas fa-clipboard-list"></i> 📋 ДЕЙСТВИЯ</label>
                         <div id="weeklyActionsContainer">
                             <div id="weeklyEmptyActions" class="empty-state"><i class="fas fa-info-circle"></i> Нет действий</div>
                             <div id="weeklyActionsList"></div>
                         </div>
                         <button class="add-btn" id="weeklyAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
                     </div>
-
-                    <div class="total-points-bar" id="weeklyTotalPointsBar">
-                        <span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span>
-                        <span class="total-points-value" id="weeklyTotalPoints">0</span>
-                    </div>
-
+                    <div class="total-points-bar"><span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span><span class="total-points-value" id="weeklyTotalPoints">0</span></div>
                     <button class="submit-btn" id="weeklySubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ</button>
-                    
-                    <div class="footer-signature">
-                        <i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i>
-                    </div>
+                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
                 </div>
             </div>
         </div>
 
         <!-- ОТЧЁТ НА ПОВЫШЕНИЕ -->
         <div id="promotionPage" class="form-page">
-            <div class="back-btn" onclick="showHome()">
-                <i class="fas fa-arrow-left"></i> На главную
-            </div>
+            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
             <div class="glass-card">
-                <div class="card-header">
-                    <h2><i class="fas fa-arrow-up"></i> ⬆️ Отчёт на повышение</h2>
-                </div>
+                <div class="card-header"><h2><i class="fas fa-arrow-up"></i> ⬆️ Отчёт на повышение</h2></div>
                 <div class="card-body">
                     <div id="promotionAlert"></div>
-                    <div class="input-group"><label>✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="promotionNickname" placeholder="Введите никнейм"></div>
-                    <div class="input-group">
-                        <label>🏅 ТЕКУЩЕЕ ЗВАНИЕ</label>
-                        <select id="promotionCurrentRank">
-                            <option value="">-- Выберите текущее звание --</option>
-                            <option value="Рядовой">Рядовой</option>
-                            <option value="Капрал">Капрал</option>
-                            <option value="Сержант">Сержант</option>
-                            <option value="Лейтенант">Лейтенант</option>
-                            <option value="Капитан">Капитан</option>
-                            <option value="Майор">Майор</option>
-                            <option value="Подполковник">Подполковник</option>
-                            <option value="Полковник">Полковник</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>🎯 ЖЕЛАЕМОЕ ЗВАНИЕ</label>
-                        <select id="promotionDesiredRank">
-                            <option value="">-- Выберите желаемое звание --</option>
-                            <option value="Рядовой">Рядовой</option>
-                            <option value="Капрал">Капрал</option>
-                            <option value="Сержант">Сержант</option>
-                            <option value="Лейтенант">Лейтенант</option>
-                            <option value="Капитан">Капитан</option>
-                            <option value="Майор">Майор</option>
-                            <option value="Подполковник">Подполковник</option>
-                            <option value="Полковник">Полковник</option>
-                        </select>
-                    </div>
+                    <div class="input-group"><label>🎮 ИГРОВОЙ НИКНЕЙМ</label><input type="text" id="promotionNickname" placeholder="Введите никнейм"></div>
+                    <div class="input-group"><label>🏅 ТЕКУЩИЙ РАНГ</label><input type="text" id="promotionCurrentRank" placeholder="Текущее звание"></div>
+                    <div class="input-group"><label>🎯 ЖЕЛАЕМЫЙ РАНГ</label><input type="text" id="promotionDesiredRank" placeholder="Желаемое звание"></div>
                     <div class="input-group"><label>📅 ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="lastPromotionDate"></div>
                     <div class="period-info" id="promotionDateInfo"></div>
-
                     <div style="margin-top: 24px;">
-                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);">
-                            <i class="fas fa-clipboard-list"></i> 📋 ДОСТИЖЕНИЯ (БАЛЛЫ НАЧИСЛЯЮТСЯ АВТОМАТИЧЕСКИ)
-                        </label>
+                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);"><i class="fas fa-clipboard-list"></i> 📋 ДОСТИЖЕНИЯ</label>
                         <div id="promotionActionsContainer">
                             <div id="promotionEmptyActions" class="empty-state"><i class="fas fa-info-circle"></i> Нет действий</div>
                             <div id="promotionActionsList"></div>
                         </div>
                         <button class="add-btn" id="promotionAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
                     </div>
-
-                    <div class="total-points-bar" id="promotionTotalPointsBar">
-                        <span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span>
-                        <span class="total-points-value" id="promotionTotalPoints">0</span>
-                    </div>
-
+                    <div class="total-points-bar"><span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span><span class="total-points-value" id="promotionTotalPoints">0</span></div>
                     <button class="submit-btn" id="promotionSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС</button>
-                    
-                    <div class="footer-signature">
-                        <i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i>
-                    </div>
+                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
                 </div>
             </div>
         </div>
 
         <!-- КВАЛИФИКАЦИЯ ПИЛОТА -->
         <div id="pilotPage" class="form-page">
-            <div class="back-btn" onclick="showHome()">
-                <i class="fas fa-arrow-left"></i> На главную
-            </div>
+            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
             <div class="glass-card">
-                <div class="card-header">
-                    <h2><i class="fas fa-wings"></i> 🛩️ Квалификация пилота</h2>
-                </div>
+                <div class="card-header"><h2><i class="fas fa-wings"></i> 🛩️ Квалификация пилота</h2></div>
                 <div class="card-body">
                     <div id="pilotAlert"></div>
-                    <div class="input-group"><label>👨‍✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="pilotName" placeholder="Введите имя и фамилию"></div>
-                    <div class="input-group">
-                        <label>🪪 ТЕКУЩАЯ КАТЕГОРИЯ</label>
+                    <div class="input-group"><label>👨‍✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="pilotName" placeholder="Введите никнейм"></div>
+                    <div class="input-group"><label>🪪 ТЕКУЩАЯ КАТЕГОРИЯ</label>
                         <select id="pilotCurrentCat">
-                            <option value="Пилот 3 категории">Пилот 3 категории</option>
-                            <option value="Пилот 2 категории">Пилот 2 категории</option>
-                            <option value="Пилот 1 категории">Пилот 1 категории</option>
-                            <option value="Пилот высшей категории">Пилот высшей категории</option>
-                            <option value="Пилот АС">Пилот АС</option>
+                            <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
                         </select>
                     </div>
-                    <div class="input-group">
-                        <label>🎯 ЖЕЛАЕМАЯ КАТЕГОРИЯ</label>
+                    <div class="input-group"><label>🎯 ЖЕЛАЕМАЯ КАТЕГОРИЯ</label>
                         <select id="pilotDesiredCat">
-                            <option value="Пилот 3 категории">Пилот 3 категории</option>
-                            <option value="Пилот 2 категории">Пилот 2 категории</option>
-                            <option value="Пилот 1 категории">Пилот 1 категории</option>
-                            <option value="Пилот высшей категории">Пилот высшей категории</option>
-                            <option value="Пилот АС">Пилот АС</option>
+                            <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
                         </select>
                     </div>
                     <div class="input-group"><label>⏱️ ОБЩИЙ НАЛЁТ (ЧАСЫ)</label><input type="number" id="pilotHours" placeholder="Например: 250"></div>
                     <div class="input-group"><label>🔗 ССЫЛКА НА АУДИТ / ОТЧЁТ</label><input type="text" id="pilotAudit" placeholder="https://discord.com/channels/..."></div>
                     <div class="input-group"><label>📅 ДАТА ПОДАЧИ</label><input type="date" id="pilotDate"></div>
                     <button class="submit-btn" id="pilotSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ</button>
-                    
-                    <div class="footer-signature">
-                        <i class="fas fa-code"></i> USAF Flight Academy <i class="fas fa-heart"></i>
+                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ОТЧЁТ О ПРОХОЖДЕНИИ ВОЗДУШНОГО МАРШРУТА -->
+        <div id="routePage" class="form-page">
+            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
+            <div class="glass-card">
+                <div class="card-header"><h2><i class="fas fa-map-marked-alt"></i> 🗺️ Отчёт о прохождении воздушного маршрута</h2></div>
+                <div class="card-body">
+                    <div id="routeAlert"></div>
+                    <div class="input-group"><label>👨‍✈️ ПИЛОТ (Имя Фамилия)</label><input type="text" id="routePilotName" placeholder="Введите никнейм"></div>
+                    <div class="input-group"><label>📅 ДАТА ВЫПОЛНЕНИЯ</label><input type="date" id="routeDate"></div>
+                    <div class="input-group"><label>🗺️ НОМЕР МАРШРУТА</label>
+                        <select id="routeType">
+                            <option>Маршрут №1</option><option>Маршрут №2.1</option><option>Маршрут №2.2</option><option>Маршрут №3</option><option>Маршрут №4</option><option>Маршрут К+[H]</option><option>Маршрут К+[P]</option>
+                        </select>
                     </div>
+                    <div class="input-group"><label>🎥 ССЫЛКА НА ВИДЕОЗАПИСЬ</label><input type="text" id="routeVideo" placeholder="https://youtu.be/..."></div>
+                    <div class="input-group"><label>📝 ДОПОЛНИТЕЛЬНЫЕ ЗАМЕТКИ</label><textarea rows="2" id="routeNotes" placeholder="Время выполнения, сложности..."></textarea></div>
+                    <button class="submit-btn" id="routeSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ</button>
+                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ⚠️ ЗАМЕНИТЕ НА СВОИ ВЕБХУКИ Discord ⚠️
         const WEBHOOKS = {
             weekly: 'https://discord.com/api/webhooks/1500899546031591688/wpkBFTZbOGyCFvhJ-SfYbPvbJFikcwDCLv983roAS7zj-AelGhtwWltVZ8JUOEmCvAEv',
             promotion: 'https://discord.com/api/webhooks/1500900181086961846/YJt7paNvrerqttykZ2Qk8q11ogdP-qMU8vBAwdPHf8hXcIoL-WsJbchkP-igh5L4R4gv',
-            pilot: 'https://discord.com/api/webhooks/1501941568570134689/7P0vf6jz3kwssPsSYM4xO9-F39cXLtBboljW18gk8Bemn4kYRYV8ShDhaTX1BkeqZe57'
+            pilot: 'https://discord.com/api/webhooks/1501309143691297043/BeXtbLJ7CY0cM83HIQjDInoS7vR2rQwPwt2QJ0yUXoWJiNVBOlLI-XMZfBEXiADxcVyl',
+            route: 'https://discord.com/api/webhooks/1501309143691297043/BeXtbLJ7CY0cM83HIQjDInoS7vR2rQwPwt2QJ0yUXoWJiNVBOlLI-XMZfBEXiADxcVyl'
         };
-
         const ROLES_TO_TAG = '<@&793440125798973441> <@&792082143408160768>';
 
-        // НОВАЯ БАЛЬНАЯ СИСТЕМА USAF
         const ACTIVITY_TYPES = [
             { name: "Патруль", basePoints: 10 },
             { name: "Нахождение регруппа, который напал на ФЗ во время КЧ", basePoints: 15 },
@@ -972,399 +912,138 @@
             { name: "Участие в прок/мед проверках", basePoints: 3 }
         ];
 
-        let weeklyActions = [];
-        let promotionActions = [];
+        let weeklyActions = [], promotionActions = [];
 
-        function formatDate(dateStr) {
-            if (!dateStr) return '';
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('ru-RU');
+        function formatDate(d) { if(!d) return ''; return new Date(d).toLocaleDateString('ru-RU'); }
+        function escapeHtml(s) { if(!s) return ''; return s.replace(/[&<>]/g, function(m){ return m==='&'?'&amp;':m==='<'?'&lt;':'&gt;';}); }
+        function calculatePoints(a) { return (a.basePoints||0) * (parseInt(a.count)||1); }
+        function totalPoints(acts) { return acts.reduce((s,a)=>s+calculatePoints(a),0); }
+
+        function updateWeeklyTotal() { document.getElementById('weeklyTotalPoints').textContent = totalPoints(weeklyActions); }
+        function updatePromotionTotal() { document.getElementById('promotionTotalPoints').textContent = totalPoints(promotionActions); }
+
+        function createActionHTML(a, idx, type) {
+            let proofs = a.proofs || [''];
+            return `<div class="action-item"><div class="action-header"><div class="action-title"><i class="fas fa-tag"></i> ДЕЙСТВИЕ #${idx+1}</div><button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button></div><div class="action-fields"><div class="action-field"><label>ТИП</label><select class="action-type" data-idx="${idx}"><option value="">-- Выберите --</option>${ACTIVITY_TYPES.map(t=>`<option value="${t.name}" data-points="${t.basePoints}" ${a.type===t.name?'selected':''}>${t.name} (${t.basePoints} баллов)</option>`).join('')}</select></div><div class="action-field"><label>КОЛ-ВО</label><input type="number" class="action-count" data-idx="${idx}" value="${a.count||1}" min="1"></div><div class="proofs-section"><label><i class="fas fa-images"></i> ДОКАЗАТЕЛЬСТВА</label><div class="proofs-list">${proofs.map((p,pi)=>`<div class="proof-item"><input type="text" class="proof-input" data-action="${idx}" data-proof="${pi}" value="${escapeHtml(p)}" placeholder="https://...">${proofs.length>1?`<button class="remove-proof" data-action="${idx}" data-proof="${pi}"><i class="fas fa-times"></i></button>`:''}</div>`).join('')}</div><button class="add-proof-btn" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button></div></div><div class="points-row"><span class="count-badge"><i class="fas fa-hashtag"></i> КОЛ-ВО: ${a.count||1}</span><span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calculatePoints(a)}</span></div></div>`;
         }
 
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
+        function attachEvents(container, acts, updateFunc) {
+            container.querySelectorAll('.remove-action').forEach(btn=>btn.addEventListener('click',()=>{ let idx=parseInt(btn.dataset.idx); acts.splice(idx,1); render(container.id, acts, updateFunc); }));
+            container.querySelectorAll('.action-type').forEach(sel=>sel.addEventListener('change',()=>{ let idx=parseInt(sel.dataset.idx); acts[idx].type=sel.value; acts[idx].basePoints=parseInt(sel.options[sel.selectedIndex].dataset.points)||0; render(container.id, acts, updateFunc); }));
+            container.querySelectorAll('.action-count').forEach(inp=>inp.addEventListener('input',()=>{ let idx=parseInt(inp.dataset.idx); acts[idx].count=parseInt(inp.value)||1; render(container.id, acts, updateFunc); }));
+            container.querySelectorAll('.add-proof-btn').forEach(btn=>btn.addEventListener('click',()=>{ let idx=parseInt(btn.dataset.action); if(!acts[idx].proofs) acts[idx].proofs=[]; acts[idx].proofs.push(''); render(container.id, acts, updateFunc); }));
+            container.querySelectorAll('.remove-proof').forEach(btn=>btn.addEventListener('click',()=>{ let aIdx=parseInt(btn.dataset.action), pIdx=parseInt(btn.dataset.proof); if(acts[aIdx].proofs.length>1){ acts[aIdx].proofs.splice(pIdx,1); render(container.id, acts, updateFunc); } }));
+            container.querySelectorAll('.proof-input').forEach(inp=>inp.addEventListener('change',()=>{ let aIdx=parseInt(inp.dataset.action), pIdx=parseInt(inp.dataset.proof); if(acts[aIdx]&&acts[aIdx].proofs) acts[aIdx].proofs[pIdx]=inp.value; }));
         }
 
-        function calculatePoints(action) {
-            let base = action.basePoints || 0;
-            let count = parseInt(action.count) || 1;
-            return base * count;
+        function render(containerId, acts, updateFunc) {
+            let container = document.getElementById(containerId), emptyDiv = document.getElementById(containerId.replace('List','EmptyActions'));
+            if(acts.length===0){ if(emptyDiv) emptyDiv.style.display='block'; container.innerHTML=''; updateFunc(); return; }
+            if(emptyDiv) emptyDiv.style.display='none';
+            container.innerHTML = acts.map((a,i)=>createActionHTML(a,i)).join('');
+            attachEvents(container, acts, updateFunc);
+            updateFunc();
         }
 
-        function calculateTotalPoints(actions) {
-            return actions.reduce((total, action) => total + calculatePoints(action), 0);
+        async function sendDiscord(webhook, title, fields, color=0x4CAF50){
+            let embed={title,color,fields,footer:{text:"ARMY Delta System"},timestamp:new Date().toISOString()};
+            let resp=await fetch(webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`${ROLES_TO_TAG}\n━━━━━━━━━━━━━━━━━━━━`,embeds:[embed]})});
+            if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
         }
 
-        function updateWeeklyTotalPoints() {
-            document.getElementById('weeklyTotalPoints').textContent = calculateTotalPoints(weeklyActions);
+        function showAlert(containerId, msg, type){
+            let c=document.getElementById(containerId);
+            let div=document.createElement('div'); div.className=`alert ${type}`; div.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${msg}`;
+            c.appendChild(div); setTimeout(()=>div.remove(),5000);
         }
 
-        function updatePromotionTotalPoints() {
-            document.getElementById('promotionTotalPoints').textContent = calculateTotalPoints(promotionActions);
+        function setDefaultDates(){
+            let today=new Date(), mon=new Date(today); mon.setDate(today.getDate()-(today.getDay()===0?6:today.getDay()-1));
+            let sun=new Date(mon); sun.setDate(mon.getDate()+6);
+            document.getElementById('weeklyDateStart').value=mon.toISOString().split('T')[0];
+            document.getElementById('weeklyDateEnd').value=sun.toISOString().split('T')[0];
+            document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(mon)} – ${formatDate(sun)} (7 дн.)`;
         }
 
-        function updateWeeklyPeriodInfo() {
-            const start = document.getElementById('weeklyDateStart').value;
-            const end = document.getElementById('weeklyDateEnd').value;
-            const infoSpan = document.getElementById('weeklyPeriodInfo');
-            if (start && end) {
-                const diffDays = Math.ceil((new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24)) + 1;
-                infoSpan.innerHTML = `${formatDate(start)} – ${formatDate(end)} (${diffDays} дн.)`;
-            } else {
-                const today = new Date();
-                const monday = new Date(today);
-                monday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
-                const sunday = new Date(monday);
-                sunday.setDate(monday.getDate() + 6);
-                infoSpan.innerHTML = `${formatDate(monday)} – ${formatDate(sunday)} (7 дн.)`;
-            }
-        }
+        function showHome(){ document.getElementById('homePage').style.display='flex'; document.querySelectorAll('.form-page').forEach(p=>p.style.display='none'); }
+        function showPage(id){ document.getElementById('homePage').style.display='none'; document.querySelectorAll('.form-page').forEach(p=>p.style.display='none'); document.getElementById(id).style.display='block'; window.scrollTo(0,0); }
 
-        function updatePromotionDateInfo() {
-            const date = document.getElementById('lastPromotionDate').value;
-            const infoSpan = document.getElementById('promotionDateInfo');
-            if (date) {
-                const d = new Date(date);
-                const monthsDiff = Math.floor((new Date() - d) / (1000 * 60 * 60 * 24 * 30));
-                infoSpan.innerHTML = `📅 Дата последнего повышения: ${formatDate(date)} (прошло ${monthsDiff} мес.)`;
-            } else {
-                infoSpan.innerHTML = `📅 Укажите дату последнего повышения`;
-            }
-        }
+        document.querySelectorAll('.action-card').forEach(card=>card.addEventListener('click',()=>{ let p=card.dataset.page; if(p==='weekly') showPage('weeklyPage'); else if(p==='promotion') showPage('promotionPage'); else if(p==='pilot') showPage('pilotPage'); else if(p==='route') showPage('routePage'); }));
 
-        function createActionHTML(action, idx, type) {
-            const proofs = action.proofs || [''];
-            return `
-                <div class="action-item" data-original-idx="${idx}">
-                    <div class="action-header">
-                        <div class="action-title"><i class="fas fa-tag"></i> ДЕЙСТВИЕ #${idx + 1}</div>
-                        <button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button>
-                    </div>
-                    <div class="action-fields">
-                        <div class="action-field">
-                            <label>ТИП АКТИВНОСТИ</label>
-                            <select class="action-type" data-idx="${idx}">
-                                <option value="">-- Выберите --</option>
-                                ${ACTIVITY_TYPES.map(t => `<option value="${escapeHtml(t.name)}" data-points="${t.basePoints}" ${action.type === t.name ? 'selected' : ''}>${escapeHtml(t.name)} (${t.basePoints} баллов)</option>`).join('')}
-                            </select>
-                        </div>
-                        <div class="action-field">
-                            <label>КОЛ-ВО</label>
-                            <input type="number" class="action-count" data-idx="${idx}" value="${action.count || 1}" min="1" step="1">
-                        </div>
-                        <div class="proofs-section">
-                            <label><i class="fas fa-images"></i> ДОКАЗАТЕЛЬСТВА (ССЫЛКИ)</label>
-                            <div class="proofs-list">
-                                ${proofs.map((proof, pIdx) => `
-                                    <div class="proof-item">
-                                        <i class="fas fa-link" style="color: var(--accent); font-size: 0.75rem;"></i>
-                                        <input type="text" class="proof-input" data-type="${type}" data-action="${idx}" data-proof="${pIdx}" value="${escapeHtml(proof)}" placeholder="https://пример.com/скриншот">
-                                        ${proofs.length > 1 ? `<button class="remove-proof" data-type="${type}" data-action="${idx}" data-proof="${pIdx}"><i class="fas fa-times"></i></button>` : ''}
-                                    </div>
-                                `).join('')}
-                            </div>
-                            <button class="add-proof-btn" data-type="${type}" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button>
-                        </div>
-                    </div>
-                    <div class="points-row">
-                        <span class="count-badge"><i class="fas fa-hashtag"></i> КОЛ-ВО: ${action.count || 1}</span>
-                        <span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calculatePoints(action)}</span>
-                    </div>
-                </div>
-            `;
-        }
+        document.getElementById('weeklyAddActionBtn').onclick=()=>{ weeklyActions.push({type:'',basePoints:0,count:1,proofs:['']}); render('weeklyActionsList',weeklyActions,updateWeeklyTotal); };
+        document.getElementById('promotionAddActionBtn').onclick=()=>{ promotionActions.push({type:'',basePoints:0,count:1,proofs:['']}); render('promotionActionsList',promotionActions,updatePromotionTotal); };
 
-        function attachActionEvents(element, idx, actionsArray, renderFull, updateTotal, type) {
-            const removeBtn = element.querySelector('.remove-action');
-            if (removeBtn) {
-                removeBtn.addEventListener('click', async () => {
-                    element.classList.add('removing');
-                    await new Promise(resolve => setTimeout(resolve, 300));
-                    actionsArray.splice(idx, 1);
-                    renderFull();
-                });
-            }
-            
-            const typeSelect = element.querySelector('.action-type');
-            if (typeSelect) {
-                typeSelect.addEventListener('change', (e) => {
-                    const selected = typeSelect.options[typeSelect.selectedIndex];
-                    actionsArray[idx].type = typeSelect.value;
-                    actionsArray[idx].basePoints = parseInt(selected.dataset.points) || 0;
-                    renderFull();
-                });
-            }
-            
-            const countInput = element.querySelector('.action-count');
-            if (countInput) {
-                countInput.addEventListener('input', (e) => {
-                    actionsArray[idx].count = parseInt(countInput.value) || 1;
-                    renderFull();
-                });
-            }
-            
-            const addProofBtn = element.querySelector('.add-proof-btn');
-            if (addProofBtn) {
-                addProofBtn.addEventListener('click', () => {
-                    if (!actionsArray[idx].proofs) actionsArray[idx].proofs = [''];
-                    actionsArray[idx].proofs.push('');
-                    renderFull();
-                });
-            }
-            
-            element.querySelectorAll('.remove-proof').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const proofIdx = parseInt(btn.dataset.proof);
-                    if (actionsArray[idx].proofs.length > 1) {
-                        btn.closest('.proof-item').classList.add('removing');
-                        await new Promise(resolve => setTimeout(resolve, 250));
-                        actionsArray[idx].proofs.splice(proofIdx, 1);
-                        renderFull();
-                    }
-                });
-            });
-            
-            element.querySelectorAll('.proof-input').forEach(inp => {
-                inp.addEventListener('change', (e) => {
-                    const aIdx = parseInt(inp.dataset.action);
-                    const pIdx = parseInt(inp.dataset.proof);
-                    if (actionsArray[aIdx] && actionsArray[aIdx].proofs) {
-                        actionsArray[aIdx].proofs[pIdx] = inp.value;
-                    }
-                });
-            });
-        }
-
-        function renderWeeklyActionsFull() {
-            const container = document.getElementById('weeklyActionsList');
-            const emptyDiv = document.getElementById('weeklyEmptyActions');
-            if (weeklyActions.length === 0) {
-                emptyDiv.style.display = 'block';
-                container.innerHTML = '';
-                updateWeeklyTotalPoints();
-                return;
-            }
-            emptyDiv.style.display = 'none';
-            container.innerHTML = weeklyActions.map((a, i) => createActionHTML(a, i, 'weekly')).join('');
-            document.querySelectorAll('#weeklyActionsList .action-item').forEach((el, i) => {
-                attachActionEvents(el, i, weeklyActions, renderWeeklyActionsFull, updateWeeklyTotalPoints, 'weekly');
-            });
-            updateWeeklyTotalPoints();
-        }
-
-        function renderPromotionActionsFull() {
-            const container = document.getElementById('promotionActionsList');
-            const emptyDiv = document.getElementById('promotionEmptyActions');
-            if (promotionActions.length === 0) {
-                emptyDiv.style.display = 'block';
-                container.innerHTML = '';
-                updatePromotionTotalPoints();
-                return;
-            }
-            emptyDiv.style.display = 'none';
-            container.innerHTML = promotionActions.map((a, i) => createActionHTML(a, i, 'promotion')).join('');
-            document.querySelectorAll('#promotionActionsList .action-item').forEach((el, i) => {
-                attachActionEvents(el, i, promotionActions, renderPromotionActionsFull, updatePromotionTotalPoints, 'promotion');
-            });
-            updatePromotionTotalPoints();
-        }
-
-        async function sendToDiscord(webhookUrl, title, fields, color = 0xD4AF37) {
-            const embed = { title, color, fields, footer: { text: "USAF Reporting System" }, timestamp: new Date().toISOString() };
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: `${ROLES_TO_TAG}\n✈️ НОВЫЙ ОТЧЁТ USAF ✈️`, embeds: [embed] })
-            });
-            if (!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
-        }
-
-        function showAlert(containerId, message, type) {
-            const container = document.getElementById(containerId);
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert ${type}`;
-            alertDiv.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
-            container.appendChild(alertDiv);
-            setTimeout(() => alertDiv.remove(), 5000);
-        }
-
-        function setDefaultWeeklyDates() {
-            const today = new Date();
-            const monday = new Date(today);
-            monday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
-            const sunday = new Date(monday);
-            sunday.setDate(monday.getDate() + 6);
-            document.getElementById('weeklyDateStart').value = monday.toISOString().split('T')[0];
-            document.getElementById('weeklyDateEnd').value = sunday.toISOString().split('T')[0];
-            updateWeeklyPeriodInfo();
-        }
-
-        function showHome() {
-            document.getElementById('homePage').style.display = 'flex';
-            document.querySelectorAll('.form-page').forEach(page => page.style.display = 'none');
-        }
-
-        function showFormPage(pageId) {
-            document.getElementById('homePage').style.display = 'none';
-            document.querySelectorAll('.form-page').forEach(page => page.style.display = 'none');
-            document.getElementById(pageId).style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        document.getElementById('weeklyAddActionBtn').addEventListener('click', () => {
-            weeklyActions.push({ type: '', basePoints: 0, count: 1, proofs: [''] });
-            renderWeeklyActionsFull();
-        });
-        document.getElementById('promotionAddActionBtn').addEventListener('click', () => {
-            promotionActions.push({ type: '', basePoints: 0, count: 1, proofs: [''] });
-            renderPromotionActionsFull();
+        document.getElementById('weeklySubmitBtn').onclick=async()=>{
+            if(!document.getElementById('weeklyNickname').value.trim()){ showAlert('weeklyAlert','Введите никнейм','error'); return; }
+            let btn=document.getElementById('weeklySubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try{
+                let nickname=document.getElementById('weeklyNickname').value.trim(), rank=document.getElementById('weeklyRank').value.trim()||'Не указано';
+                let start=document.getElementById('weeklyDateStart').value, end=document.getElementById('weeklyDateEnd').value, period=(start&&end)?`${formatDate(start)} – ${formatDate(end)}`:'Не указан';
+                let acts='', total=0;
+                weeklyActions.forEach((a,i)=>{ let pts=calculatePoints(a); total+=pts; let proofs=(a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n')||'Нет'); acts+=`**${i+1}. ${a.type||'Не выбрано'}** ×${a.count||1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`; });
+                if(weeklyActions.length===0) acts='Нет действий';
+                await sendDiscord(WEBHOOKS.weekly,"📊 Еженедельный отчёт",[{name:"🎮 Никнейм",value:nickname,inline:true},{name:"🏅 Ранг",value:rank,inline:true},{name:"📅 Период",value:period,inline:true},{name:"📊 Действия",value:acts.substring(0,900)},{name:"🏆 Итого баллов",value:`${total}`,inline:true}]);
+                showAlert('weeklyAlert','✅ Отчёт отправлен!','success');
+                document.getElementById('weeklyNickname').value=''; document.getElementById('weeklyRank').value=''; weeklyActions=[]; render('weeklyActionsList',weeklyActions,updateWeeklyTotal); setDefaultDates();
+            } catch(e){ showAlert('weeklyAlert',`❌ Ошибка: ${e.message}`,'error'); }
+            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ'; }
         });
 
-        document.getElementById('weeklySubmitBtn').addEventListener('click', async () => {
-            if (!document.getElementById('weeklyNickname').value.trim()) { showAlert('weeklyAlert', 'Введите имя и фамилию', 'error'); return; }
-            const btn = document.getElementById('weeklySubmitBtn');
-            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try {
-                const nickname = document.getElementById('weeklyNickname').value.trim();
-                const rank = document.getElementById('weeklyRank').value || 'Не указано';
-                const start = document.getElementById('weeklyDateStart').value;
-                const end = document.getElementById('weeklyDateEnd').value;
-                const period = (start && end) ? `${formatDate(start)} – ${formatDate(end)}` : 'Не указан';
-                let actionsText = '';
-                let total = 0;
-                weeklyActions.forEach((a, i) => {
-                    const pts = calculatePoints(a);
-                    total += pts;
-                    const proofs = (a.proofs?.filter(p => p).map(p => `• ${p}`).join('\n') || 'Нет');
-                    actionsText += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
-                });
-                if (weeklyActions.length === 0) actionsText = 'Нет активностей';
-                await sendToDiscord(WEBHOOKS.weekly, "📊 Еженедельный отчёт USAF", [
-                    { name: "✈️ Пилот", value: nickname, inline: true },
-                    { name: "🏅 Звание", value: rank, inline: true },
-                    { name: "📅 Период", value: period, inline: true },
-                    { name: "📋 Активности", value: actionsText.substring(0, 900) },
-                    { name: "🏆 ИТОГО БАЛЛОВ", value: `${total}`, inline: true }
-                ]);
-                showAlert('weeklyAlert', '✅ Отчёт отправлен в Discord!', 'success');
-                document.getElementById('weeklyNickname').value = '';
-                document.getElementById('weeklyRank').value = '';
-                weeklyActions = [];
-                renderWeeklyActionsFull();
-                setDefaultWeeklyDates();
-            } catch (err) { showAlert('weeklyAlert', `❌ Ошибка: ${err.message}`, 'error'); }
-            finally { btn.disabled = false; btn.innerHTML = '<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ'; }
+        document.getElementById('promotionSubmitBtn').onclick=async()=>{
+            if(!document.getElementById('promotionNickname').value.trim()){ showAlert('promotionAlert','Введите никнейм','error'); return; }
+            let btn=document.getElementById('promotionSubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try{
+                let nickname=document.getElementById('promotionNickname').value.trim(), cur=document.getElementById('promotionCurrentRank').value.trim()||'Не указано', des=document.getElementById('promotionDesiredRank').value.trim()||'Не указано';
+                let last=document.getElementById('lastPromotionDate').value, lastF=last?formatDate(last):'Не указана';
+                let acts='', total=0;
+                promotionActions.forEach((a,i)=>{ let pts=calculatePoints(a); total+=pts; let proofs=(a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n')||'Нет'); acts+=`**${i+1}. ${a.type||'Не выбрано'}** ×${a.count||1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`; });
+                if(promotionActions.length===0) acts='Нет достижений';
+                await sendDiscord(WEBHOOKS.promotion,"⬆️ Запрос на повышение",[{name:"🎮 Никнейм",value:nickname,inline:true},{name:"🏅 Текущий ранг",value:cur,inline:true},{name:"🎯 Желаемый ранг",value:des,inline:true},{name:"📅 Последнее повышение",value:lastF,inline:true},{name:"📊 Достижения",value:acts.substring(0,900)},{name:"🏆 Итого баллов",value:`${total}`,inline:true}]);
+                showAlert('promotionAlert','✅ Запрос отправлен!','success');
+                document.getElementById('promotionNickname').value=''; document.getElementById('promotionCurrentRank').value=''; document.getElementById('promotionDesiredRank').value=''; document.getElementById('lastPromotionDate').value='';
+                promotionActions=[]; render('promotionActionsList',promotionActions,updatePromotionTotal);
+                document.getElementById('promotionDateInfo').innerHTML='📅 Укажите дату последнего повышения';
+            } catch(e){ showAlert('promotionAlert',`❌ Ошибка: ${e.message}`,'error'); }
+            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС'; }
         });
 
-        document.getElementById('promotionSubmitBtn').addEventListener('click', async () => {
-            if (!document.getElementById('promotionNickname').value.trim()) { showAlert('promotionAlert', 'Введите имя и фамилию', 'error'); return; }
-            if (!document.getElementById('promotionCurrentRank').value) { showAlert('promotionAlert', 'Выберите текущее звание', 'error'); return; }
-            const btn = document.getElementById('promotionSubmitBtn');
-            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try {
-                const nickname = document.getElementById('promotionNickname').value.trim();
-                const currentRank = document.getElementById('promotionCurrentRank').value;
-                const desiredRank = document.getElementById('promotionDesiredRank').value || 'Не указано';
-                const lastDate = document.getElementById('lastPromotionDate').value;
-                const lastFormatted = lastDate ? formatDate(lastDate) : 'Не указана';
-                let actionsText = '';
-                let total = 0;
-                promotionActions.forEach((a, i) => {
-                    const pts = calculatePoints(a);
-                    total += pts;
-                    const proofs = (a.proofs?.filter(p => p).map(p => `• ${p}`).join('\n') || 'Нет');
-                    actionsText += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
-                });
-                if (promotionActions.length === 0) actionsText = 'Нет достижений';
-                await sendToDiscord(WEBHOOKS.promotion, "⬆️ Запрос на повышение USAF", [
-                    { name: "✈️ Военнослужащий", value: nickname, inline: true },
-                    { name: "🎖️ Текущее звание", value: currentRank, inline: true },
-                    { name: "⭐ Желаемое звание", value: desiredRank, inline: true },
-                    { name: "📅 Последнее повышение", value: lastFormatted, inline: true },
-                    { name: "📜 Достижения (баллы)", value: actionsText.substring(0, 900) },
-                    { name: "🏆 Сумма баллов", value: `${total}`, inline: true }
-                ]);
-                showAlert('promotionAlert', '✅ Запрос на повышение отправлен!', 'success');
-                document.getElementById('promotionNickname').value = '';
-                document.getElementById('promotionCurrentRank').value = '';
-                document.getElementById('promotionDesiredRank').value = '';
-                document.getElementById('lastPromotionDate').value = '';
-                promotionActions = [];
-                renderPromotionActionsFull();
-                updatePromotionDateInfo();
-            } catch (err) { showAlert('promotionAlert', `❌ Ошибка: ${err.message}`, 'error'); }
-            finally { btn.disabled = false; btn.innerHTML = '<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС'; }
+        document.getElementById('pilotSubmitBtn').onclick=async()=>{
+            if(!document.getElementById('pilotName').value.trim()){ showAlert('pilotAlert','Введите имя пилота','error'); return; }
+            let btn=document.getElementById('pilotSubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try{
+                let name=document.getElementById('pilotName').value.trim(), cur=document.getElementById('pilotCurrentCat').value, des=document.getElementById('pilotDesiredCat').value;
+                let hours=document.getElementById('pilotHours').value||'0', audit=document.getElementById('pilotAudit').value.trim()||'Не указано';
+                let date=document.getElementById('pilotDate').value||new Date().toISOString().split('T')[0];
+                await sendDiscord(WEBHOOKS.pilot,"🛩️ Квалификация пилота",[{name:"👨‍✈️ Пилот",value:name,inline:true},{name:"🪪 Текущая категория",value:cur,inline:true},{name:"🎯 Желаемая категория",value:des,inline:true},{name:"⏱️ Налёт часов",value:`${hours} ч.`,inline:true},{name:"🔗 Ссылка на аудит",value:audit},{name:"📅 Дата подачи",value:date,inline:true}]);
+                showAlert('pilotAlert','✅ Заявка отправлена!','success');
+                document.getElementById('pilotName').value=''; document.getElementById('pilotHours').value=''; document.getElementById('pilotAudit').value=''; document.getElementById('pilotDate').value='';
+            } catch(e){ showAlert('pilotAlert',`❌ Ошибка: ${e.message}`,'error'); }
+            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ'; }
         });
 
-        document.getElementById('pilotSubmitBtn').addEventListener('click', async () => {
-            if (!document.getElementById('pilotName').value.trim()) { showAlert('pilotAlert', 'Введите имя пилота', 'error'); return; }
-            const btn = document.getElementById('pilotSubmitBtn');
-            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try {
-                const name = document.getElementById('pilotName').value.trim();
-                const current = document.getElementById('pilotCurrentCat').value;
-                const desired = document.getElementById('pilotDesiredCat').value;
-                const hours = document.getElementById('pilotHours').value || '0';
-                const audit = document.getElementById('pilotAudit').value.trim() || 'Не указано';
-                const date = document.getElementById('pilotDate').value || new Date().toISOString().split('T')[0];
-                await sendToDiscord(WEBHOOKS.pilot, "🛩️ Заявка на повышение квалификации пилота", [
-                    { name: "👨‍✈️ Пилот", value: name, inline: true },
-                    { name: "🪪 Текущая категория", value: current, inline: true },
-                    { name: "🎯 Желаемая категория", value: desired, inline: true },
-                    { name: "⏱️ Общий налёт", value: `${hours} ч.`, inline: true },
-                    { name: "🔗 Ссылка на аудит", value: audit },
-                    { name: "📅 Дата подачи", value: date, inline: true }
-                ]);
-                showAlert('pilotAlert', '✅ Заявка на повышение квалификации отправлена!', 'success');
-                document.getElementById('pilotName').value = '';
-                document.getElementById('pilotHours').value = '';
-                document.getElementById('pilotAudit').value = '';
-                document.getElementById('pilotDate').value = '';
-            } catch (err) { showAlert('pilotAlert', `❌ Ошибка: ${err.message}`, 'error'); }
-            finally { btn.disabled = false; btn.innerHTML = '<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ'; }
-        });
+        document.getElementById('routeSubmitBtn').onclick=async()=>{
+            if(!document.getElementById('routePilotName').value.trim()){ showAlert('routeAlert','Введите имя пилота','error'); return; }
+            if(!document.getElementById('routeVideo').value.trim()){ showAlert('routeAlert','Укажите ссылку на видео','error'); return; }
+            let btn=document.getElementById('routeSubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try{
+                let pilot=document.getElementById('routePilotName').value.trim(), date=document.getElementById('routeDate').value||'Не указана';
+                let route=document.getElementById('routeType').value, video=document.getElementById('routeVideo').value.trim();
+                let notes=document.getElementById('routeNotes').value.trim()||'—';
+                await sendDiscord(WEBHOOKS.route,"🗺️ Отчёт о прохождении воздушного маршрута",[{name:"👨‍✈️ Пилот",value:pilot,inline:true},{name:"📅 Дата",value:date,inline:true},{name:"🗺️ Маршрут",value:route,inline:true},{name:"🎥 Видеозапись",value:video},{name:"📝 Заметки",value:notes}]);
+                showAlert('routeAlert','✅ Отчёт о маршруте отправлен!','success');
+                document.getElementById('routePilotName').value=''; document.getElementById('routeDate').value=''; document.getElementById('routeVideo').value=''; document.getElementById('routeNotes').value='';
+            } catch(e){ showAlert('routeAlert',`❌ Ошибка: ${e.message}`,'error'); }
+            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ'; }
+        };
 
-        document.querySelectorAll('.action-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const page = card.dataset.page;
-                if (page === 'weekly') showFormPage('weeklyPage');
-                else if (page === 'promotion') showFormPage('promotionPage');
-                else if (page === 'pilot') showFormPage('pilotPage');
-            });
-        });
+        document.getElementById('themeSwitch').onclick=()=>{ document.body.classList.toggle('light'); let isLight=document.body.classList.contains('light'); localStorage.setItem('theme',isLight?'light':'dark'); let icon=document.querySelector('#themeSwitch i'), span=document.querySelector('#themeSwitch span'); if(isLight){ icon.className='fas fa-moon'; span.innerText='Тёмная тема'; } else { icon.className='fas fa-sun'; span.innerText='Светлая тема'; } };
+        if(localStorage.getItem('theme')==='light'){ document.body.classList.add('light'); document.querySelector('#themeSwitch i').className='fas fa-moon'; document.querySelector('#themeSwitch span').innerText='Тёмная тема'; }
 
-        document.getElementById('themeSwitch').addEventListener('click', () => {
-            document.body.classList.toggle('light');
-            const isLight = document.body.classList.contains('light');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            const icon = document.querySelector('#themeSwitch i');
-            const text = document.querySelector('#themeSwitch span');
-            if (isLight) { icon.className = 'fas fa-moon'; text.innerText = 'Тёмная тема'; }
-            else { icon.className = 'fas fa-sun'; text.innerText = 'Светлая тема'; }
-        });
+        document.getElementById('weeklyDateStart').addEventListener('change',()=>{ let s=document.getElementById('weeklyDateStart').value, e=document.getElementById('weeklyDateEnd').value; if(s&&e) document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(s)} – ${formatDate(e)} (${Math.ceil((new Date(e)-new Date(s))/(1000*60*60*24))+1} дн.)`; else setDefaultDates(); });
+        document.getElementById('weeklyDateEnd').addEventListener('change',()=>{ let s=document.getElementById('weeklyDateStart').value, e=document.getElementById('weeklyDateEnd').value; if(s&&e) document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(s)} – ${formatDate(e)} (${Math.ceil((new Date(e)-new Date(s))/(1000*60*60*24))+1} дн.)`; });
+        document.getElementById('lastPromotionDate').addEventListener('change',()=>{ let d=document.getElementById('lastPromotionDate').value; if(d) document.getElementById('promotionDateInfo').innerHTML=`📅 Дата последнего повышения: ${formatDate(d)} (прошло ${Math.floor((new Date()-new Date(d))/(1000*60*60*24*30))} мес.)`; else document.getElementById('promotionDateInfo').innerHTML='📅 Укажите дату последнего повышения'; });
 
-        document.getElementById('weeklyDateStart').addEventListener('change', updateWeeklyPeriodInfo);
-        document.getElementById('weeklyDateEnd').addEventListener('change', updateWeeklyPeriodInfo);
-        document.getElementById('lastPromotionDate').addEventListener('change', updatePromotionDateInfo);
-
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            document.body.classList.add('light');
-            document.querySelector('#themeSwitch i').className = 'fas fa-moon';
-            document.querySelector('#themeSwitch span').innerText = 'Тёмная тема';
-        }
-
-        showHome();
-        setDefaultWeeklyDates();
-        renderWeeklyActionsFull();
-        renderPromotionActionsFull();
-        updatePromotionDateInfo();
+        showHome(); setDefaultDates(); render('weeklyActionsList',weeklyActions,updateWeeklyTotal); render('promotionActionsList',promotionActions,updatePromotionTotal);
     </script>
 </body>
 </html>
