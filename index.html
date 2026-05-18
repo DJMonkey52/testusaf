@@ -1,1049 +1,874 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ARMY Delta | Система отчетов</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #051505 0%, #0a2a0a 50%, #0d2e0d 100%);
-            min-height: 100vh;
-            transition: background 0.3s ease;
-        }
-
-        body.light {
-            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
-        }
-
-        :root {
-            --glass-bg: rgba(10, 25, 10, 0.95);
-            --glass-border: rgba(76, 175, 80, 0.35);
-            --text-primary: #F0F3FA;
-            --text-secondary: #B0C4B0;
-            --text-muted: #8A9A8A;
-            --accent: #4CAF50;
-            --accent-glow: #66BB6A;
-            --accent-dark: #2E7D32;
-            --success: #10b981;
-            --danger: #ef4444;
-            --border-light: rgba(255, 255, 255, 0.06);
-            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
-            --shadow-md: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
-            --input-bg: rgba(5, 20, 5, 0.9);
-            --card-hover: rgba(76, 175, 80, 0.12);
-        }
-
-        body.light {
-            --glass-bg: rgba(245, 255, 245, 0.95);
-            --glass-border: rgba(76, 175, 80, 0.25);
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --text-muted: #9ca3af;
-            --accent: #4CAF50;
-            --accent-glow: #66BB6A;
-            --accent-dark: #388E3C;
-            --border-light: rgba(0, 0, 0, 0.08);
-            --input-bg: rgba(255, 255, 255, 0.95);
-            --card-hover: rgba(76, 175, 80, 0.08);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
-
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-
-        .logo-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: white;
-            box-shadow: var(--shadow-sm);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .logo h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFFFFF, #A5D6A7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        body.light .logo h1 {
-            background: linear-gradient(135deg, #1e3b1e, #2e7d32);
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 8px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            z-index: 100;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            transform: scale(1.02);
-        }
-
-        .home-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-            min-height: calc(100vh - 180px);
-        }
-
-        .cards-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 0;
-        }
-
-        .action-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            padding: 38px 32px;
-            width: 300px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-        }
-
-        .action-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-icon {
-            width: 75px;
-            height: 75px;
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.25), rgba(46, 125, 50, 0.15));
-            border-radius: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            color: var(--accent);
-            transition: all 0.3s;
-        }
-
-        .action-card:hover .card-icon {
-            transform: scale(1.05);
-        }
-
-        .action-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-
-        .action-card p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
-
-        .card-arrow {
-            margin-top: 18px;
-            font-size: 1.1rem;
-            color: var(--accent);
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-
-        .action-card:hover .card-arrow {
-            opacity: 1;
-            transform: translateX(6px);
-        }
-
-        .form-page {
-            display: none;
-            animation: fadeInUp 0.4s ease;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 10px 22px;
-            color: var(--text-primary);
-            font-weight: 500;
-            cursor: pointer;
-            margin-bottom: 24px;
-            transition: all 0.2s;
-        }
-
-        .back-btn:hover {
-            border-color: var(--accent);
-            transform: translateX(-4px);
-        }
-
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.08));
-            padding: 20px 28px;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .card-header h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-header h2 i {
-            color: var(--accent);
-        }
-
-        .card-body {
-            padding: 28px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            color: var(--accent-glow);
-            margin-bottom: 6px;
-        }
-
-        .input-group input, .input-group select, .input-group textarea {
-            width: 100%;
-            padding: 12px 14px;
-            background: var(--input-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 14px;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
-        }
-
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
-        }
-
-        .period-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-
-        .period-info {
-            background: rgba(76, 175, 80, 0.1);
-            border-radius: 12px;
-            padding: 10px 14px;
-            text-align: center;
-            color: var(--accent-glow);
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .action-item {
-            background: var(--card-hover);
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 14px;
-            border: 1px solid var(--border-light);
-            transition: all 0.2s ease;
-            overflow: hidden;
-        }
-
-        .action-item.new-action {
-            animation: actionAppear 0.35s ease forwards;
-        }
-
-        @keyframes actionAppear {
-            from { opacity: 0; transform: scale(0.95) translateY(-15px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .action-item.removing {
-            animation: actionRemove 0.3s ease forwards !important;
-            pointer-events: none;
-        }
-
-        @keyframes actionRemove {
-            0% { opacity: 1; transform: scale(1) translateX(0); max-height: 300px; margin-bottom: 14px; padding: 16px; }
-            100% { opacity: 0; transform: scale(0.95) translateX(-30px); max-height: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; border: none; }
-        }
-
-        .action-item:hover {
-            border-color: var(--accent);
-            transform: translateX(3px);
-        }
-
-        .action-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .action-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .remove-action {
-            background: rgba(239, 68, 68, 0.15);
-            border: none;
-            color: #f87171;
-            padding: 5px 12px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .remove-action:hover {
-            background: rgba(239, 68, 68, 0.3);
-            transform: scale(1.02);
-        }
-
-        .action-fields {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
-        .action-field {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .action-field label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        .action-field select, .action-field input {
-            padding: 8px 12px;
-            background: var(--input-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            font-size: 0.85rem;
-            color: var(--text-primary);
-        }
-
-        .proofs-section {
-            grid-column: span 2;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .proofs-section label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: var(--accent-glow);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .proof-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            background: rgba(0,0,0,0.25);
-            border-radius: 10px;
-            padding: 6px 10px;
-        }
-
-        .proof-item.new-proof {
-            animation: proofAppear 0.3s ease;
-        }
-
-        @keyframes proofAppear {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .proof-item.removing {
-            animation: proofRemove 0.25s ease forwards;
-            pointer-events: none;
-        }
-
-        @keyframes proofRemove {
-            from { opacity: 1; transform: translateX(0); max-height: 60px; }
-            to { opacity: 0; transform: translateX(-20px); max-height: 0; margin-bottom: 0; padding: 0; }
-        }
-
-        body.light .proof-item {
-            background: rgba(0,0,0,0.05);
-        }
-
-        .proof-item input {
-            flex: 1;
-            padding: 8px 10px;
-            font-size: 0.8rem;
-            background: var(--input-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            color: var(--text-primary);
-        }
-
-        .proof-item input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .remove-proof {
-            background: rgba(239, 68, 68, 0.15);
-            border: none;
-            color: #f87171;
-            cursor: pointer;
-            font-size: 0.8rem;
-            padding: 6px 10px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .remove-proof:hover {
-            background: rgba(239, 68, 68, 0.3);
-            transform: scale(1.02);
-        }
-
-        .add-proof-btn {
-            background: rgba(76, 175, 80, 0.18);
-            border: 1px dashed var(--accent);
-            border-radius: 10px;
-            padding: 6px 12px;
-            font-size: 0.7rem;
-            color: var(--accent);
-            cursor: pointer;
-            margin-top: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-
-        .add-proof-btn:hover {
-            background: rgba(76, 175, 80, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .points-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-light);
-            margin-top: 6px;
-        }
-
-        .points-badge {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            padding: 5px 14px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .count-badge {
-            background: rgba(76, 175, 80, 0.18);
-            padding: 5px 14px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            color: var(--accent-glow);
-        }
-
-        .add-btn {
-            width: 100%;
-            background: rgba(76, 175, 80, 0.12);
-            border: 1px dashed var(--accent);
-            border-radius: 16px;
-            padding: 14px;
-            color: var(--accent);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-            margin: 16px 0;
-        }
-
-        .add-btn:hover {
-            background: rgba(76, 175, 80, 0.25);
-            transform: translateY(-2px);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            background: rgba(10, 25, 10, 0.5);
-            border-radius: 18px;
-            margin-bottom: 14px;
-        }
-
-        .total-points-bar {
-            background: rgba(76, 175, 80, 0.15);
-            border-radius: 16px;
-            padding: 14px 20px;
-            margin: 20px 0 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid var(--border-light);
-        }
-
-        .total-points-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: var(--accent-glow);
-        }
-
-        .total-points-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(105deg, var(--accent), var(--accent-dark));
-            border: none;
-            padding: 14px;
-            border-radius: 22px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.05);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.5);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            transform: none;
-        }
-
-        .footer-signature {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-light);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-signature i {
-            color: var(--accent);
-            margin: 0 4px;
-        }
-
-        .alert {
-            padding: 12px 16px;
-            border-radius: 14px;
-            margin-bottom: 20px;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-15px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .alert.success {
-            background: rgba(16, 185, 129, 0.15);
-            border-left: 3px solid #10b981;
-            color: #10b981;
-            display: flex;
-        }
-
-        body.light .alert.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: #059669;
-        }
-
-        .alert.error {
-            background: rgba(239, 68, 68, 0.12);
-            border-left: 3px solid #ef4444;
-            color: #f87171;
-            display: flex;
-        }
-
-        body.light .alert.error {
-            background: rgba(239, 68, 68, 0.08);
-            color: #dc2626;
-        }
-
-        @media (max-width: 850px) {
-            .cards-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-            .action-card {
-                width: 300px;
-            }
-            .action-fields {
-                grid-template-columns: 1fr;
-            }
-            .proofs-section {
-                grid-column: span 1;
-            }
-            .period-row {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .card-body {
-                padding: 20px;
-            }
-            .total-points-value {
-                font-size: 1.4rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>USAF | Система отчетов Delta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --glass-bg: rgba(30, 25, 18, 0.96);
+      --glass-border: rgba(180, 150, 80, 0.45);
+      --text-primary: #F5EED9;
+      --text-secondary: #DDD2B6;
+      --text-muted: #B8A97C;
+      --accent: #D4AF37;
+      --accent-glow: #E6C868;
+      --accent-dark: #B88F2A;
+      --success: #10b981;
+      --danger: #ef4444;
+      --border-light: rgba(212, 175, 55, 0.25);
+      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 20px 35px -10px rgba(0, 0, 0, 0.6);
+      --input-bg: rgba(20, 16, 12, 0.9);
+      --card-hover: rgba(212, 175, 55, 0.12);
+      --empty-bg: rgba(30, 25, 18, 0.6);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: repeating-linear-gradient(45deg, #2a2418 0px, #2a2418 40px, #3e3524 40px, #3e3524 80px, #1f1a10 80px, #1f1a10 120px);
+      min-height: 100vh;
+    }
+
+    body.light {
+      background: #e6dcc5;
+      --glass-bg: rgba(250, 245, 235, 0.95);
+      --glass-border: rgba(180, 150, 80, 0.4);
+      --text-primary: #2c2418;
+      --text-secondary: #5c4e32;
+      --text-muted: #8a7a58;
+      --accent: #b8860b;
+      --accent-glow: #d4a017;
+      --accent-dark: #9a6d0a;
+      --border-light: rgba(0, 0, 0, 0.1);
+      --input-bg: rgba(255, 255, 245, 0.98);
+      --card-hover: rgba(184, 134, 11, 0.08);
+      --empty-bg: rgba(0, 0, 0, 0.03);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .logo-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #1a1a1a;
+      box-shadow: var(--shadow-sm);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #F5EED9, var(--accent-glow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+      z-index: 100;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    /* Главное меню */
+    .home-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      min-height: calc(100vh - 180px);
+    }
+
+    .main-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 20px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .main-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 35px 25px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .main-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+    }
+
+    .main-card-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(184, 143, 42, 0.15));
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 32px;
+      color: var(--accent);
+    }
+
+    .main-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .main-card p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .main-card-arrow {
+      margin-top: 16px;
+      color: var(--accent);
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .main-card:hover .main-card-arrow {
+      opacity: 1;
+      transform: translateX(6px);
+    }
+
+    /* Формы */
+    .form-page {
+      display: none;
+      animation: fadeInUp 0.4s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 10px 22px;
+      color: var(--text-primary);
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 24px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      border-color: var(--accent);
+      transform: translateX(-4px);
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(128, 98, 30, 0.08));
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .card-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header h2 i {
+      color: var(--accent);
+    }
+
+    .card-body {
+      padding: 28px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--accent-glow);
+      margin-bottom: 6px;
+    }
+
+    .input-group input, .input-group select, .input-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    }
+
+    .period-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .actions-section {
+      margin-top: 24px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 24px;
+      padding: 16px;
+    }
+
+    .action-item {
+      background: var(--card-hover);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border-light);
+      transition: all 0.2s ease;
+    }
+
+    .action-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+    }
+
+    .remove-action {
+      background: rgba(239, 68, 68, 0.15);
+      border: none;
+      color: #f87171;
+      padding: 5px 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.7rem;
+    }
+
+    .action-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .action-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .action-field label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .proofs-section {
+      grid-column: span 2;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      padding: 6px 10px;
+    }
+
+    .proof-item input {
+      flex: 1;
+      padding: 8px 10px;
+      background: var(--input-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.8rem;
+    }
+
+    .remove-proof {
+      background: rgba(239, 68, 68, 0.15);
+      border: none;
+      color: #f87171;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+
+    .add-proof-btn {
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px dashed var(--accent);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 0.7rem;
+      color: var(--accent);
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .points-row {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+      margin-top: 6px;
+    }
+
+    .points-badge {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #1f1a10;
+    }
+
+    .add-btn {
+      width: 100%;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px dashed var(--accent);
+      border-radius: 16px;
+      padding: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .total-points-bar {
+      background: rgba(212, 175, 55, 0.15);
+      border-radius: 16px;
+      padding: 14px 20px;
+      margin: 20px 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .total-points-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(105deg, var(--accent), var(--accent-dark));
+      border: none;
+      padding: 14px;
+      border-radius: 22px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1f1a10;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.05);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      background: var(--empty-bg);
+      border-radius: 18px;
+      margin-bottom: 14px;
+    }
+
+    .footer-signature {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-light);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    .alert.success {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 3px solid #10b981;
+      color: #10b981;
+      display: flex;
+    }
+
+    .alert.error {
+      background: rgba(239, 68, 68, 0.12);
+      border-left: 3px solid #ef4444;
+      color: #f87171;
+      display: flex;
+    }
+
+    @media (max-width: 700px) {
+      .main-cards-grid { grid-template-columns: 1fr; gap: 20px; }
+      .action-fields { grid-template-columns: 1fr; }
+      .proofs-section { grid-column: span 1; }
+      .period-row { grid-template-columns: 1fr; }
+      .total-points-value { font-size: 1.4rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="theme-toggle" id="themeSwitch">
-        <i class="fas fa-sun"></i>
-        <span>Светлая тема</span>
+  <div class="theme-toggle" id="themeSwitch">
+    <i class="fas fa-sun"></i>
+    <span>Светлая тема</span>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-fighter-jet"></i></div>
+        <h1>USAF Delta</h1>
+      </div>
+      <p class="subtitle">United States Air Force | Бальная система отчетов</p>
     </div>
 
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-gun"></i></div>
-                <h1>ARMY Delta</h1>
-            </div>
-            <p class="subtitle">Система подачи отчётов delta</p>
+    <div id="mainMenuPage" class="home-page">
+      <div class="main-cards-grid">
+        <div class="main-card" data-report="weekly">
+          <div class="main-card-icon"><i class="fas fa-calendar-week"></i></div>
+          <h3>📊 Еженедельный отчёт</h3>
+          <p>Отчёт с бальной системой за активности</p>
+          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
         </div>
-
-        <div id="homePage" class="home-page">
-            <div class="cards-grid">
-                <div class="action-card" data-page="weekly">
-                    <div class="card-icon"><i class="fas fa-calendar-week"></i></div>
-                    <h3>📊 Еженедельный отчёт</h3>
-                    <p>Отчёт о еженедельной работе с бальной системой</p>
-                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
-                </div>
-                <div class="action-card" data-page="promotion">
-                    <div class="card-icon"><i class="fas fa-arrow-up"></i></div>
-                    <h3>⬆️ Отчёт на повышение</h3>
-                    <p>Заявка на повышение должности/звания</p>
-                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
-                </div>
-                <div class="action-card" data-page="pilot">
-                    <div class="card-icon"><i class="fas fa-wings"></i></div>
-                    <h3>🛩️ Квалификация пилота</h3>
-                    <p>Повышение лётной категории</p>
-                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
-                </div>
-                <div class="action-card" data-page="route">
-                    <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
-                    <h3>🗺️ Отчёт о маршруте</h3>
-                    <p>Прохождение воздушного маршрута</p>
-                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
-                </div>
-            </div>
+        <div class="main-card" data-report="promotion">
+          <div class="main-card-icon"><i class="fas fa-arrow-up"></i></div>
+          <h3>⬆️ Отчёт на повышение</h3>
+          <p>Сбор баллов для повышения звания</p>
+          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
         </div>
-
-        <!-- ЕЖЕНЕДЕЛЬНЫЙ ОТЧЁТ -->
-        <div id="weeklyPage" class="form-page">
-            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
-            <div class="glass-card">
-                <div class="card-header"><h2><i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт</h2></div>
-                <div class="card-body">
-                    <div id="weeklyAlert"></div>
-                    <div class="input-group"><label>🎮 ИГРОВОЙ НИКНЕЙМ</label><input type="text" id="weeklyNickname" placeholder="Введите никнейм"></div>
-                    <div class="input-group"><label>🏅 РАНГ СОТРУДНИКА</label><input type="text" id="weeklyRank" placeholder="Ваше звание"></div>
-                    <div class="period-row">
-                        <div class="input-group"><label>📅 ДАТА НАЧАЛА</label><input type="date" id="weeklyDateStart"></div>
-                        <div class="input-group"><label>📅 ДАТА ОКОНЧАНИЯ</label><input type="date" id="weeklyDateEnd"></div>
-                    </div>
-                    <div class="period-info" id="weeklyPeriodInfo"></div>
-                    <div style="margin-top: 24px;">
-                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);"><i class="fas fa-clipboard-list"></i> 📋 ДЕЙСТВИЯ</label>
-                        <div id="weeklyActionsContainer">
-                            <div id="weeklyEmptyActions" class="empty-state"><i class="fas fa-info-circle"></i> Нет действий</div>
-                            <div id="weeklyActionsList"></div>
-                        </div>
-                        <button class="add-btn" id="weeklyAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
-                    </div>
-                    <div class="total-points-bar"><span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span><span class="total-points-value" id="weeklyTotalPoints">0</span></div>
-                    <button class="submit-btn" id="weeklySubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ</button>
-                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
-                </div>
-            </div>
+        <div class="main-card" data-report="pilot">
+          <div class="main-card-icon"><i class="fas fa-wings"></i></div>
+          <h3>🛩️ Квалификация пилота</h3>
+          <p>Повышение лётной категории</p>
+          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
         </div>
-
-        <!-- ОТЧЁТ НА ПОВЫШЕНИЕ -->
-        <div id="promotionPage" class="form-page">
-            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
-            <div class="glass-card">
-                <div class="card-header"><h2><i class="fas fa-arrow-up"></i> ⬆️ Отчёт на повышение</h2></div>
-                <div class="card-body">
-                    <div id="promotionAlert"></div>
-                    <div class="input-group"><label>🎮 ИГРОВОЙ НИКНЕЙМ</label><input type="text" id="promotionNickname" placeholder="Введите никнейм"></div>
-                    <div class="input-group"><label>🏅 ТЕКУЩИЙ РАНГ</label><input type="text" id="promotionCurrentRank" placeholder="Текущее звание"></div>
-                    <div class="input-group"><label>🎯 ЖЕЛАЕМЫЙ РАНГ</label><input type="text" id="promotionDesiredRank" placeholder="Желаемое звание"></div>
-                    <div class="input-group"><label>📅 ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="lastPromotionDate"></div>
-                    <div class="period-info" id="promotionDateInfo"></div>
-                    <div style="margin-top: 24px;">
-                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);"><i class="fas fa-clipboard-list"></i> 📋 ДОСТИЖЕНИЯ</label>
-                        <div id="promotionActionsContainer">
-                            <div id="promotionEmptyActions" class="empty-state"><i class="fas fa-info-circle"></i> Нет действий</div>
-                            <div id="promotionActionsList"></div>
-                        </div>
-                        <button class="add-btn" id="promotionAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
-                    </div>
-                    <div class="total-points-bar"><span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span><span class="total-points-value" id="promotionTotalPoints">0</span></div>
-                    <button class="submit-btn" id="promotionSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС</button>
-                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
-                </div>
-            </div>
+        <div class="main-card" data-report="route">
+          <div class="main-card-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <h3>🗺️ Отчёт о маршруте</h3>
+          <p>Прохождение воздушного маршрута</p>
+          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
         </div>
-
-        <!-- КВАЛИФИКАЦИЯ ПИЛОТА -->
-        <div id="pilotPage" class="form-page">
-            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
-            <div class="glass-card">
-                <div class="card-header"><h2><i class="fas fa-wings"></i> 🛩️ Квалификация пилота</h2></div>
-                <div class="card-body">
-                    <div id="pilotAlert"></div>
-                    <div class="input-group"><label>👨‍✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="pilotName" placeholder="Введите никнейм"></div>
-                    <div class="input-group"><label>🪪 ТЕКУЩАЯ КАТЕГОРИЯ</label>
-                        <select id="pilotCurrentCat">
-                            <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
-                        </select>
-                    </div>
-                    <div class="input-group"><label>🎯 ЖЕЛАЕМАЯ КАТЕГОРИЯ</label>
-                        <select id="pilotDesiredCat">
-                            <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
-                        </select>
-                    </div>
-                    <div class="input-group"><label>⏱️ ОБЩИЙ НАЛЁТ (ЧАСЫ)</label><input type="number" id="pilotHours" placeholder="Например: 250"></div>
-                    <div class="input-group"><label>🔗 ССЫЛКА НА АУДИТ / ОТЧЁТ</label><input type="text" id="pilotAudit" placeholder="https://discord.com/channels/..."></div>
-                    <div class="input-group"><label>📅 ДАТА ПОДАЧИ</label><input type="date" id="pilotDate"></div>
-                    <button class="submit-btn" id="pilotSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ</button>
-                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ОТЧЁТ О ПРОХОЖДЕНИИ ВОЗДУШНОГО МАРШРУТА -->
-        <div id="routePage" class="form-page">
-            <div class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> На главную</div>
-            <div class="glass-card">
-                <div class="card-header"><h2><i class="fas fa-map-marked-alt"></i> 🗺️ Отчёт о прохождении воздушного маршрута</h2></div>
-                <div class="card-body">
-                    <div id="routeAlert"></div>
-                    <div class="input-group"><label>👨‍✈️ ПИЛОТ (Имя Фамилия)</label><input type="text" id="routePilotName" placeholder="Введите никнейм"></div>
-                    <div class="input-group"><label>📅 ДАТА ВЫПОЛНЕНИЯ</label><input type="date" id="routeDate"></div>
-                    <div class="input-group"><label>🗺️ НОМЕР МАРШРУТА</label>
-                        <select id="routeType">
-                            <option>Маршрут №1</option><option>Маршрут №2.1</option><option>Маршрут №2.2</option><option>Маршрут №3</option><option>Маршрут №4</option><option>Маршрут К+[H]</option><option>Маршрут К+[P]</option>
-                        </select>
-                    </div>
-                    <div class="input-group"><label>🎥 ССЫЛКА НА ВИДЕОЗАПИСЬ</label><input type="text" id="routeVideo" placeholder="https://youtu.be/..."></div>
-                    <div class="input-group"><label>📝 ДОПОЛНИТЕЛЬНЫЕ ЗАМЕТКИ</label><textarea rows="2" id="routeNotes" placeholder="Время выполнения, сложности..."></textarea></div>
-                    <button class="submit-btn" id="routeSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ</button>
-                    <div class="footer-signature"><i class="fas fa-code"></i> By ARMY Delta <i class="fas fa-heart"></i></div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        const WEBHOOKS = {
-            weekly: 'https://discord.com/api/webhooks/1500899546031591688/wpkBFTZbOGyCFvhJ-SfYbPvbJFikcwDCLv983roAS7zj-AelGhtwWltVZ8JUOEmCvAEv',
-            promotion: 'https://discord.com/api/webhooks/1500900181086961846/YJt7paNvrerqttykZ2Qk8q11ogdP-qMU8vBAwdPHf8hXcIoL-WsJbchkP-igh5L4R4gv',
-            pilot: 'https://discord.com/api/webhooks/1501309143691297043/BeXtbLJ7CY0cM83HIQjDInoS7vR2rQwPwt2QJ0yUXoWJiNVBOlLI-XMZfBEXiADxcVyl',
-            route: 'https://discord.com/api/webhooks/1501309143691297043/BeXtbLJ7CY0cM83HIQjDInoS7vR2rQwPwt2QJ0yUXoWJiNVBOlLI-XMZfBEXiADxcVyl'
-        };
-        const ROLES_TO_TAG = '<@&793440125798973441> <@&792082143408160768>';
+    <!-- ЕЖЕНЕДЕЛЬНЫЙ ОТЧЁТ С БАЛЛАМИ -->
+    <div id="weeklyForm" class="form-page">
+      <div class="back-btn" id="backWeeklyBtn"><i class="fas fa-arrow-left"></i> На главную</div>
+      <div class="glass-card">
+        <div class="card-header"><h2><i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт USAF</h2></div>
+        <div class="card-body">
+          <div id="weeklyAlert"></div>
+          <div class="input-group"><label>👨‍✈️ ИМЯ ФАМИЛИЯ (никнейм)</label><input type="text" id="weeklyName" placeholder="John Doe"></div>
+          <div class="input-group"><label>🏅 ВАШЕ ЗВАНИЕ</label><input type="text" id="weeklyRank" placeholder="Лейтенант / Капитан"></div>
+          <div class="period-row">
+            <div class="input-group"><label>📅 ДАТА НАЧАЛА</label><input type="date" id="weeklyDateStart"></div>
+            <div class="input-group"><label>📅 ДАТА ОКОНЧАНИЯ</label><input type="date" id="weeklyDateEnd"></div>
+          </div>
+          <div class="period-info" id="weeklyPeriodInfo" style="background:rgba(212,175,55,0.1); border-radius:12px; padding:8px; text-align:center; margin-bottom:16px;"></div>
+          
+          <div class="actions-section">
+            <label style="font-size: 0.7rem; font-weight: 600; color: var(--accent-glow);"><i class="fas fa-tasks"></i> АКТИВНОСТИ ЗА НЕДЕЛЮ</label>
+            <div id="weeklyActionsList"></div>
+            <button class="add-btn" id="weeklyAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
+          </div>
+          
+          <div class="total-points-bar">
+            <span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span>
+            <span class="total-points-value" id="weeklyTotalPoints">0</span>
+          </div>
+          <button class="submit-btn" id="sendWeeklyBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ РАПОРТ</button>
+          <div class="footer-signature"><i class="fas fa-code"></i> USAF High Command</div>
+        </div>
+      </div>
+    </div>
 
-        const ACTIVITY_TYPES = [
-            { name: "Патруль", basePoints: 10 },
-            { name: "Нахождение регруппа, который напал на ФЗ во время КЧ", basePoints: 15 },
-            { name: "Участие в поставке NG", basePoints: 5 },
-            { name: "Участие в поставке EMS", basePoints: 5 },
-            { name: "Эвакуация солдата NG", basePoints: 2 },
-            { name: "Дежурство на ДВ во время КЧ", basePoints: 4 },
-            { name: "Участие в вечернем построении", basePoints: 2 },
-            { name: "Фиксация взятие ЛА с нарушением", basePoints: 4 },
-            { name: "Проведение тренировки/лекции", basePoints: 4 },
-            { name: "Участие на тренировках/лекциях", basePoints: 2 },
-            { name: "Участие на гос. тренировке", basePoints: 5 },
-            { name: "Проведение ареста (Нашивка должна быть в рации департамента)", basePoints: 6 },
-            { name: "Участие в рейде/отбитии захвата гос. структуры", basePoints: 10 },
-            { name: "Участие в усиленном патруле", basePoints: 6 },
-            { name: "Участие на отбитие анальгетики", basePoints: 5 },
-            { name: "Удачное отбитие ФЗ/ФТ", basePoints: 10 },
-            { name: "Участие на Дроп/Поезде", basePoints: 3 },
-            { name: "Участие на Черный рынок", basePoints: 10 },
-            { name: "Участие в МП", basePoints: 5 },
-            { name: "Участие в ГМП", basePoints: 10 },
-            { name: "Проведение экзамена", basePoints: 5 },
-            { name: "Проверка маршрута", basePoints: 3 },
-            { name: "Проверка отчета", basePoints: 3 },
-            { name: "Участие в прок/мед проверках", basePoints: 3 }
-        ];
+    <!-- ОТЧЁТ НА ПОВЫШЕНИЕ С БАЛЛАМИ -->
+    <div id="promotionForm" class="form-page">
+      <div class="back-btn" id="backPromBtn"><i class="fas fa-arrow-left"></i> На главную</div>
+      <div class="glass-card">
+        <div class="card-header"><h2><i class="fas fa-arrow-up"></i> ⭐ Запрос на повышение звания</h2></div>
+        <div class="card-body">
+          <div id="promAlert"></div>
+          <div class="input-group"><label>👤 ПОЛНОЕ ИМЯ</label><input type="text" id="promName" placeholder="Иван Соколов"></div>
+          <div class="input-group"><label>🎖️ ТЕКУЩЕЕ ЗВАНИЕ</label><input type="text" id="promCurrentRank" placeholder="Лейтенант"></div>
+          <div class="input-group"><label>⭐ ЖЕЛАЕМОЕ ЗВАНИЕ</label><input type="text" id="promDesiredRank" placeholder="Капитан"></div>
+          <div class="input-group"><label>📅 ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="promLastDate"></div>
+          
+          <div class="actions-section">
+            <label style="font-size: 0.7rem; font-weight: 600; color: var(--accent-glow);"><i class="fas fa-medal"></i> ДОСТИЖЕНИЯ ДЛЯ ПОВЫШЕНИЯ</label>
+            <div id="promActionsList"></div>
+            <button class="add-btn" id="promAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДОСТИЖЕНИЕ</button>
+          </div>
+          
+          <div class="total-points-bar">
+            <span class="total-points-label"><i class="fas fa-star"></i> СУММА БАЛЛОВ ЗА ДОСТИЖЕНИЯ</span>
+            <span class="total-points-value" id="promTotalPoints">0</span>
+          </div>
+          <button class="submit-btn" id="sendPromBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ ЗАПРОС</button>
+        </div>
+      </div>
+    </div>
 
-        let weeklyActions = [], promotionActions = [];
+    <!-- КВАЛИФИКАЦИЯ ПИЛОТА -->
+    <div id="pilotForm" class="form-page">
+      <div class="back-btn" id="backPilotBtn"><i class="fas fa-arrow-left"></i> На главную</div>
+      <div class="glass-card">
+        <div class="card-header"><h2><i class="fas fa-wings"></i> 🛩️ Повышение лётной категории</h2></div>
+        <div class="card-body">
+          <div id="pilotAlert"></div>
+          <div class="input-group"><label>👨‍✈️ ПИЛОТ (Имя Фамилия)</label><input type="text" id="pilotName" placeholder="Michael Johnson"></div>
+          <div class="input-group"><label>📊 ТЕКУЩАЯ КАТЕГОРИЯ</label>
+            <select id="currentCat">
+              <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
+            </select>
+          </div>
+          <div class="input-group"><label>🎯 ЖЕЛАЕМАЯ КАТЕГОРИЯ</label>
+            <select id="desiredCat">
+              <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
+            </select>
+          </div>
+          <div class="input-group"><label>⏱️ НАЛЁТ ЧАСОВ (общий)</label><input type="number" id="flightHours" placeholder="480"></div>
+          <div class="input-group"><label>📎 ССЫЛКА НА АУДИТ / КАДРОВЫЙ ОТЧЁТ</label><input type="text" id="auditLink" placeholder="https://discord.com/..."></div>
+          <div class="input-group"><label>📅 ДАТА ПОДАЧИ</label><input type="date" id="pilotDate"></div>
+          <button class="submit-btn" id="sendPilotBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ НА РАССМОТРЕНИЕ</button>
+          <div class="footer-signature"><i class="fas fa-plane-departure"></i> USAF Flight Standards</div>
+        </div>
+      </div>
+    </div>
 
-        function formatDate(d) { if(!d) return ''; return new Date(d).toLocaleDateString('ru-RU'); }
-        function escapeHtml(s) { if(!s) return ''; return s.replace(/[&<>]/g, function(m){ return m==='&'?'&amp;':m==='<'?'&lt;':'&gt;';}); }
-        function calculatePoints(a) { return (a.basePoints||0) * (parseInt(a.count)||1); }
-        function totalPoints(acts) { return acts.reduce((s,a)=>s+calculatePoints(a),0); }
+    <!-- ПРОХОЖДЕНИЕ МАРШРУТА -->
+    <div id="routeForm" class="form-page">
+      <div class="back-btn" id="backRouteBtn"><i class="fas fa-arrow-left"></i> На главную</div>
+      <div class="glass-card">
+        <div class="card-header"><h2><i class="fas fa-route"></i> 🗺️ Сдача воздушного маршрута</h2></div>
+        <div class="card-body">
+          <div id="routeAlert"></div>
+          <div class="input-group"><label>👤 ПИЛОТ (Имя Фамилия)</label><input type="text" id="routePilotName" placeholder="Emily Clark"></div>
+          <div class="input-group"><label>📅 ДАТА ВЫПОЛНЕНИЯ</label><input type="date" id="routeDate"></div>
+          <div class="input-group"><label>🗺️ НОМЕР МАРШРУТА</label>
+            <select id="routeType">
+              <option>Маршрут №1</option><option>Маршрут №2.1</option><option>Маршрут №2.2</option><option>Маршрут №3</option><option>Маршрут №4</option><option>Маршрут К+[H]</option><option>Маршрут К+[P]</option>
+            </select>
+          </div>
+          <div class="input-group"><label>🎥 ССЫЛКА НА ВИДЕОЗАПИСЬ</label><input type="text" id="routeVideo" placeholder="https://youtu.be/..."></div>
+          <div class="input-group"><label>📝 ДОПОЛНИТЕЛЬНЫЕ ЗАМЕТКИ</label><textarea rows="2" id="routeNotes" placeholder="Время выполнения, сложности..."></textarea></div>
+          <button class="submit-btn" id="sendRouteBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ ОТЧЁТ О МАРШРУТЕ</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        function updateWeeklyTotal() { document.getElementById('weeklyTotalPoints').textContent = totalPoints(weeklyActions); }
-        function updatePromotionTotal() { document.getElementById('promotionTotalPoints').textContent = totalPoints(promotionActions); }
+  <script>
+    // БАЛЬНАЯ СИСТЕМА (полный список из вашего запроса)
+    const ACTIVITY_POINTS = {
+      "Патруль": 10, "Нахождение регруппа, который напал на ФЗ во время КЧ": 15,
+      "Участие в поставке NG": 5, "Участие в поставке EMS": 5, "Эвакуация солдата NG": 2,
+      "Дежурство на ДВ во время КЧ": 4, "Участие в вечернем построении": 2, "Фиксация взятие ЛА с нарушением": 4,
+      "Проведение тренировки/лекции": 4, "Участие на тренировках/лекциях": 2, "Участие на гос. тренировке": 5,
+      "Проведение ареста (Нашивка должна быть в рации департамента)": 6, "Участие в рейде/отбитии захвата гос. структуры": 10,
+      "Участие в усиленном патруле": 6, "Участие на отбитие анальгетики": 5, "Удачное отбитие ФЗ/ФТ": 10,
+      "Участие на Дроп/Поезде": 3, "Участие на Черный рынок": 10, "Участие в МП": 5, "Участие в ГМП": 10,
+      "Проведение экзамена": 5, "Проверка маршрута": 3, "Проверка отчета": 3, "Участие в прок/мед проверках": 3
+    };
+    const ACTIVITY_NAMES = Object.keys(ACTIVITY_POINTS);
 
-        function createActionHTML(a, idx, type) {
-            let proofs = a.proofs || [''];
-            return `<div class="action-item"><div class="action-header"><div class="action-title"><i class="fas fa-tag"></i> ДЕЙСТВИЕ #${idx+1}</div><button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button></div><div class="action-fields"><div class="action-field"><label>ТИП</label><select class="action-type" data-idx="${idx}"><option value="">-- Выберите --</option>${ACTIVITY_TYPES.map(t=>`<option value="${t.name}" data-points="${t.basePoints}" ${a.type===t.name?'selected':''}>${t.name} (${t.basePoints} баллов)</option>`).join('')}</select></div><div class="action-field"><label>КОЛ-ВО</label><input type="number" class="action-count" data-idx="${idx}" value="${a.count||1}" min="1"></div><div class="proofs-section"><label><i class="fas fa-images"></i> ДОКАЗАТЕЛЬСТВА</label><div class="proofs-list">${proofs.map((p,pi)=>`<div class="proof-item"><input type="text" class="proof-input" data-action="${idx}" data-proof="${pi}" value="${escapeHtml(p)}" placeholder="https://...">${proofs.length>1?`<button class="remove-proof" data-action="${idx}" data-proof="${pi}"><i class="fas fa-times"></i></button>`:''}</div>`).join('')}</div><button class="add-proof-btn" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button></div></div><div class="points-row"><span class="count-badge"><i class="fas fa-hashtag"></i> КОЛ-ВО: ${a.count||1}</span><span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calculatePoints(a)}</span></div></div>`;
-        }
+    const WEBHOOKS = {
+      weekly: 'https://discord.com/api/webhooks/1500899546031591688/wpkBFTZbOGyCFvhJ-SfYbPvbJFikcwDCLv983roAS7zj-AelGhtwWltVZ8JUOEmCvAEv',
+      promotion: 'https://discord.com/api/webhooks/1500900181086961846/YJt7paNvrerqttykZ2Qk8q11ogdP-qMU8vBAwdPHf8hXcIoL-WsJbchkP-igh5L4R4gv',
+      pilot: 'https://discord.com/api/webhooks/1501309143691297043/BeXtbLJ7CY0cM83HIQjDInoS7vR2rQwPwt2QJ0yUXoWJiNVBOlLI-XMZfBEXiADxcVyl',
+      route: 'https://discord.com/api/webhooks/1501309143691297043/BeXtbLJ7CY0cM83HIQjDInoS7vR2rQwPwt2QJ0yUXoWJiNVBOlLI-XMZfBEXiADxcVyl'
+    };
+    const USAF_ROLES = '<@&793440125798973441> <@&792082143408160768>';
 
-        function attachEvents(container, acts, updateFunc) {
-            container.querySelectorAll('.remove-action').forEach(btn=>btn.addEventListener('click',()=>{ let idx=parseInt(btn.dataset.idx); acts.splice(idx,1); render(container.id, acts, updateFunc); }));
-            container.querySelectorAll('.action-type').forEach(sel=>sel.addEventListener('change',()=>{ let idx=parseInt(sel.dataset.idx); acts[idx].type=sel.value; acts[idx].basePoints=parseInt(sel.options[sel.selectedIndex].dataset.points)||0; render(container.id, acts, updateFunc); }));
-            container.querySelectorAll('.action-count').forEach(inp=>inp.addEventListener('input',()=>{ let idx=parseInt(inp.dataset.idx); acts[idx].count=parseInt(inp.value)||1; render(container.id, acts, updateFunc); }));
-            container.querySelectorAll('.add-proof-btn').forEach(btn=>btn.addEventListener('click',()=>{ let idx=parseInt(btn.dataset.action); if(!acts[idx].proofs) acts[idx].proofs=[]; acts[idx].proofs.push(''); render(container.id, acts, updateFunc); }));
-            container.querySelectorAll('.remove-proof').forEach(btn=>btn.addEventListener('click',()=>{ let aIdx=parseInt(btn.dataset.action), pIdx=parseInt(btn.dataset.proof); if(acts[aIdx].proofs.length>1){ acts[aIdx].proofs.splice(pIdx,1); render(container.id, acts, updateFunc); } }));
-            container.querySelectorAll('.proof-input').forEach(inp=>inp.addEventListener('change',()=>{ let aIdx=parseInt(inp.dataset.action), pIdx=parseInt(inp.dataset.proof); if(acts[aIdx]&&acts[aIdx].proofs) acts[aIdx].proofs[pIdx]=inp.value; }));
-        }
+    let weeklyActions = [], promotionActions = [];
 
-        function render(containerId, acts, updateFunc) {
-            let container = document.getElementById(containerId), emptyDiv = document.getElementById(containerId.replace('List','EmptyActions'));
-            if(acts.length===0){ if(emptyDiv) emptyDiv.style.display='block'; container.innerHTML=''; updateFunc(); return; }
-            if(emptyDiv) emptyDiv.style.display='none';
-            container.innerHTML = acts.map((a,i)=>createActionHTML(a,i)).join('');
-            attachEvents(container, acts, updateFunc);
-            updateFunc();
-        }
+    function calcPoints(a) { return (ACTIVITY_POINTS[a.type]||0) * (parseInt(a.count)||1); }
+    function totalPoints(acts) { return acts.reduce((s,a)=>s+calcPoints(a),0); }
+    function formatDate(d) { if(!d) return ''; return new Date(d).toLocaleDateString('ru-RU'); }
+    function escapeHtml(s) { if(!s) return ''; return s.replace(/[&<>]/g, m=>m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
 
-        async function sendDiscord(webhook, title, fields, color=0x4CAF50){
-            let embed={title,color,fields,footer:{text:"ARMY Delta System"},timestamp:new Date().toISOString()};
-            let resp=await fetch(webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`${ROLES_TO_TAG}\n━━━━━━━━━━━━━━━━━━━━`,embeds:[embed]})});
-            if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        }
+    function renderActions(containerId, acts, updateFunc) {
+      const container = document.getElementById(containerId);
+      if(!container) return;
+      if(acts.length===0){ container.innerHTML='<div class="empty-state"><i class="fas fa-info-circle"></i> Нет добавленных активностей</div>'; updateFunc(); return; }
+      container.innerHTML = acts.map((a,idx)=>`
+        <div class="action-item">
+          <div class="action-header"><div class="action-title"><i class="fas fa-tag"></i> Действие #${idx+1}</div><button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button></div>
+          <div class="action-fields">
+            <div class="action-field"><label>ТИП АКТИВНОСТИ</label><select class="action-type" data-idx="${idx}"><option value="">-- Выберите --</option>${ACTIVITY_NAMES.map(n=>`<option value="${n}" ${a.type===n?'selected':''}>${n} (${ACTIVITY_POINTS[n]} баллов)</option>`).join('')}</select></div>
+            <div class="action-field"><label>КОЛ-ВО</label><input type="number" class="action-count" data-idx="${idx}" value="${a.count||1}" min="1"></div>
+            <div class="proofs-section"><label>🔗 ДОКАЗАТЕЛЬСТВА</label><div class="proofs-list">${(a.proofs||['']).map((p,pi)=>`<div class="proof-item"><input type="text" class="proof-input" data-action="${idx}" data-proof="${pi}" value="${escapeHtml(p)}" placeholder="https://...">${(a.proofs||[]).length>1?`<button class="remove-proof" data-action="${idx}" data-proof="${pi}"><i class="fas fa-times"></i></button>`:''}</div>`).join('')}</div><button class="add-proof-btn" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button></div>
+          </div>
+          <div class="points-row"><span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calcPoints(a)}</span></div>
+        </div>
+      `).join('');
+      container.querySelectorAll('.remove-action').forEach(btn=>btn.addEventListener('click',()=>{ acts.splice(parseInt(btn.dataset.idx),1); renderActions(containerId,acts,updateFunc); updateFunc(); }));
+      container.querySelectorAll('.action-type').forEach(sel=>sel.addEventListener('change',()=>{ acts[parseInt(sel.dataset.idx)].type=sel.value; renderActions(containerId,acts,updateFunc); updateFunc(); }));
+      container.querySelectorAll('.action-count').forEach(inp=>inp.addEventListener('input',()=>{ acts[parseInt(inp.dataset.idx)].count=parseInt(inp.value)||1; renderActions(containerId,acts,updateFunc); updateFunc(); }));
+      container.querySelectorAll('.add-proof-btn').forEach(btn=>btn.addEventListener('click',()=>{ let idx=parseInt(btn.dataset.action); if(!acts[idx].proofs) acts[idx].proofs=[]; acts[idx].proofs.push(''); renderActions(containerId,acts,updateFunc); }));
+      container.querySelectorAll('.remove-proof').forEach(btn=>btn.addEventListener('click',()=>{ let a=parseInt(btn.dataset.action), p=parseInt(btn.dataset.proof); if(acts[a].proofs.length>1){ acts[a].proofs.splice(p,1); renderActions(containerId,acts,updateFunc); } }));
+      container.querySelectorAll('.proof-input').forEach(inp=>inp.addEventListener('change',()=>{ let a=parseInt(inp.dataset.action), p=parseInt(inp.dataset.proof); if(acts[a]&&acts[a].proofs) acts[a].proofs[p]=inp.value; }));
+      updateFunc();
+    }
 
-        function showAlert(containerId, msg, type){
-            let c=document.getElementById(containerId);
-            let div=document.createElement('div'); div.className=`alert ${type}`; div.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${msg}`;
-            c.appendChild(div); setTimeout(()=>div.remove(),5000);
-        }
+    async function sendDiscord(webhook, title, fields, color=0xD4AF37){
+      let embed={title,color,fields,footer:{text:"USAF Delta System"},timestamp:new Date().toISOString()};
+      let resp=await fetch(webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`${USAF_ROLES}\n✈️ **НОВЫЙ ОТЧЁТ USAF** ✈️`,embeds:[embed]})});
+      if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    }
 
-        function setDefaultDates(){
-            let today=new Date(), mon=new Date(today); mon.setDate(today.getDate()-(today.getDay()===0?6:today.getDay()-1));
-            let sun=new Date(mon); sun.setDate(mon.getDate()+6);
-            document.getElementById('weeklyDateStart').value=mon.toISOString().split('T')[0];
-            document.getElementById('weeklyDateEnd').value=sun.toISOString().split('T')[0];
-            document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(mon)} – ${formatDate(sun)} (7 дн.)`;
-        }
+    function showAlert(containerId, msg, type){
+      let c=document.getElementById(containerId);
+      if(!c) return;
+      let div=document.createElement('div'); div.className=`alert ${type}`; div.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-triangle'}"></i> ${msg}`;
+      c.appendChild(div); setTimeout(()=>div.remove(),5000);
+    }
 
-        function showHome(){ document.getElementById('homePage').style.display='flex'; document.querySelectorAll('.form-page').forEach(p=>p.style.display='none'); }
-        function showPage(id){ document.getElementById('homePage').style.display='none'; document.querySelectorAll('.form-page').forEach(p=>p.style.display='none'); document.getElementById(id).style.display='block'; window.scrollTo(0,0); }
+    // Навигация
+    const mainMenu = document.getElementById('mainMenuPage');
+    const forms = { weekly:document.getElementById('weeklyForm'), promotion:document.getElementById('promotionForm'), pilot:document.getElementById('pilotForm'), route:document.getElementById('routeForm') };
+    function showMain(){ mainMenu.style.display='flex'; Object.values(forms).forEach(f=>f.style.display='none'); }
+    document.querySelectorAll('.main-card[data-report]').forEach(card=>card.addEventListener('click',()=>{ let t=card.dataset.report; mainMenu.style.display='none'; Object.values(forms).forEach(f=>f.style.display='none'); if(forms[t]) forms[t].style.display='block'; window.scrollTo(0,0); }));
+    document.getElementById('backWeeklyBtn').addEventListener('click',showMain);
+    document.getElementById('backPromBtn').addEventListener('click',showMain);
+    document.getElementById('backPilotBtn').addEventListener('click',showMain);
+    document.getElementById('backRouteBtn').addEventListener('click',showMain);
 
-        document.querySelectorAll('.action-card').forEach(card=>card.addEventListener('click',()=>{ let p=card.dataset.page; if(p==='weekly') showPage('weeklyPage'); else if(p==='promotion') showPage('promotionPage'); else if(p==='pilot') showPage('pilotPage'); else if(p==='route') showPage('routePage'); }));
+    // Добавление действий
+    document.getElementById('weeklyAddActionBtn').onclick=()=>{ weeklyActions.push({type:'',count:1,proofs:['']}); renderActions('weeklyActionsList',weeklyActions,()=>document.getElementById('weeklyTotalPoints').textContent=totalPoints(weeklyActions)); };
+    document.getElementById('promAddActionBtn').onclick=()=>{ promotionActions.push({type:'',count:1,proofs:['']}); renderActions('promActionsList',promotionActions,()=>document.getElementById('promTotalPoints').textContent=totalPoints(promotionActions)); };
 
-        document.getElementById('weeklyAddActionBtn').onclick=()=>{ weeklyActions.push({type:'',basePoints:0,count:1,proofs:['']}); render('weeklyActionsList',weeklyActions,updateWeeklyTotal); };
-        document.getElementById('promotionAddActionBtn').onclick=()=>{ promotionActions.push({type:'',basePoints:0,count:1,proofs:['']}); render('promotionActionsList',promotionActions,updatePromotionTotal); };
+    // Отправка еженедельного
+    document.getElementById('sendWeeklyBtn').addEventListener('click', async()=>{
+      let name=document.getElementById('weeklyName').value.trim();
+      if(!name){ showAlert('weeklyAlert','Введите имя!','error'); return; }
+      let rank=document.getElementById('weeklyRank').value.trim()||'Не указано';
+      let start=document.getElementById('weeklyDateStart').value, end=document.getElementById('weeklyDateEnd').value;
+      let period=(start&&end)?`${formatDate(start)} – ${formatDate(end)}`:'Не указан';
+      let acts='', total=0;
+      weeklyActions.forEach((a,i)=>{ let pts=calcPoints(a); total+=pts; let proofs=(a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n')||'Нет'); acts+=`**${i+1}. ${a.type||'Не выбрано'}** ×${a.count||1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`; });
+      if(weeklyActions.length===0) acts='Нет активностей';
+      let btn=document.getElementById('sendWeeklyBtn');
+      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+      try{
+        await sendDiscord(WEBHOOKS.weekly,'📅 Еженедельный рапорт USAF (с баллами)',[{name:'👨‍✈️ Пилот',value:name,inline:true},{name:'🏅 Звание',value:rank,inline:true},{name:'📆 Период',value:period,inline:true},{name:'📊 Активности',value:acts.substring(0,900)},{name:'🏆 ИТОГО БАЛЛОВ',value:`${total}`,inline:true}]);
+        showAlert('weeklyAlert','✅ Отчёт отправлен!','success');
+        document.getElementById('weeklyName').value=''; document.getElementById('weeklyRank').value=''; weeklyActions=[]; renderActions('weeklyActionsList',weeklyActions,()=>document.getElementById('weeklyTotalPoints').textContent=0);
+      } catch(e){ showAlert('weeklyAlert',`Ошибка: ${e.message}`,'error'); }
+      finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ РАПОРТ'; }
+    });
 
-        document.getElementById('weeklySubmitBtn').onclick=async()=>{
-            if(!document.getElementById('weeklyNickname').value.trim()){ showAlert('weeklyAlert','Введите никнейм','error'); return; }
-            let btn=document.getElementById('weeklySubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try{
-                let nickname=document.getElementById('weeklyNickname').value.trim(), rank=document.getElementById('weeklyRank').value.trim()||'Не указано';
-                let start=document.getElementById('weeklyDateStart').value, end=document.getElementById('weeklyDateEnd').value, period=(start&&end)?`${formatDate(start)} – ${formatDate(end)}`:'Не указан';
-                let acts='', total=0;
-                weeklyActions.forEach((a,i)=>{ let pts=calculatePoints(a); total+=pts; let proofs=(a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n')||'Нет'); acts+=`**${i+1}. ${a.type||'Не выбрано'}** ×${a.count||1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`; });
-                if(weeklyActions.length===0) acts='Нет действий';
-                await sendDiscord(WEBHOOKS.weekly,"📊 Еженедельный отчёт",[{name:"🎮 Никнейм",value:nickname,inline:true},{name:"🏅 Ранг",value:rank,inline:true},{name:"📅 Период",value:period,inline:true},{name:"📊 Действия",value:acts.substring(0,900)},{name:"🏆 Итого баллов",value:`${total}`,inline:true}]);
-                showAlert('weeklyAlert','✅ Отчёт отправлен!','success');
-                document.getElementById('weeklyNickname').value=''; document.getElementById('weeklyRank').value=''; weeklyActions=[]; render('weeklyActionsList',weeklyActions,updateWeeklyTotal); setDefaultDates();
-            } catch(e){ showAlert('weeklyAlert',`❌ Ошибка: ${e.message}`,'error'); }
-            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ'; }
-        });
+    // Отправка повышения
+    document.getElementById('sendPromBtn').addEventListener('click', async()=>{
+      let name=document.getElementById('promName').value.trim();
+      let cur=document.getElementById('promCurrentRank').value.trim();
+      let des=document.getElementById('promDesiredRank').value.trim();
+      if(!name||!cur||!des){ showAlert('promAlert','Заполните ФИО и звания!','error'); return; }
+      let acts='', total=0;
+      promotionActions.forEach((a,i)=>{ let pts=calcPoints(a); total+=pts; let proofs=(a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n')||'Нет'); acts+=`**${i+1}. ${a.type||'Не выбрано'}** ×${a.count||1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`; });
+      if(promotionActions.length===0) acts='Нет достижений';
+      let btn=document.getElementById('sendPromBtn');
+      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+      try{
+        await sendDiscord(WEBHOOKS.promotion,'⭐ Запрос на повышение звания USAF',[{name:'👤 Военнослужащий',value:name,inline:true},{name:'🎖️ Текущее звание',value:cur,inline:true},{name:'⭐ Желаемое звание',value:des,inline:true},{name:'📅 Последнее повышение',value:document.getElementById('promLastDate').value||'—',inline:true},{name:'📜 Достижения (баллы)',value:acts.substring(0,900)},{name:'🏆 Сумма баллов',value:`${total}`,inline:true}]);
+        showAlert('promAlert','✅ Запрос отправлен!','success');
+        document.getElementById('promName').value=''; document.getElementById('promCurrentRank').value=''; document.getElementById('promDesiredRank').value=''; document.getElementById('promLastDate').value='';
+        promotionActions=[]; renderActions('promActionsList',promotionActions,()=>document.getElementById('promTotalPoints').textContent=0);
+      } catch(e){ showAlert('promAlert',`Ошибка: ${e.message}`,'error'); }
+      finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ ЗАПРОС'; }
+    });
 
-        document.getElementById('promotionSubmitBtn').onclick=async()=>{
-            if(!document.getElementById('promotionNickname').value.trim()){ showAlert('promotionAlert','Введите никнейм','error'); return; }
-            let btn=document.getElementById('promotionSubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try{
-                let nickname=document.getElementById('promotionNickname').value.trim(), cur=document.getElementById('promotionCurrentRank').value.trim()||'Не указано', des=document.getElementById('promotionDesiredRank').value.trim()||'Не указано';
-                let last=document.getElementById('lastPromotionDate').value, lastF=last?formatDate(last):'Не указана';
-                let acts='', total=0;
-                promotionActions.forEach((a,i)=>{ let pts=calculatePoints(a); total+=pts; let proofs=(a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n')||'Нет'); acts+=`**${i+1}. ${a.type||'Не выбрано'}** ×${a.count||1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`; });
-                if(promotionActions.length===0) acts='Нет достижений';
-                await sendDiscord(WEBHOOKS.promotion,"⬆️ Запрос на повышение",[{name:"🎮 Никнейм",value:nickname,inline:true},{name:"🏅 Текущий ранг",value:cur,inline:true},{name:"🎯 Желаемый ранг",value:des,inline:true},{name:"📅 Последнее повышение",value:lastF,inline:true},{name:"📊 Достижения",value:acts.substring(0,900)},{name:"🏆 Итого баллов",value:`${total}`,inline:true}]);
-                showAlert('promotionAlert','✅ Запрос отправлен!','success');
-                document.getElementById('promotionNickname').value=''; document.getElementById('promotionCurrentRank').value=''; document.getElementById('promotionDesiredRank').value=''; document.getElementById('lastPromotionDate').value='';
-                promotionActions=[]; render('promotionActionsList',promotionActions,updatePromotionTotal);
-                document.getElementById('promotionDateInfo').innerHTML='📅 Укажите дату последнего повышения';
-            } catch(e){ showAlert('promotionAlert',`❌ Ошибка: ${e.message}`,'error'); }
-            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС'; }
-        });
+    // Квалификация пилота
+    document.getElementById('sendPilotBtn').addEventListener('click', async()=>{
+      let pilot=document.getElementById('pilotName').value.trim();
+      let hours=document.getElementById('flightHours').value;
+      if(!pilot||!hours){ showAlert('pilotAlert','Введите имя пилота и налёт часов!','error'); return; }
+      let btn=document.getElementById('sendPilotBtn');
+      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+      try{
+        await sendDiscord(WEBHOOKS.pilot,'🛩️ Аттестация на повышение лётной категории',[{name:'✈️ Пилот',value:pilot,inline:true},{name:'📊 Текущая категория',value:document.getElementById('currentCat').value,inline:true},{name:'🎯 Желаемая категория',value:document.getElementById('desiredCat').value,inline:true},{name:'⏱️ Общий налёт',value:`${hours} ч.`,inline:true},{name:'🔗 Ссылка на аудит',value:document.getElementById('auditLink').value||'—'},{name:'📅 Дата подачи',value:document.getElementById('pilotDate').value||new Date().toISOString().slice(0,10)}]);
+        showAlert('pilotAlert','✅ Заявка принята!','success');
+        document.getElementById('pilotName').value=''; document.getElementById('flightHours').value=''; document.getElementById('auditLink').value=''; document.getElementById('pilotDate').value='';
+      } catch(e){ showAlert('pilotAlert',`Ошибка: ${e.message}`,'error'); }
+      finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ НА РАССМОТРЕНИЕ'; }
+    });
 
-        document.getElementById('pilotSubmitBtn').onclick=async()=>{
-            if(!document.getElementById('pilotName').value.trim()){ showAlert('pilotAlert','Введите имя пилота','error'); return; }
-            let btn=document.getElementById('pilotSubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try{
-                let name=document.getElementById('pilotName').value.trim(), cur=document.getElementById('pilotCurrentCat').value, des=document.getElementById('pilotDesiredCat').value;
-                let hours=document.getElementById('pilotHours').value||'0', audit=document.getElementById('pilotAudit').value.trim()||'Не указано';
-                let date=document.getElementById('pilotDate').value||new Date().toISOString().split('T')[0];
-                await sendDiscord(WEBHOOKS.pilot,"🛩️ Квалификация пилота",[{name:"👨‍✈️ Пилот",value:name,inline:true},{name:"🪪 Текущая категория",value:cur,inline:true},{name:"🎯 Желаемая категория",value:des,inline:true},{name:"⏱️ Налёт часов",value:`${hours} ч.`,inline:true},{name:"🔗 Ссылка на аудит",value:audit},{name:"📅 Дата подачи",value:date,inline:true}]);
-                showAlert('pilotAlert','✅ Заявка отправлена!','success');
-                document.getElementById('pilotName').value=''; document.getElementById('pilotHours').value=''; document.getElementById('pilotAudit').value=''; document.getElementById('pilotDate').value='';
-            } catch(e){ showAlert('pilotAlert',`❌ Ошибка: ${e.message}`,'error'); }
-            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ'; }
-        });
+    // Маршрут
+    document.getElementById('sendRouteBtn').addEventListener('click', async()=>{
+      let pilot=document.getElementById('routePilotName').value.trim();
+      let video=document.getElementById('routeVideo').value.trim();
+      if(!pilot||!video){ showAlert('routeAlert','Укажите имя пилота и ссылку на видео!','error'); return; }
+      let btn=document.getElementById('sendRouteBtn');
+      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+      try{
+        await sendDiscord(WEBHOOKS.route,'🗺️ Отчёт о прохождении воздушного маршрута',[{name:'👨‍✈️ Пилот',value:pilot,inline:true},{name:'📅 Дата полёта',value:document.getElementById('routeDate').value||'—',inline:true},{name:'🗺️ Маршрут',value:document.getElementById('routeType').value,inline:true},{name:'🎥 Видеозапись',value:video},{name:'📝 Заметки',value:document.getElementById('routeNotes').value||'—'}]);
+        showAlert('routeAlert','✅ Отчёт о маршруте отправлен!','success');
+        document.getElementById('routePilotName').value=''; document.getElementById('routeDate').value=''; document.getElementById('routeVideo').value=''; document.getElementById('routeNotes').value='';
+      } catch(e){ showAlert('routeAlert',`Ошибка: ${e.message}`,'error'); }
+      finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ ОТЧЁТ О МАРШРУТЕ'; }
+    });
 
-        document.getElementById('routeSubmitBtn').onclick=async()=>{
-            if(!document.getElementById('routePilotName').value.trim()){ showAlert('routeAlert','Введите имя пилота','error'); return; }
-            if(!document.getElementById('routeVideo').value.trim()){ showAlert('routeAlert','Укажите ссылку на видео','error'); return; }
-            let btn=document.getElementById('routeSubmitBtn'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-            try{
-                let pilot=document.getElementById('routePilotName').value.trim(), date=document.getElementById('routeDate').value||'Не указана';
-                let route=document.getElementById('routeType').value, video=document.getElementById('routeVideo').value.trim();
-                let notes=document.getElementById('routeNotes').value.trim()||'—';
-                await sendDiscord(WEBHOOKS.route,"🗺️ Отчёт о прохождении воздушного маршрута",[{name:"👨‍✈️ Пилот",value:pilot,inline:true},{name:"📅 Дата",value:date,inline:true},{name:"🗺️ Маршрут",value:route,inline:true},{name:"🎥 Видеозапись",value:video},{name:"📝 Заметки",value:notes}]);
-                showAlert('routeAlert','✅ Отчёт о маршруте отправлен!','success');
-                document.getElementById('routePilotName').value=''; document.getElementById('routeDate').value=''; document.getElementById('routeVideo').value=''; document.getElementById('routeNotes').value='';
-            } catch(e){ showAlert('routeAlert',`❌ Ошибка: ${e.message}`,'error'); }
-            finally{ btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ'; }
-        };
+    // Даты по умолчанию
+    function setDefaultDates(){
+      let today=new Date(), mon=new Date(today);
+      mon.setDate(today.getDate()-(today.getDay()===0?6:today.getDay()-1));
+      let sun=new Date(mon); sun.setDate(mon.getDate()+6);
+      document.getElementById('weeklyDateStart').value=mon.toISOString().split('T')[0];
+      document.getElementById('weeklyDateEnd').value=sun.toISOString().split('T')[0];
+      document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(mon)} – ${formatDate(sun)} (7 дн.)`;
+    }
+    setDefaultDates();
+    document.getElementById('weeklyDateStart').addEventListener('change',()=>{ let s=document.getElementById('weeklyDateStart').value, e=document.getElementById('weeklyDateEnd').value; if(s&&e) document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(s)} – ${formatDate(e)} (${Math.ceil((new Date(e)-new Date(s))/(1000*60*60*24))+1} дн.)`; else setDefaultDates(); });
+    document.getElementById('weeklyDateEnd').addEventListener('change',()=>{ let s=document.getElementById('weeklyDateStart').value, e=document.getElementById('weeklyDateEnd').value; if(s&&e) document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(s)} – ${formatDate(e)} (${Math.ceil((new Date(e)-new Date(s))/(1000*60*60*24))+1} дн.)`; });
 
-        document.getElementById('themeSwitch').onclick=()=>{ document.body.classList.toggle('light'); let isLight=document.body.classList.contains('light'); localStorage.setItem('theme',isLight?'light':'dark'); let icon=document.querySelector('#themeSwitch i'), span=document.querySelector('#themeSwitch span'); if(isLight){ icon.className='fas fa-moon'; span.innerText='Тёмная тема'; } else { icon.className='fas fa-sun'; span.innerText='Светлая тема'; } };
-        if(localStorage.getItem('theme')==='light'){ document.body.classList.add('light'); document.querySelector('#themeSwitch i').className='fas fa-moon'; document.querySelector('#themeSwitch span').innerText='Тёмная тема'; }
+    // Тема
+    const themeSwitch=document.getElementById('themeSwitch');
+    themeSwitch.addEventListener('click',()=>{ document.body.classList.toggle('light'); let isLight=document.body.classList.contains('light'); localStorage.setItem('usafTheme',isLight?'light':'dark'); let icon=themeSwitch.querySelector('i'), span=themeSwitch.querySelector('span'); if(isLight){ icon.className='fas fa-moon'; span.innerText='Тёмная тема'; } else { icon.className='fas fa-sun'; span.innerText='Светлая тема'; } });
+    if(localStorage.getItem('usafTheme')==='light'){ document.body.classList.add('light'); themeSwitch.querySelector('i').className='fas fa-moon'; themeSwitch.querySelector('span').innerText='Тёмная тема'; }
 
-        document.getElementById('weeklyDateStart').addEventListener('change',()=>{ let s=document.getElementById('weeklyDateStart').value, e=document.getElementById('weeklyDateEnd').value; if(s&&e) document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(s)} – ${formatDate(e)} (${Math.ceil((new Date(e)-new Date(s))/(1000*60*60*24))+1} дн.)`; else setDefaultDates(); });
-        document.getElementById('weeklyDateEnd').addEventListener('change',()=>{ let s=document.getElementById('weeklyDateStart').value, e=document.getElementById('weeklyDateEnd').value; if(s&&e) document.getElementById('weeklyPeriodInfo').innerHTML=`${formatDate(s)} – ${formatDate(e)} (${Math.ceil((new Date(e)-new Date(s))/(1000*60*60*24))+1} дн.)`; });
-        document.getElementById('lastPromotionDate').addEventListener('change',()=>{ let d=document.getElementById('lastPromotionDate').value; if(d) document.getElementById('promotionDateInfo').innerHTML=`📅 Дата последнего повышения: ${formatDate(d)} (прошло ${Math.floor((new Date()-new Date(d))/(1000*60*60*24*30))} мес.)`; else document.getElementById('promotionDateInfo').innerHTML='📅 Укажите дату последнего повышения'; });
-
-        showHome(); setDefaultDates(); render('weeklyActionsList',weeklyActions,updateWeeklyTotal); render('promotionActionsList',promotionActions,updatePromotionTotal);
-    </script>
+    renderActions('weeklyActionsList',weeklyActions,()=>document.getElementById('weeklyTotalPoints').textContent=totalPoints(weeklyActions));
+    renderActions('promActionsList',promotionActions,()=>document.getElementById('promTotalPoints').textContent=totalPoints(promotionActions));
+    showMain();
+  </script>
 </body>
 </html>
