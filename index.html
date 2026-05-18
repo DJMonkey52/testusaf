@@ -1,1019 +1,1370 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>USAF | Система отчетов</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>USAF | Система отчетов</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --glass-bg: rgba(30, 28, 22, 0.96);
-      --glass-border: rgba(212, 175, 55, 0.45);
-      --text-primary: #F5EED9;
-      --text-secondary: #DDD2B6;
-      --text-muted: #B8A97C;
-      --accent: #D4AF37;
-      --accent-glow: #E6C868;
-      --accent-dark: #B88F2A;
-      --success: #10b981;
-      --danger: #ef4444;
-      --border-light: rgba(212, 175, 55, 0.25);
-      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.5);
-      --shadow-md: 0 20px 35px -10px rgba(0, 0, 0, 0.6);
-      --input-bg: rgba(20, 18, 14, 0.9);
-      --card-hover: rgba(212, 175, 55, 0.12);
-      --empty-bg: rgba(30, 28, 22, 0.6);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: repeating-linear-gradient(45deg, #2a2418 0px, #2a2418 40px, #3e3524 40px, #3e3524 80px, #1f1a10 80px, #1f1a10 120px);
-      min-height: 100vh;
-    }
+        body.light {
+            background: linear-gradient(135deg, #e8eef4 0%, #d4dee8 100%);
+        }
 
-    body.light {
-      background: #e6dcc5;
-      --glass-bg: rgba(250, 245, 235, 0.95);
-      --glass-border: rgba(180, 150, 80, 0.4);
-      --text-primary: #2c2418;
-      --text-secondary: #5c4e32;
-      --text-muted: #8a7a58;
-      --accent: #b8860b;
-      --accent-glow: #d4a017;
-      --accent-dark: #9a6d0a;
-      --border-light: rgba(0, 0, 0, 0.1);
-      --input-bg: rgba(255, 255, 245, 0.98);
-      --card-hover: rgba(184, 134, 11, 0.08);
-      --empty-bg: rgba(0, 0, 0, 0.03);
-    }
+        :root {
+            --glass-bg: rgba(18, 22, 35, 0.95);
+            --glass-border: rgba(212, 175, 55, 0.35);
+            --text-primary: #F0F3FA;
+            --text-secondary: #B0C4B0;
+            --text-muted: #8A9A8A;
+            --accent: #D4AF37;
+            --accent-glow: #E6C868;
+            --accent-dark: #B88F2A;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border-light: rgba(255, 255, 255, 0.06);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+            --input-bg: rgba(10, 12, 20, 0.9);
+            --card-hover: rgba(212, 175, 55, 0.12);
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        body.light {
+            --glass-bg: rgba(245, 245, 250, 0.95);
+            --glass-border: rgba(212, 175, 55, 0.25);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --accent: #D4AF37;
+            --accent-glow: #B88F2A;
+            --accent-dark: #9a6d0a;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --card-hover: rgba(212, 175, 55, 0.08);
+        }
 
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
-      margin-top: 10px;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
 
-    .logo-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #1a1a1a;
-      box-shadow: var(--shadow-sm);
-      animation: float 3s ease-in-out infinite;
-    }
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #1a1a1a;
+            box-shadow: var(--shadow-sm);
+            animation: float 3s ease-in-out infinite;
+        }
 
-    .logo h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #F5EED9, var(--accent-glow));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
 
-    .subtitle {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-    }
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, var(--accent-glow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 50px;
-      padding: 8px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      color: var(--text-primary);
-      font-weight: 500;
-      font-size: 0.85rem;
-      transition: all 0.3s;
-      z-index: 100;
-    }
+        body.light .logo h1 {
+            background: linear-gradient(135deg, #1e3b1e, #2e7d32);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
 
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      transform: scale(1.02);
-    }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
 
-    /* Главное меню */
-    .home-page {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex: 1;
-      min-height: calc(100vh - 180px);
-    }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            z-index: 100;
+        }
 
-    .main-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-top: 20px;
-      max-width: 700px;
-      width: 100%;
-    }
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
 
-    .main-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-radius: 32px;
-      padding: 35px 25px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      text-align: center;
-      box-shadow: var(--shadow-md);
-    }
+        .home-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            min-height: calc(100vh - 180px);
+        }
 
-    .main-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--accent);
-    }
+        .cards-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 0;
+        }
 
-    .main-card-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(184, 143, 42, 0.15));
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 32px;
-      color: var(--accent);
-    }
+        .action-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 38px 32px;
+            width: 300px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
 
-    .main-card h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
+        .action-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
 
-    .main-card p {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-    }
+        .card-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(184, 143, 42, 0.15));
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: var(--accent);
+            transition: all 0.3s;
+        }
 
-    .main-card-arrow {
-      margin-top: 16px;
-      color: var(--accent);
-      opacity: 0;
-      transition: 0.3s;
-    }
+        .action-card:hover .card-icon {
+            transform: scale(1.05);
+        }
 
-    .main-card:hover .main-card-arrow {
-      opacity: 1;
-      transform: translateX(6px);
-    }
+        .action-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
 
-    /* Формы */
-    .form-page {
-      display: none;
-      animation: fadeInUp 0.4s ease;
-    }
+        .action-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .card-arrow {
+            margin-top: 18px;
+            font-size: 1.1rem;
+            color: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
 
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--glass-border);
-      border-radius: 50px;
-      padding: 10px 22px;
-      color: var(--text-primary);
-      font-weight: 500;
-      cursor: pointer;
-      margin-bottom: 24px;
-      transition: all 0.2s;
-    }
+        .action-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(6px);
+        }
 
-    .back-btn:hover {
-      border-color: var(--accent);
-      transform: translateX(-4px);
-    }
+        .form-page {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
 
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      border-radius: 32px;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .card-header {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(128, 98, 30, 0.08));
-      padding: 20px 28px;
-      border-bottom: 1px solid var(--border-light);
-    }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 10px 22px;
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: all 0.2s;
+        }
 
-    .card-header h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .back-btn:hover {
+            border-color: var(--accent);
+            transform: translateX(-4px);
+        }
 
-    .card-header h2 i {
-      color: var(--accent);
-    }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
 
-    .card-body {
-      padding: 28px;
-    }
+        .card-header {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 143, 42, 0.08));
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border-light);
+        }
 
-    .input-group {
-      margin-bottom: 20px;
-    }
+        .card-header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .input-group label {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: var(--accent-glow);
-      margin-bottom: 6px;
-    }
+        .card-header h2 i {
+            color: var(--accent);
+        }
 
-    .input-group input, .input-group select, .input-group textarea {
-      width: 100%;
-      padding: 12px 14px;
-      background: var(--input-bg);
-      border: 1px solid var(--border-light);
-      border-radius: 14px;
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      transition: all 0.2s;
-    }
+        .card-body {
+            padding: 28px;
+        }
 
-    .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
-    }
+        .input-group {
+            margin-bottom: 20px;
+        }
 
-    .actions-section {
-      margin-top: 24px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 24px;
-      padding: 16px;
-    }
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: var(--accent-glow);
+            margin-bottom: 6px;
+        }
 
-    .action-item {
-      background: var(--card-hover);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
-      border: 1px solid var(--border-light);
-      transition: all 0.2s ease;
-    }
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
 
-    .action-item:hover {
-      border-color: var(--accent);
-      transform: translateX(3px);
-    }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+        }
 
-    .action-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+        .period-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
 
-    .action-title {
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: 0.85rem;
-    }
+        .period-info {
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            padding: 10px 14px;
+            text-align: center;
+            color: var(--accent-glow);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
 
-    .remove-action {
-      background: rgba(239, 68, 68, 0.15);
-      border: none;
-      color: #f87171;
-      padding: 5px 12px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
+        .action-item {
+            background: var(--card-hover);
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
 
-    .action-fields {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
+        .action-item.new-action {
+            animation: actionAppear 0.35s ease forwards;
+        }
 
-    .action-field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+        @keyframes actionAppear {
+            from { opacity: 0; transform: scale(0.95) translateY(-15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
 
-    .action-field label {
-      font-size: 0.65rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
+        .action-item.removing {
+            animation: actionRemove 0.3s ease forwards !important;
+            pointer-events: none;
+        }
 
-    .proofs-section {
-      grid-column: span 2;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border-light);
-    }
+        @keyframes actionRemove {
+            0% { opacity: 1; transform: scale(1) translateX(0); max-height: 300px; margin-bottom: 14px; padding: 16px; }
+            100% { opacity: 0; transform: scale(0.95) translateX(-30px); max-height: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; border: none; }
+        }
 
-    .proof-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 10px;
-      padding: 6px 10px;
-    }
+        .action-item:hover {
+            border-color: var(--accent);
+            transform: translateX(3px);
+        }
 
-    .proof-item input {
-      flex: 1;
-      padding: 8px 10px;
-      background: var(--input-bg);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-size: 0.8rem;
-    }
+        .action-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    .remove-proof {
-      background: rgba(239, 68, 68, 0.15);
-      border: none;
-      color: #f87171;
-      cursor: pointer;
-      padding: 6px 10px;
-      border-radius: 8px;
-    }
+        .action-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .add-proof-btn {
-      background: rgba(212, 175, 55, 0.18);
-      border: 1px dashed var(--accent);
-      border-radius: 10px;
-      padding: 6px 12px;
-      font-size: 0.7rem;
-      color: var(--accent);
-      cursor: pointer;
-      margin-top: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .remove-action {
+            background: rgba(239, 68, 68, 0.15);
+            border: none;
+            color: #f87171;
+            padding: 5px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
 
-    .points-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 10px;
-      border-top: 1px solid var(--border-light);
-      margin-top: 6px;
-    }
+        .remove-action:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: scale(1.02);
+        }
 
-    .points-badge {
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #1f1a10;
-    }
+        .action-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
 
-    .add-btn {
-      width: 100%;
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px dashed var(--accent);
-      border-radius: 16px;
-      padding: 12px;
-      color: var(--accent);
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 16px 0;
-    }
+        .action-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
 
-    .total-points-bar {
-      background: rgba(212, 175, 55, 0.15);
-      border-radius: 16px;
-      padding: 14px 20px;
-      margin: 20px 0 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .action-field label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
 
-    .total-points-value {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+        .action-field select, .action-field input {
+            padding: 8px 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
 
-    .submit-btn {
-      width: 100%;
-      background: linear-gradient(105deg, var(--accent), var(--accent-dark));
-      border: none;
-      padding: 14px;
-      border-radius: 22px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #1f1a10;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: all 0.3s;
-    }
+        .proofs-section {
+            grid-column: span 2;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-light);
+        }
 
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      filter: brightness(1.05);
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
-    }
+        .proofs-section label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-glow);
+            margin-bottom: 8px;
+            display: block;
+        }
 
-    .empty-state {
-      text-align: center;
-      padding: 30px;
-      color: var(--text-muted);
-      background: var(--empty-bg);
-      border-radius: 18px;
-      margin-bottom: 14px;
-    }
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 10px;
+            padding: 6px 10px;
+        }
 
-    .footer-signature {
-      text-align: center;
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border-light);
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
+        .proof-item.new-proof {
+            animation: proofAppear 0.3s ease;
+        }
 
-    .alert {
-      padding: 12px 16px;
-      border-radius: 14px;
-      margin-bottom: 20px;
-      display: none;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      font-size: 0.85rem;
-    }
+        @keyframes proofAppear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-    .alert.success {
-      background: rgba(16, 185, 129, 0.15);
-      border-left: 3px solid #10b981;
-      color: #10b981;
-      display: flex;
-    }
+        .proof-item.removing {
+            animation: proofRemove 0.25s ease forwards;
+            pointer-events: none;
+        }
 
-    .alert.error {
-      background: rgba(239, 68, 68, 0.12);
-      border-left: 3px solid #ef4444;
-      color: #f87171;
-      display: flex;
-    }
+        @keyframes proofRemove {
+            from { opacity: 1; transform: translateX(0); max-height: 60px; }
+            to { opacity: 0; transform: translateX(-20px); max-height: 0; margin-bottom: 0; padding: 0; }
+        }
 
-    @media (max-width: 700px) {
-      .main-cards-grid { grid-template-columns: 1fr; gap: 20px; }
-      .action-fields { grid-template-columns: 1fr; }
-      .proofs-section { grid-column: span 1; }
-      .total-points-value { font-size: 1.4rem; }
-    }
-  </style>
+        body.light .proof-item {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .proof-item input {
+            flex: 1;
+            padding: 8px 10px;
+            font-size: 0.8rem;
+            background: var(--input-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: var(--text-primary);
+        }
+
+        .proof-item input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .remove-proof {
+            background: rgba(239, 68, 68, 0.15);
+            border: none;
+            color: #f87171;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .remove-proof:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: scale(1.02);
+        }
+
+        .add-proof-btn {
+            background: rgba(212, 175, 55, 0.18);
+            border: 1px dashed var(--accent);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.7rem;
+            color: var(--accent);
+            cursor: pointer;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .add-proof-btn:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .points-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-light);
+            margin-top: 6px;
+        }
+
+        .points-badge {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .count-badge {
+            background: rgba(212, 175, 55, 0.18);
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: var(--accent-glow);
+        }
+
+        .add-btn {
+            width: 100%;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px dashed var(--accent);
+            border-radius: 16px;
+            padding: 14px;
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            margin: 16px 0;
+        }
+
+        .add-btn:hover {
+            background: rgba(212, 175, 55, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            background: rgba(10, 25, 10, 0.5);
+            border-radius: 18px;
+            margin-bottom: 14px;
+        }
+
+        .total-points-bar {
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 16px;
+            padding: 14px 20px;
+            margin: 20px 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .total-points-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-glow);
+        }
+
+        .total-points-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(105deg, var(--accent), var(--accent-dark));
+            border: none;
+            padding: 14px;
+            border-radius: 22px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.05);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .footer-signature {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-signature i {
+            color: var(--accent);
+            margin: 0 4px;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .alert.success {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 3px solid #10b981;
+            color: #10b981;
+            display: flex;
+        }
+
+        body.light .alert.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+
+        .alert.error {
+            background: rgba(239, 68, 68, 0.12);
+            border-left: 3px solid #ef4444;
+            color: #f87171;
+            display: flex;
+        }
+
+        body.light .alert.error {
+            background: rgba(239, 68, 68, 0.08);
+            color: #dc2626;
+        }
+
+        @media (max-width: 850px) {
+            .cards-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .action-card {
+                width: 300px;
+            }
+            .action-fields {
+                grid-template-columns: 1fr;
+            }
+            .proofs-section {
+                grid-column: span 1;
+            }
+            .period-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .card-body {
+                padding: 20px;
+            }
+            .total-points-value {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="theme-toggle" id="themeSwitch">
-    <i class="fas fa-sun"></i>
-    <span>Светлая тема</span>
-  </div>
-
-  <div class="container">
-    <div class="header">
-      <div class="logo">
-        <div class="logo-icon"><i class="fas fa-fighter-jet"></i></div>
-        <h1>USAF</h1>
-      </div>
-      <p class="subtitle">United States Air Force | Бальная система отчетов</p>
+    <div class="theme-toggle" id="themeSwitch">
+        <i class="fas fa-sun"></i>
+        <span>Светлая тема</span>
     </div>
 
-    <!-- Главное меню -->
-    <div id="mainMenuPage" class="home-page">
-      <div class="main-cards-grid">
-        <div class="main-card" data-report="weekly">
-          <div class="main-card-icon"><i class="fas fa-calendar-week"></i></div>
-          <h3>Еженедельный отчёт</h3>
-          <p>Отчёт с бальной системой за активности</p>
-          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="main-card" data-report="promotion">
-          <div class="main-card-icon"><i class="fas fa-arrow-up"></i></div>
-          <h3>Отчёт на повышение</h3>
-          <p>Сбор баллов для повышения звания</p>
-          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="main-card" data-report="pilot">
-          <div class="main-card-icon"><i class="fas fa-wings"></i></div>
-          <h3>Квалификация пилота</h3>
-          <p>Повышение лётной категории</p>
-          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="main-card" data-report="route">
-          <div class="main-card-icon"><i class="fas fa-map-marked-alt"></i></div>
-          <h3>Прохождение маршрута</h3>
-          <p>Сдача воздушного маршрута</p>
-          <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ЕЖЕНЕДЕЛЬНЫЙ ОТЧЁТ С БАЛЛАМИ -->
-    <div id="weeklyForm" class="form-page">
-      <div class="back-btn" id="backWeeklyBtn"><i class="fas fa-arrow-left"></i> На главную</div>
-      <div class="glass-card">
-        <div class="card-header"><h2><i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт USAF</h2></div>
-        <div class="card-body">
-          <div id="weeklyAlert"></div>
-          <div class="input-group"><label>👨‍✈️ ИМЯ ФАМИЛИЯ (никнейм)</label><input type="text" id="weeklyName" placeholder="John Doe"></div>
-          <div class="input-group"><label>🏅 ВАШЕ ЗВАНИЕ</label><input type="text" id="weeklyRank" placeholder="Лейтенант / Капитан"></div>
-          <div class="input-group"><label>📅 ПЕРИОД (неделя)</label><input type="text" id="weeklyPeriod" placeholder="01.04.2026 - 07.04.2026"></div>
-          
-          <div class="actions-section">
-            <label style="font-size: 0.7rem; font-weight: 600; color: var(--accent-glow);"><i class="fas fa-tasks"></i> АКТИВНОСТИ ЗА НЕДЕЛЮ</label>
-            <div id="weeklyActionsList"></div>
-            <button class="add-btn" id="weeklyAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
-          </div>
-          
-          <div class="total-points-bar">
-            <span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span>
-            <span class="total-points-value" id="weeklyTotalPoints">0</span>
-          </div>
-          <button class="submit-btn" id="sendWeeklyBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ РАПОРТ</button>
-          <div class="footer-signature"><i class="fas fa-code"></i> USAF High Command</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ОТЧЁТ НА ПОВЫШЕНИЕ С БАЛЛАМИ -->
-    <div id="promotionForm" class="form-page">
-      <div class="back-btn" id="backPromBtn"><i class="fas fa-arrow-left"></i> На главную</div>
-      <div class="glass-card">
-        <div class="card-header"><h2><i class="fas fa-arrow-up"></i> ⭐ Запрос на повышение звания</h2></div>
-        <div class="card-body">
-          <div id="promAlert"></div>
-          <div class="input-group"><label>👤 ПОЛНОЕ ИМЯ</label><input type="text" id="promName" placeholder="Иван Соколов"></div>
-          <div class="input-group"><label>🎖️ ТЕКУЩЕЕ ЗВАНИЕ</label><input type="text" id="promCurrentRank" placeholder="Лейтенант"></div>
-          <div class="input-group"><label>⭐ ЖЕЛАЕМОЕ ЗВАНИЕ</label><input type="text" id="promDesiredRank" placeholder="Капитан"></div>
-          <div class="input-group"><label>📅 ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="promLastDate"></div>
-          
-          <div class="actions-section">
-            <label style="font-size: 0.7rem; font-weight: 600; color: var(--accent-glow);"><i class="fas fa-medal"></i> ДОСТИЖЕНИЯ ДЛЯ ПОВЫШЕНИЯ</label>
-            <div id="promActionsList"></div>
-            <button class="add-btn" id="promAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДОСТИЖЕНИЕ</button>
-          </div>
-          
-          <div class="total-points-bar">
-            <span class="total-points-label"><i class="fas fa-star"></i> СУММА БАЛЛОВ ЗА ДОСТИЖЕНИЯ</span>
-            <span class="total-points-value" id="promTotalPoints">0</span>
-          </div>
-          <button class="submit-btn" id="sendPromBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ ЗАПРОС</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- КВАЛИФИКАЦИЯ ПИЛОТА (отдельная форма) -->
-    <div id="pilotForm" class="form-page">
-      <div class="back-btn" id="backPilotBtn"><i class="fas fa-arrow-left"></i> На главную</div>
-      <div class="glass-card">
-        <div class="card-header"><h2><i class="fas fa-wings"></i> 🛩️ Повышение лётной категории</h2></div>
-        <div class="card-body">
-          <div id="pilotAlert"></div>
-          <div class="input-group"><label>👨‍✈️ ПИЛОТ (Имя Фамилия)</label><input type="text" id="pilotName" placeholder="Michael Johnson"></div>
-          <div class="input-group"><label>📊 ТЕКУЩАЯ КАТЕГОРИЯ</label>
-            <select id="currentCat">
-              <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
-            </select>
-          </div>
-          <div class="input-group"><label>🎯 ЖЕЛАЕМАЯ КАТЕГОРИЯ</label>
-            <select id="desiredCat">
-              <option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option>
-            </select>
-          </div>
-          <div class="input-group"><label>⏱️ НАЛЁТ ЧАСОВ (общий)</label><input type="number" id="flightHours" placeholder="480"></div>
-          <div class="input-group"><label>📎 ССЫЛКА НА АУДИТ / КАДРОВЫЙ ОТЧЁТ</label><input type="text" id="auditLink" placeholder="https://discord.com/..."></div>
-          <div class="input-group"><label>📅 ДАТА ПОДАЧИ</label><input type="date" id="pilotDate"></div>
-          <button class="submit-btn" id="sendPilotBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ НА РАССМОТРЕНИЕ</button>
-          <div class="footer-signature"><i class="fas fa-plane-departure"></i> USAF Flight Standards</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ПРОХОЖДЕНИЕ МАРШРУТА -->
-    <div id="routeForm" class="form-page">
-      <div class="back-btn" id="backRouteBtn"><i class="fas fa-arrow-left"></i> На главную</div>
-      <div class="glass-card">
-        <div class="card-header"><h2><i class="fas fa-route"></i> 🗺️ Сдача воздушного маршрута</h2></div>
-        <div class="card-body">
-          <div id="routeAlert"></div>
-          <div class="input-group"><label>👤 ПИЛОТ (Имя Фамилия)</label><input type="text" id="routePilotName" placeholder="Emily Clark"></div>
-          <div class="input-group"><label>📅 ДАТА ВЫПОЛНЕНИЯ</label><input type="date" id="routeDate"></div>
-          <div class="input-group"><label>🗺️ НОМЕР МАРШРУТА</label>
-            <select id="routeType">
-              <option>Маршрут №1</option><option>Маршрут №2.1</option><option>Маршрут №2.2</option><option>Маршрут №3</option><option>Маршрут №4</option><option>Маршрут К+[H]</option><option>Маршрут К+[P]</option>
-            </select>
-          </div>
-          <div class="input-group"><label>🎥 ССЫЛКА НА ВИДЕОЗАПИСЬ</label><input type="text" id="routeVideo" placeholder="https://youtu.be/..."></div>
-          <div class="input-group"><label>📝 ДОПОЛНИТЕЛЬНЫЕ ЗАМЕТКИ</label><textarea rows="2" id="routeNotes" placeholder="Время выполнения..."></textarea></div>
-          <button class="submit-btn" id="sendRouteBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ ОТЧЁТ О МАРШРУТЕ</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ---------- БАЛЬНАЯ СИСТЕМА (ваши данные) ----------
-    const ACTIVITY_POINTS = {
-      "Патруль": 10,
-      "Нахождение регруппа, который напал на ФЗ во время КЧ": 15,
-      "Участие в поставке NG": 5,
-      "Участие в поставке EMS": 5,
-      "Эвакуация солдата NG": 2,
-      "Дежурство на ДВ во время КЧ": 4,
-      "Участие в вечернем построении": 2,
-      "Фиксация взятие ЛА с нарушением": 4,
-      "Проведение тренировки/лекции": 4,
-      "Участие на тренировках/лекциях": 2,
-      "Участие на гос. тренировке": 5,
-      "Проведение ареста (Нашивка должна быть в рации департамента)": 6,
-      "Участие в рейде/отбитии захвата гос. структуры": 10,
-      "Участие в усиленном патруле": 6,
-      "Участие на отбитие анальгетики": 5,
-      "Удачное отбитие ФЗ/ФТ": 10,
-      "Участие на Дроп/Поезде": 3,
-      "Участие на Черный рынок": 10,
-      "Участие в МП": 5,
-      "Участие в ГМП": 10,
-      "Проведение экзамена": 5,
-      "Проверка маршрута": 3,
-      "Проверка отчета": 3,
-      "Участие в прок\\мед проверках": 3
-    };
-    const ACTIVITY_NAMES = Object.keys(ACTIVITY_POINTS);
-
-    // Вебхуки (замените на свои)
-    const WEBHOOKS = {
-      weekly: 'https://discord.com/api/webhooks/1501941568570134689/7P0vf6jz3kwssPsSYM4xO9-F39cXLtBboljW18gk8Bemn4kYRYV8ShDhaTX1BkeqZe57',
-      promotion: 'https://discord.com/api/webhooks/1501941568570134689/7P0vf6jz3kwssPsSYM4xO9-F39cXLtBboljW18gk8Bemn4kYRYV8ShDhaTX1BkeqZe57',
-      pilot: 'https://discord.com/api/webhooks/1501941568570134689/7P0vf6jz3kwssPsSYM4xO9-F39cXLtBboljW18gk8Bemn4kYRYV8ShDhaTX1BkeqZe57',
-      route: 'https://discord.com/api/webhooks/1501941568570134689/7P0vf6jz3kwssPsSYM4xO9-F39cXLtBboljW18gk8Bemn4kYRYV8ShDhaTX1BkeqZe57'
-    };
-    const USAF_ROLES = '<@&793440125798973441> <@&792082143408160768>';
-
-    let weeklyActions = [];
-    let promotionActions = [];
-
-    function calculatePoints(action) {
-      let base = ACTIVITY_POINTS[action.type] || 0;
-      let count = parseInt(action.count) || 1;
-      return base * count;
-    }
-
-    function updateWeeklyTotal() {
-      document.getElementById('weeklyTotalPoints').textContent = weeklyActions.reduce((s, a) => s + calculatePoints(a), 0);
-    }
-    function updatePromTotal() {
-      document.getElementById('promTotalPoints').textContent = promotionActions.reduce((s, a) => s + calculatePoints(a), 0);
-    }
-
-    function renderActions(containerId, actionsArray, updateFunc, type) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      if (actionsArray.length === 0) {
-        container.innerHTML = '<div class="empty-state"><i class="fas fa-info-circle"></i> Нет добавленных активностей</div>';
-        updateFunc();
-        return;
-      }
-      container.innerHTML = actionsArray.map((act, idx) => `
-        <div class="action-item" data-idx="${idx}">
-          <div class="action-header">
-            <div class="action-title"><i class="fas fa-tag"></i> Действие #${idx+1}</div>
-            <button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button>
-          </div>
-          <div class="action-fields">
-            <div class="action-field">
-              <label>ТИП АКТИВНОСТИ</label>
-              <select class="action-type" data-idx="${idx}">
-                <option value="">-- Выберите --</option>
-                ${ACTIVITY_NAMES.map(n => `<option value="${n}" ${act.type === n ? 'selected' : ''}>${n} (${ACTIVITY_POINTS[n]} баллов)</option>`).join('')}
-              </select>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-fighter-jet"></i></div>
+                <h1>USAF</h1>
             </div>
-            <div class="action-field">
-              <label>КОЛ-ВО</label>
-              <input type="number" class="action-count" data-idx="${idx}" value="${act.count || 1}" min="1">
-            </div>
-            <div class="proofs-section">
-              <label>🔗 ДОКАЗАТЕЛЬСТВА (ссылки)</label>
-              <div class="proofs-list">
-                ${(act.proofs || ['']).map((p, pi) => `
-                  <div class="proof-item">
-                    <input type="text" class="proof-input" data-action="${idx}" data-proof="${pi}" value="${escapeHtml(p)}" placeholder="https://...">
-                    ${(act.proofs.length > 1) ? `<button class="remove-proof" data-action="${idx}" data-proof="${pi}"><i class="fas fa-times"></i></button>` : ''}
-                  </div>
-                `).join('')}
-              </div>
-              <button class="add-proof-btn" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button>
-            </div>
-          </div>
-          <div class="points-row">
-            <span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calculatePoints(act)}</span>
-          </div>
+            <p class="subtitle">United States Air Force | Система подачи отчётов</p>
         </div>
-      `).join('');
-      attachEventsToContainer(container, actionsArray, updateFunc, type);
-    }
 
-    function attachEventsToContainer(container, actionsArray, updateFunc, type) {
-      container.querySelectorAll('.remove-action').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          let idx = parseInt(btn.dataset.idx);
-          actionsArray.splice(idx, 1);
-          renderActions(container.id, actionsArray, updateFunc, type);
+        <div id="homePage" class="home-page">
+            <div class="cards-grid">
+                <div class="action-card" data-page="weekly">
+                    <div class="card-icon"><i class="fas fa-calendar-week"></i></div>
+                    <h3>📊 Еженедельный отчёт</h3>
+                    <p>Отчёт о еженедельной работе с бальной системой</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="action-card" data-page="promotion">
+                    <div class="card-icon"><i class="fas fa-arrow-up"></i></div>
+                    <h3>⬆️ Отчёт на повышение</h3>
+                    <p>Заявка на повышение должности/звания</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="action-card" data-page="pilot">
+                    <div class="card-icon"><i class="fas fa-wings"></i></div>
+                    <h3>🛩️ Квалификация пилота</h3>
+                    <p>Повышение лётной категории</p>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЕЖЕНЕДЕЛЬНЫЙ ОТЧЁТ -->
+        <div id="weeklyPage" class="form-page">
+            <div class="back-btn" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> На главную
+            </div>
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт USAF</h2>
+                </div>
+                <div class="card-body">
+                    <div id="weeklyAlert"></div>
+                    <div class="input-group"><label>✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="weeklyNickname" placeholder="Введите имя и фамилию"></div>
+                    <div class="input-group">
+                        <label>🏅 ЗВАНИЕ / ДОЛЖНОСТЬ</label>
+                        <select id="weeklyRank">
+                            <option value="">-- Выберите звание --</option>
+                            <option value="Рядовой">Рядовой</option>
+                            <option value="Капрал">Капрал</option>
+                            <option value="Сержант">Сержант</option>
+                            <option value="Лейтенант">Лейтенант</option>
+                            <option value="Капитан">Капитан</option>
+                            <option value="Майор">Майор</option>
+                            <option value="Подполковник">Подполковник</option>
+                            <option value="Полковник">Полковник</option>
+                        </select>
+                    </div>
+                    <div class="period-row">
+                        <div class="input-group"><label>📅 ДАТА НАЧАЛА</label><input type="date" id="weeklyDateStart"></div>
+                        <div class="input-group"><label>📅 ДАТА ОКОНЧАНИЯ</label><input type="date" id="weeklyDateEnd"></div>
+                    </div>
+                    <div class="period-info" id="weeklyPeriodInfo"></div>
+
+                    <div style="margin-top: 24px;">
+                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);">
+                            <i class="fas fa-clipboard-list"></i> 📋 АКТИВНОСТИ (БАЛЛЫ НАЧИСЛЯЮТСЯ АВТОМАТИЧЕСКИ)
+                        </label>
+                        <div id="weeklyActionsContainer">
+                            <div id="weeklyEmptyActions" class="empty-state"><i class="fas fa-info-circle"></i> Нет действий</div>
+                            <div id="weeklyActionsList"></div>
+                        </div>
+                        <button class="add-btn" id="weeklyAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
+                    </div>
+
+                    <div class="total-points-bar" id="weeklyTotalPointsBar">
+                        <span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span>
+                        <span class="total-points-value" id="weeklyTotalPoints">0</span>
+                    </div>
+
+                    <button class="submit-btn" id="weeklySubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ</button>
+                    
+                    <div class="footer-signature">
+                        <i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ОТЧЁТ НА ПОВЫШЕНИЕ -->
+        <div id="promotionPage" class="form-page">
+            <div class="back-btn" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> На главную
+            </div>
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-arrow-up"></i> ⬆️ Отчёт на повышение</h2>
+                </div>
+                <div class="card-body">
+                    <div id="promotionAlert"></div>
+                    <div class="input-group"><label>✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="promotionNickname" placeholder="Введите никнейм"></div>
+                    <div class="input-group">
+                        <label>🏅 ТЕКУЩЕЕ ЗВАНИЕ</label>
+                        <select id="promotionCurrentRank">
+                            <option value="">-- Выберите текущее звание --</option>
+                            <option value="Рядовой">Рядовой</option>
+                            <option value="Капрал">Капрал</option>
+                            <option value="Сержант">Сержант</option>
+                            <option value="Лейтенант">Лейтенант</option>
+                            <option value="Капитан">Капитан</option>
+                            <option value="Майор">Майор</option>
+                            <option value="Подполковник">Подполковник</option>
+                            <option value="Полковник">Полковник</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>🎯 ЖЕЛАЕМОЕ ЗВАНИЕ</label>
+                        <select id="promotionDesiredRank">
+                            <option value="">-- Выберите желаемое звание --</option>
+                            <option value="Рядовой">Рядовой</option>
+                            <option value="Капрал">Капрал</option>
+                            <option value="Сержант">Сержант</option>
+                            <option value="Лейтенант">Лейтенант</option>
+                            <option value="Капитан">Капитан</option>
+                            <option value="Майор">Майор</option>
+                            <option value="Подполковник">Подполковник</option>
+                            <option value="Полковник">Полковник</option>
+                        </select>
+                    </div>
+                    <div class="input-group"><label>📅 ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="lastPromotionDate"></div>
+                    <div class="period-info" id="promotionDateInfo"></div>
+
+                    <div style="margin-top: 24px;">
+                        <label style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-glow);">
+                            <i class="fas fa-clipboard-list"></i> 📋 ДОСТИЖЕНИЯ (БАЛЛЫ НАЧИСЛЯЮТСЯ АВТОМАТИЧЕСКИ)
+                        </label>
+                        <div id="promotionActionsContainer">
+                            <div id="promotionEmptyActions" class="empty-state"><i class="fas fa-info-circle"></i> Нет действий</div>
+                            <div id="promotionActionsList"></div>
+                        </div>
+                        <button class="add-btn" id="promotionAddActionBtn"><i class="fas fa-plus-circle"></i> + ДОБАВИТЬ ДЕЙСТВИЕ</button>
+                    </div>
+
+                    <div class="total-points-bar" id="promotionTotalPointsBar">
+                        <span class="total-points-label"><i class="fas fa-star"></i> ОБЩЕЕ КОЛИЧЕСТВО БАЛЛОВ</span>
+                        <span class="total-points-value" id="promotionTotalPoints">0</span>
+                    </div>
+
+                    <button class="submit-btn" id="promotionSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС</button>
+                    
+                    <div class="footer-signature">
+                        <i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- КВАЛИФИКАЦИЯ ПИЛОТА -->
+        <div id="pilotPage" class="form-page">
+            <div class="back-btn" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> На главную
+            </div>
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-wings"></i> 🛩️ Квалификация пилота</h2>
+                </div>
+                <div class="card-body">
+                    <div id="pilotAlert"></div>
+                    <div class="input-group"><label>👨‍✈️ ИМЯ ФАМИЛИЯ (НИКНЕЙМ)</label><input type="text" id="pilotName" placeholder="Введите имя и фамилию"></div>
+                    <div class="input-group">
+                        <label>🪪 ТЕКУЩАЯ КАТЕГОРИЯ</label>
+                        <select id="pilotCurrentCat">
+                            <option value="Пилот 3 категории">Пилот 3 категории</option>
+                            <option value="Пилот 2 категории">Пилот 2 категории</option>
+                            <option value="Пилот 1 категории">Пилот 1 категории</option>
+                            <option value="Пилот высшей категории">Пилот высшей категории</option>
+                            <option value="Пилот АС">Пилот АС</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>🎯 ЖЕЛАЕМАЯ КАТЕГОРИЯ</label>
+                        <select id="pilotDesiredCat">
+                            <option value="Пилот 3 категории">Пилот 3 категории</option>
+                            <option value="Пилот 2 категории">Пилот 2 категории</option>
+                            <option value="Пилот 1 категории">Пилот 1 категории</option>
+                            <option value="Пилот высшей категории">Пилот высшей категории</option>
+                            <option value="Пилот АС">Пилот АС</option>
+                        </select>
+                    </div>
+                    <div class="input-group"><label>⏱️ ОБЩИЙ НАЛЁТ (ЧАСЫ)</label><input type="number" id="pilotHours" placeholder="Например: 250"></div>
+                    <div class="input-group"><label>🔗 ССЫЛКА НА АУДИТ / ОТЧЁТ</label><input type="text" id="pilotAudit" placeholder="https://discord.com/channels/..."></div>
+                    <div class="input-group"><label>📅 ДАТА ПОДАЧИ</label><input type="date" id="pilotDate"></div>
+                    <button class="submit-btn" id="pilotSubmitBtn"><i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ</button>
+                    
+                    <div class="footer-signature">
+                        <i class="fas fa-code"></i> USAF Flight Academy <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ ЗАМЕНИТЕ НА СВОИ ВЕБХУКИ Discord ⚠️
+        const WEBHOOKS = {
+            weekly: 'https://discord.com/api/webhooks/1500899546031591688/wpkBFTZbOGyCFvhJ-SfYbPvbJFikcwDCLv983roAS7zj-AelGhtwWltVZ8JUOEmCvAEv',
+            promotion: 'https://discord.com/api/webhooks/1500900181086961846/YJt7paNvrerqttykZ2Qk8q11ogdP-qMU8vBAwdPHf8hXcIoL-WsJbchkP-igh5L4R4gv',
+            pilot: 'https://discord.com/api/webhooks/1501941568570134689/7P0vf6jz3kwssPsSYM4xO9-F39cXLtBboljW18gk8Bemn4kYRYV8ShDhaTX1BkeqZe57'
+        };
+
+        const ROLES_TO_TAG = '<@&793440125798973441> <@&792082143408160768>';
+
+        // НОВАЯ БАЛЬНАЯ СИСТЕМА USAF
+        const ACTIVITY_TYPES = [
+            { name: "Патруль", basePoints: 10 },
+            { name: "Нахождение регруппа, который напал на ФЗ во время КЧ", basePoints: 15 },
+            { name: "Участие в поставке NG", basePoints: 5 },
+            { name: "Участие в поставке EMS", basePoints: 5 },
+            { name: "Эвакуация солдата NG", basePoints: 2 },
+            { name: "Дежурство на ДВ во время КЧ", basePoints: 4 },
+            { name: "Участие в вечернем построении", basePoints: 2 },
+            { name: "Фиксация взятие ЛА с нарушением", basePoints: 4 },
+            { name: "Проведение тренировки/лекции", basePoints: 4 },
+            { name: "Участие на тренировках/лекциях", basePoints: 2 },
+            { name: "Участие на гос. тренировке", basePoints: 5 },
+            { name: "Проведение ареста (Нашивка должна быть в рации департамента)", basePoints: 6 },
+            { name: "Участие в рейде/отбитии захвата гос. структуры", basePoints: 10 },
+            { name: "Участие в усиленном патруле", basePoints: 6 },
+            { name: "Участие на отбитие анальгетики", basePoints: 5 },
+            { name: "Удачное отбитие ФЗ/ФТ", basePoints: 10 },
+            { name: "Участие на Дроп/Поезде", basePoints: 3 },
+            { name: "Участие на Черный рынок", basePoints: 10 },
+            { name: "Участие в МП", basePoints: 5 },
+            { name: "Участие в ГМП", basePoints: 10 },
+            { name: "Проведение экзамена", basePoints: 5 },
+            { name: "Проверка маршрута", basePoints: 3 },
+            { name: "Проверка отчета", basePoints: 3 },
+            { name: "Участие в прок/мед проверках", basePoints: 3 }
+        ];
+
+        let weeklyActions = [];
+        let promotionActions = [];
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('ru-RU');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        function calculatePoints(action) {
+            let base = action.basePoints || 0;
+            let count = parseInt(action.count) || 1;
+            return base * count;
+        }
+
+        function calculateTotalPoints(actions) {
+            return actions.reduce((total, action) => total + calculatePoints(action), 0);
+        }
+
+        function updateWeeklyTotalPoints() {
+            document.getElementById('weeklyTotalPoints').textContent = calculateTotalPoints(weeklyActions);
+        }
+
+        function updatePromotionTotalPoints() {
+            document.getElementById('promotionTotalPoints').textContent = calculateTotalPoints(promotionActions);
+        }
+
+        function updateWeeklyPeriodInfo() {
+            const start = document.getElementById('weeklyDateStart').value;
+            const end = document.getElementById('weeklyDateEnd').value;
+            const infoSpan = document.getElementById('weeklyPeriodInfo');
+            if (start && end) {
+                const diffDays = Math.ceil((new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24)) + 1;
+                infoSpan.innerHTML = `${formatDate(start)} – ${formatDate(end)} (${diffDays} дн.)`;
+            } else {
+                const today = new Date();
+                const monday = new Date(today);
+                monday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
+                const sunday = new Date(monday);
+                sunday.setDate(monday.getDate() + 6);
+                infoSpan.innerHTML = `${formatDate(monday)} – ${formatDate(sunday)} (7 дн.)`;
+            }
+        }
+
+        function updatePromotionDateInfo() {
+            const date = document.getElementById('lastPromotionDate').value;
+            const infoSpan = document.getElementById('promotionDateInfo');
+            if (date) {
+                const d = new Date(date);
+                const monthsDiff = Math.floor((new Date() - d) / (1000 * 60 * 60 * 24 * 30));
+                infoSpan.innerHTML = `📅 Дата последнего повышения: ${formatDate(date)} (прошло ${monthsDiff} мес.)`;
+            } else {
+                infoSpan.innerHTML = `📅 Укажите дату последнего повышения`;
+            }
+        }
+
+        function createActionHTML(action, idx, type) {
+            const proofs = action.proofs || [''];
+            return `
+                <div class="action-item" data-original-idx="${idx}">
+                    <div class="action-header">
+                        <div class="action-title"><i class="fas fa-tag"></i> ДЕЙСТВИЕ #${idx + 1}</div>
+                        <button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button>
+                    </div>
+                    <div class="action-fields">
+                        <div class="action-field">
+                            <label>ТИП АКТИВНОСТИ</label>
+                            <select class="action-type" data-idx="${idx}">
+                                <option value="">-- Выберите --</option>
+                                ${ACTIVITY_TYPES.map(t => `<option value="${escapeHtml(t.name)}" data-points="${t.basePoints}" ${action.type === t.name ? 'selected' : ''}>${escapeHtml(t.name)} (${t.basePoints} баллов)</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="action-field">
+                            <label>КОЛ-ВО</label>
+                            <input type="number" class="action-count" data-idx="${idx}" value="${action.count || 1}" min="1" step="1">
+                        </div>
+                        <div class="proofs-section">
+                            <label><i class="fas fa-images"></i> ДОКАЗАТЕЛЬСТВА (ССЫЛКИ)</label>
+                            <div class="proofs-list">
+                                ${proofs.map((proof, pIdx) => `
+                                    <div class="proof-item">
+                                        <i class="fas fa-link" style="color: var(--accent); font-size: 0.75rem;"></i>
+                                        <input type="text" class="proof-input" data-type="${type}" data-action="${idx}" data-proof="${pIdx}" value="${escapeHtml(proof)}" placeholder="https://пример.com/скриншот">
+                                        ${proofs.length > 1 ? `<button class="remove-proof" data-type="${type}" data-action="${idx}" data-proof="${pIdx}"><i class="fas fa-times"></i></button>` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="add-proof-btn" data-type="${type}" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button>
+                        </div>
+                    </div>
+                    <div class="points-row">
+                        <span class="count-badge"><i class="fas fa-hashtag"></i> КОЛ-ВО: ${action.count || 1}</span>
+                        <span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calculatePoints(action)}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function attachActionEvents(element, idx, actionsArray, renderFull, updateTotal, type) {
+            const removeBtn = element.querySelector('.remove-action');
+            if (removeBtn) {
+                removeBtn.addEventListener('click', async () => {
+                    element.classList.add('removing');
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    actionsArray.splice(idx, 1);
+                    renderFull();
+                });
+            }
+            
+            const typeSelect = element.querySelector('.action-type');
+            if (typeSelect) {
+                typeSelect.addEventListener('change', (e) => {
+                    const selected = typeSelect.options[typeSelect.selectedIndex];
+                    actionsArray[idx].type = typeSelect.value;
+                    actionsArray[idx].basePoints = parseInt(selected.dataset.points) || 0;
+                    renderFull();
+                });
+            }
+            
+            const countInput = element.querySelector('.action-count');
+            if (countInput) {
+                countInput.addEventListener('input', (e) => {
+                    actionsArray[idx].count = parseInt(countInput.value) || 1;
+                    renderFull();
+                });
+            }
+            
+            const addProofBtn = element.querySelector('.add-proof-btn');
+            if (addProofBtn) {
+                addProofBtn.addEventListener('click', () => {
+                    if (!actionsArray[idx].proofs) actionsArray[idx].proofs = [''];
+                    actionsArray[idx].proofs.push('');
+                    renderFull();
+                });
+            }
+            
+            element.querySelectorAll('.remove-proof').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const proofIdx = parseInt(btn.dataset.proof);
+                    if (actionsArray[idx].proofs.length > 1) {
+                        btn.closest('.proof-item').classList.add('removing');
+                        await new Promise(resolve => setTimeout(resolve, 250));
+                        actionsArray[idx].proofs.splice(proofIdx, 1);
+                        renderFull();
+                    }
+                });
+            });
+            
+            element.querySelectorAll('.proof-input').forEach(inp => {
+                inp.addEventListener('change', (e) => {
+                    const aIdx = parseInt(inp.dataset.action);
+                    const pIdx = parseInt(inp.dataset.proof);
+                    if (actionsArray[aIdx] && actionsArray[aIdx].proofs) {
+                        actionsArray[aIdx].proofs[pIdx] = inp.value;
+                    }
+                });
+            });
+        }
+
+        function renderWeeklyActionsFull() {
+            const container = document.getElementById('weeklyActionsList');
+            const emptyDiv = document.getElementById('weeklyEmptyActions');
+            if (weeklyActions.length === 0) {
+                emptyDiv.style.display = 'block';
+                container.innerHTML = '';
+                updateWeeklyTotalPoints();
+                return;
+            }
+            emptyDiv.style.display = 'none';
+            container.innerHTML = weeklyActions.map((a, i) => createActionHTML(a, i, 'weekly')).join('');
+            document.querySelectorAll('#weeklyActionsList .action-item').forEach((el, i) => {
+                attachActionEvents(el, i, weeklyActions, renderWeeklyActionsFull, updateWeeklyTotalPoints, 'weekly');
+            });
+            updateWeeklyTotalPoints();
+        }
+
+        function renderPromotionActionsFull() {
+            const container = document.getElementById('promotionActionsList');
+            const emptyDiv = document.getElementById('promotionEmptyActions');
+            if (promotionActions.length === 0) {
+                emptyDiv.style.display = 'block';
+                container.innerHTML = '';
+                updatePromotionTotalPoints();
+                return;
+            }
+            emptyDiv.style.display = 'none';
+            container.innerHTML = promotionActions.map((a, i) => createActionHTML(a, i, 'promotion')).join('');
+            document.querySelectorAll('#promotionActionsList .action-item').forEach((el, i) => {
+                attachActionEvents(el, i, promotionActions, renderPromotionActionsFull, updatePromotionTotalPoints, 'promotion');
+            });
+            updatePromotionTotalPoints();
+        }
+
+        async function sendToDiscord(webhookUrl, title, fields, color = 0xD4AF37) {
+            const embed = { title, color, fields, footer: { text: "USAF Reporting System" }, timestamp: new Date().toISOString() };
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: `${ROLES_TO_TAG}\n✈️ НОВЫЙ ОТЧЁТ USAF ✈️`, embeds: [embed] })
+            });
+            if (!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+        }
+
+        function showAlert(containerId, message, type) {
+            const container = document.getElementById(containerId);
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+            container.appendChild(alertDiv);
+            setTimeout(() => alertDiv.remove(), 5000);
+        }
+
+        function setDefaultWeeklyDates() {
+            const today = new Date();
+            const monday = new Date(today);
+            monday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
+            const sunday = new Date(monday);
+            sunday.setDate(monday.getDate() + 6);
+            document.getElementById('weeklyDateStart').value = monday.toISOString().split('T')[0];
+            document.getElementById('weeklyDateEnd').value = sunday.toISOString().split('T')[0];
+            updateWeeklyPeriodInfo();
+        }
+
+        function showHome() {
+            document.getElementById('homePage').style.display = 'flex';
+            document.querySelectorAll('.form-page').forEach(page => page.style.display = 'none');
+        }
+
+        function showFormPage(pageId) {
+            document.getElementById('homePage').style.display = 'none';
+            document.querySelectorAll('.form-page').forEach(page => page.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('weeklyAddActionBtn').addEventListener('click', () => {
+            weeklyActions.push({ type: '', basePoints: 0, count: 1, proofs: [''] });
+            renderWeeklyActionsFull();
         });
-      });
-      container.querySelectorAll('.action-type').forEach(sel => {
-        sel.addEventListener('change', (e) => {
-          let idx = parseInt(sel.dataset.idx);
-          actionsArray[idx].type = sel.value;
-          renderActions(container.id, actionsArray, updateFunc, type);
+        document.getElementById('promotionAddActionBtn').addEventListener('click', () => {
+            promotionActions.push({ type: '', basePoints: 0, count: 1, proofs: [''] });
+            renderPromotionActionsFull();
         });
-      });
-      container.querySelectorAll('.action-count').forEach(inp => {
-        inp.addEventListener('input', (e) => {
-          let idx = parseInt(inp.dataset.idx);
-          actionsArray[idx].count = parseInt(inp.value) || 1;
-          renderActions(container.id, actionsArray, updateFunc, type);
+
+        document.getElementById('weeklySubmitBtn').addEventListener('click', async () => {
+            if (!document.getElementById('weeklyNickname').value.trim()) { showAlert('weeklyAlert', 'Введите имя и фамилию', 'error'); return; }
+            const btn = document.getElementById('weeklySubmitBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try {
+                const nickname = document.getElementById('weeklyNickname').value.trim();
+                const rank = document.getElementById('weeklyRank').value || 'Не указано';
+                const start = document.getElementById('weeklyDateStart').value;
+                const end = document.getElementById('weeklyDateEnd').value;
+                const period = (start && end) ? `${formatDate(start)} – ${formatDate(end)}` : 'Не указан';
+                let actionsText = '';
+                let total = 0;
+                weeklyActions.forEach((a, i) => {
+                    const pts = calculatePoints(a);
+                    total += pts;
+                    const proofs = (a.proofs?.filter(p => p).map(p => `• ${p}`).join('\n') || 'Нет');
+                    actionsText += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
+                });
+                if (weeklyActions.length === 0) actionsText = 'Нет активностей';
+                await sendToDiscord(WEBHOOKS.weekly, "📊 Еженедельный отчёт USAF", [
+                    { name: "✈️ Пилот", value: nickname, inline: true },
+                    { name: "🏅 Звание", value: rank, inline: true },
+                    { name: "📅 Период", value: period, inline: true },
+                    { name: "📋 Активности", value: actionsText.substring(0, 900) },
+                    { name: "🏆 ИТОГО БАЛЛОВ", value: `${total}`, inline: true }
+                ]);
+                showAlert('weeklyAlert', '✅ Отчёт отправлен в Discord!', 'success');
+                document.getElementById('weeklyNickname').value = '';
+                document.getElementById('weeklyRank').value = '';
+                weeklyActions = [];
+                renderWeeklyActionsFull();
+                setDefaultWeeklyDates();
+            } catch (err) { showAlert('weeklyAlert', `❌ Ошибка: ${err.message}`, 'error'); }
+            finally { btn.disabled = false; btn.innerHTML = '<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ОТЧЁТ'; }
         });
-      });
-      container.querySelectorAll('.add-proof-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          let idx = parseInt(btn.dataset.action);
-          if (!actionsArray[idx].proofs) actionsArray[idx].proofs = [''];
-          actionsArray[idx].proofs.push('');
-          renderActions(container.id, actionsArray, updateFunc, type);
+
+        document.getElementById('promotionSubmitBtn').addEventListener('click', async () => {
+            if (!document.getElementById('promotionNickname').value.trim()) { showAlert('promotionAlert', 'Введите имя и фамилию', 'error'); return; }
+            if (!document.getElementById('promotionCurrentRank').value) { showAlert('promotionAlert', 'Выберите текущее звание', 'error'); return; }
+            const btn = document.getElementById('promotionSubmitBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try {
+                const nickname = document.getElementById('promotionNickname').value.trim();
+                const currentRank = document.getElementById('promotionCurrentRank').value;
+                const desiredRank = document.getElementById('promotionDesiredRank').value || 'Не указано';
+                const lastDate = document.getElementById('lastPromotionDate').value;
+                const lastFormatted = lastDate ? formatDate(lastDate) : 'Не указана';
+                let actionsText = '';
+                let total = 0;
+                promotionActions.forEach((a, i) => {
+                    const pts = calculatePoints(a);
+                    total += pts;
+                    const proofs = (a.proofs?.filter(p => p).map(p => `• ${p}`).join('\n') || 'Нет');
+                    actionsText += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
+                });
+                if (promotionActions.length === 0) actionsText = 'Нет достижений';
+                await sendToDiscord(WEBHOOKS.promotion, "⬆️ Запрос на повышение USAF", [
+                    { name: "✈️ Военнослужащий", value: nickname, inline: true },
+                    { name: "🎖️ Текущее звание", value: currentRank, inline: true },
+                    { name: "⭐ Желаемое звание", value: desiredRank, inline: true },
+                    { name: "📅 Последнее повышение", value: lastFormatted, inline: true },
+                    { name: "📜 Достижения (баллы)", value: actionsText.substring(0, 900) },
+                    { name: "🏆 Сумма баллов", value: `${total}`, inline: true }
+                ]);
+                showAlert('promotionAlert', '✅ Запрос на повышение отправлен!', 'success');
+                document.getElementById('promotionNickname').value = '';
+                document.getElementById('promotionCurrentRank').value = '';
+                document.getElementById('promotionDesiredRank').value = '';
+                document.getElementById('lastPromotionDate').value = '';
+                promotionActions = [];
+                renderPromotionActionsFull();
+                updatePromotionDateInfo();
+            } catch (err) { showAlert('promotionAlert', `❌ Ошибка: ${err.message}`, 'error'); }
+            finally { btn.disabled = false; btn.innerHTML = '<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАПРОС'; }
         });
-      });
-      container.querySelectorAll('.remove-proof').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          let actionIdx = parseInt(btn.dataset.action);
-          let proofIdx = parseInt(btn.dataset.proof);
-          if (actionsArray[actionIdx].proofs.length > 1) {
-            actionsArray[actionIdx].proofs.splice(proofIdx, 1);
-            renderActions(container.id, actionsArray, updateFunc, type);
-          }
+
+        document.getElementById('pilotSubmitBtn').addEventListener('click', async () => {
+            if (!document.getElementById('pilotName').value.trim()) { showAlert('pilotAlert', 'Введите имя пилота', 'error'); return; }
+            const btn = document.getElementById('pilotSubmitBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+            try {
+                const name = document.getElementById('pilotName').value.trim();
+                const current = document.getElementById('pilotCurrentCat').value;
+                const desired = document.getElementById('pilotDesiredCat').value;
+                const hours = document.getElementById('pilotHours').value || '0';
+                const audit = document.getElementById('pilotAudit').value.trim() || 'Не указано';
+                const date = document.getElementById('pilotDate').value || new Date().toISOString().split('T')[0];
+                await sendToDiscord(WEBHOOKS.pilot, "🛩️ Заявка на повышение квалификации пилота", [
+                    { name: "👨‍✈️ Пилот", value: name, inline: true },
+                    { name: "🪪 Текущая категория", value: current, inline: true },
+                    { name: "🎯 Желаемая категория", value: desired, inline: true },
+                    { name: "⏱️ Общий налёт", value: `${hours} ч.`, inline: true },
+                    { name: "🔗 Ссылка на аудит", value: audit },
+                    { name: "📅 Дата подачи", value: date, inline: true }
+                ]);
+                showAlert('pilotAlert', '✅ Заявка на повышение квалификации отправлена!', 'success');
+                document.getElementById('pilotName').value = '';
+                document.getElementById('pilotHours').value = '';
+                document.getElementById('pilotAudit').value = '';
+                document.getElementById('pilotDate').value = '';
+            } catch (err) { showAlert('pilotAlert', `❌ Ошибка: ${err.message}`, 'error'); }
+            finally { btn.disabled = false; btn.innerHTML = '<i class="fab fa-discord"></i> 📨 ОТПРАВИТЬ ЗАЯВКУ'; }
         });
-      });
-      container.querySelectorAll('.proof-input').forEach(inp => {
-        inp.addEventListener('change', (e) => {
-          let aIdx = parseInt(inp.dataset.action);
-          let pIdx = parseInt(inp.dataset.proof);
-          if (actionsArray[aIdx] && actionsArray[aIdx].proofs) actionsArray[aIdx].proofs[pIdx] = inp.value;
+
+        document.querySelectorAll('.action-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const page = card.dataset.page;
+                if (page === 'weekly') showFormPage('weeklyPage');
+                else if (page === 'promotion') showFormPage('promotionPage');
+                else if (page === 'pilot') showFormPage('pilotPage');
+            });
         });
-      });
-    }
 
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+        document.getElementById('themeSwitch').addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            const isLight = document.body.classList.contains('light');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            const icon = document.querySelector('#themeSwitch i');
+            const text = document.querySelector('#themeSwitch span');
+            if (isLight) { icon.className = 'fas fa-moon'; text.innerText = 'Тёмная тема'; }
+            else { icon.className = 'fas fa-sun'; text.innerText = 'Светлая тема'; }
+        });
 
-    async function sendDiscord(webhook, title, fields, color=0xD4AF37) {
-      const embed = { title, color, fields, footer: { text: "USAF Reporting System" }, timestamp: new Date().toISOString() };
-      const resp = await fetch(webhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: `${USAF_ROLES}\n✈️ **НОВЫЙ ОТЧЁТ USAF** ✈️`, embeds: [embed] }) });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    }
+        document.getElementById('weeklyDateStart').addEventListener('change', updateWeeklyPeriodInfo);
+        document.getElementById('weeklyDateEnd').addEventListener('change', updateWeeklyPeriodInfo);
+        document.getElementById('lastPromotionDate').addEventListener('change', updatePromotionDateInfo);
 
-    function showAlert(containerId, msg, type) {
-      const c = document.getElementById(containerId);
-      if(!c) return;
-      const div = document.createElement('div'); div.className = `alert ${type}`; div.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-triangle'}"></i> ${msg}`;
-      c.appendChild(div); setTimeout(()=>div.remove(),5000);
-    }
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light');
+            document.querySelector('#themeSwitch i').className = 'fas fa-moon';
+            document.querySelector('#themeSwitch span').innerText = 'Тёмная тема';
+        }
 
-    // Навигация
-    const mainMenu = document.getElementById('mainMenuPage');
-    const weeklyFormDiv = document.getElementById('weeklyForm');
-    const promFormDiv = document.getElementById('promotionForm');
-    const pilotFormDiv = document.getElementById('pilotForm');
-    const routeFormDiv = document.getElementById('routeForm');
-    function showMain() { mainMenu.style.display = 'flex'; weeklyFormDiv.style.display = 'none'; promFormDiv.style.display = 'none'; pilotFormDiv.style.display = 'none'; routeFormDiv.style.display = 'none'; }
-    document.querySelectorAll('.main-card[data-report]').forEach(card => {
-      card.addEventListener('click', () => {
-        mainMenu.style.display = 'none';
-        weeklyFormDiv.style.display = 'none'; promFormDiv.style.display = 'none'; pilotFormDiv.style.display = 'none'; routeFormDiv.style.display = 'none';
-        if(card.dataset.report === 'weekly') weeklyFormDiv.style.display = 'block';
-        else if(card.dataset.report === 'promotion') promFormDiv.style.display = 'block';
-        else if(card.dataset.report === 'pilot') pilotFormDiv.style.display = 'block';
-        else if(card.dataset.report === 'route') routeFormDiv.style.display = 'block';
-      });
-    });
-    document.getElementById('backWeeklyBtn').addEventListener('click', showMain);
-    document.getElementById('backPromBtn').addEventListener('click', showMain);
-    document.getElementById('backPilotBtn').addEventListener('click', showMain);
-    document.getElementById('backRouteBtn').addEventListener('click', showMain);
-
-    // Добавление действий
-    document.getElementById('weeklyAddActionBtn').addEventListener('click', () => { weeklyActions.push({ type: '', count: 1, proofs: [''] }); renderActions('weeklyActionsList', weeklyActions, updateWeeklyTotal, 'weekly'); updateWeeklyTotal(); });
-    document.getElementById('promAddActionBtn').addEventListener('click', () => { promotionActions.push({ type: '', count: 1, proofs: [''] }); renderActions('promActionsList', promotionActions, updatePromTotal, 'prom'); updatePromTotal(); });
-
-    // Отправка еженедельного
-    document.getElementById('sendWeeklyBtn').addEventListener('click', async () => {
-      const name = document.getElementById('weeklyName').value.trim();
-      if(!name) { showAlert('weeklyAlert','Введите имя!','error'); return; }
-      const rank = document.getElementById('weeklyRank').value.trim() || 'Не указано';
-      const period = document.getElementById('weeklyPeriod').value.trim() || 'Не указан';
-      let actionsText = '';
-      let total = 0;
-      weeklyActions.forEach((a,idx) => {
-        const pts = calculatePoints(a);
-        total += pts;
-        const proofsStr = (a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n') || 'Нет');
-        actionsText += `**${idx+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofsStr}\n\n`;
-      });
-      if(weeklyActions.length===0) actionsText = 'Нет активностей';
-      const btn = document.getElementById('sendWeeklyBtn');
-      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-      try {
-        await sendDiscord(WEBHOOKS.weekly, '📅 Еженедельный рапорт USAF (с баллами)', [
-          {name:'👨‍✈️ Пилот', value: name, inline:true},
-          {name:'🏅 Звание', value: rank, inline:true},
-          {name:'📆 Период', value: period, inline:true},
-          {name:'📊 Активности', value: actionsText.substring(0,1000)},
-          {name:'🏆 ИТОГО БАЛЛОВ', value: `${total}`, inline:true}
-        ]);
-        showAlert('weeklyAlert','✅ Отчёт отправлен!','success');
-        weeklyActions = []; renderActions('weeklyActionsList', weeklyActions, updateWeeklyTotal, 'weekly'); updateWeeklyTotal();
-        document.getElementById('weeklyName').value=''; document.getElementById('weeklyRank').value=''; document.getElementById('weeklyPeriod').value='';
-      } catch(e){ showAlert('weeklyAlert',`Ошибка: ${e.message}`,'error'); }
-      finally { btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ РАПОРТ'; }
-    });
-
-    // Отправка повышения
-    document.getElementById('sendPromBtn').addEventListener('click', async () => {
-      const name = document.getElementById('promName').value.trim();
-      const curRank = document.getElementById('promCurrentRank').value.trim();
-      const desRank = document.getElementById('promDesiredRank').value.trim();
-      if(!name || !curRank || !desRank) { showAlert('promAlert','Заполните ФИО и звания!','error'); return; }
-      let actionsText = '';
-      let total = 0;
-      promotionActions.forEach((a,idx) => {
-        const pts = calculatePoints(a);
-        total += pts;
-        const proofsStr = (a.proofs?.filter(p=>p).map(p=>`• ${p}`).join('\n') || 'Нет');
-        actionsText += `**${idx+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofsStr}\n\n`;
-      });
-      if(promotionActions.length===0) actionsText = 'Нет достижений';
-      const btn = document.getElementById('sendPromBtn');
-      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-      try {
-        await sendDiscord(WEBHOOKS.promotion, '⭐ Запрос на повышение звания USAF', [
-          {name:'👤 Военнослужащий', value: name, inline:true},
-          {name:'🎖️ Текущее звание', value: curRank, inline:true},
-          {name:'⭐ Желаемое звание', value: desRank, inline:true},
-          {name:'📅 Дата последнего повышения', value: document.getElementById('promLastDate').value || '—', inline:true},
-          {name:'📜 Достижения (баллы)', value: actionsText.substring(0,900)},
-          {name:'🏆 Сумма баллов', value: `${total}`, inline:true}
-        ]);
-        showAlert('promAlert','✅ Запрос отправлен!','success');
-        promotionActions = []; renderActions('promActionsList', promotionActions, updatePromTotal, 'prom'); updatePromTotal();
-        document.getElementById('promName').value=''; document.getElementById('promCurrentRank').value=''; document.getElementById('promDesiredRank').value=''; document.getElementById('promLastDate').value='';
-      } catch(e){ showAlert('promAlert',`Ошибка: ${e.message}`,'error'); }
-      finally { btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ ЗАПРОС'; }
-    });
-
-    // Квалификация пилота
-    document.getElementById('sendPilotBtn').addEventListener('click', async () => {
-      const pilot = document.getElementById('pilotName').value.trim();
-      const hours = document.getElementById('flightHours').value;
-      if(!pilot || !hours) { showAlert('pilotAlert','Введите имя пилота и налёт часов!','error'); return; }
-      const btn = document.getElementById('sendPilotBtn');
-      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-      try {
-        await sendDiscord(WEBHOOKS.pilot, '🛩️ Аттестация на повышение лётной категории', [
-          {name:'✈️ Пилот', value: pilot, inline:true},
-          {name:'📊 Текущая категория', value: document.getElementById('currentCat').value, inline:true},
-          {name:'🎯 Желаемая категория', value: document.getElementById('desiredCat').value, inline:true},
-          {name:'⏱️ Общий налёт', value: `${hours} ч.`, inline:true},
-          {name:'🔗 Ссылка на аудит', value: document.getElementById('auditLink').value || '—'},
-          {name:'📅 Дата подачи', value: document.getElementById('pilotDate').value || new Date().toISOString().slice(0,10)}
-        ]);
-        showAlert('pilotAlert','✅ Заявка принята!','success');
-        document.getElementById('pilotName').value=''; document.getElementById('flightHours').value=''; document.getElementById('auditLink').value=''; document.getElementById('pilotDate').value='';
-      } catch(e){ showAlert('pilotAlert',`Ошибка: ${e.message}`,'error'); }
-      finally { btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ НА РАССМОТРЕНИЕ'; }
-    });
-
-    // Маршрут
-    document.getElementById('sendRouteBtn').addEventListener('click', async () => {
-      const pilot = document.getElementById('routePilotName').value.trim();
-      const video = document.getElementById('routeVideo').value.trim();
-      if(!pilot || !video) { showAlert('routeAlert','Укажите имя пилота и ссылку на видео!','error'); return; }
-      const btn = document.getElementById('sendRouteBtn');
-      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-      try {
-        await sendDiscord(WEBHOOKS.route, '🗺️ Отчёт о прохождении воздушного маршрута', [
-          {name:'👨‍✈️ Пилот', value: pilot, inline:true},
-          {name:'📅 Дата полёта', value: document.getElementById('routeDate').value || '—', inline:true},
-          {name:'🗺️ Маршрут', value: document.getElementById('routeType').value, inline:true},
-          {name:'🎥 Видеозапись', value: video},
-          {name:'📝 Заметки', value: document.getElementById('routeNotes').value || '—'}
-        ]);
-        showAlert('routeAlert','✅ Отчёт о маршруте отправлен!','success');
-        document.getElementById('routePilotName').value=''; document.getElementById('routeDate').value=''; document.getElementById('routeVideo').value=''; document.getElementById('routeNotes').value='';
-      } catch(e){ showAlert('routeAlert',`Ошибка: ${e.message}`,'error'); }
-      finally { btn.disabled=false; btn.innerHTML='<i class="fab fa-discord"></i> ОТПРАВИТЬ ОТЧЁТ'; }
-    });
-
-    // Тема
-    const themeSwitch = document.getElementById('themeSwitch');
-    themeSwitch.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      const isLight = document.body.classList.contains('light');
-      localStorage.setItem('usafTheme', isLight ? 'light' : 'dark');
-      const icon = themeSwitch.querySelector('i'); const span = themeSwitch.querySelector('span');
-      if (isLight) { icon.className = 'fas fa-moon'; span.innerText = 'Тёмная тема'; }
-      else { icon.className = 'fas fa-sun'; span.innerText = 'Светлая тема'; }
-    });
-    if (localStorage.getItem('usafTheme') === 'light') {
-      document.body.classList.add('light');
-      themeSwitch.querySelector('i').className = 'fas fa-moon';
-      themeSwitch.querySelector('span').innerText = 'Тёмная тема';
-    }
-
-    renderActions('weeklyActionsList', weeklyActions, updateWeeklyTotal, 'weekly');
-    renderActions('promActionsList', promotionActions, updatePromTotal, 'prom');
-    showMain();
-  </script>
+        showHome();
+        setDefaultWeeklyDates();
+        renderWeeklyActionsFull();
+        renderPromotionActionsFull();
+        updatePromotionDateInfo();
+    </script>
 </body>
 </html>
