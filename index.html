@@ -717,25 +717,25 @@
                 <div class="main-card" data-type="weekly">
                     <div class="main-card-icon">📊</div>
                     <h3>Еженедельный отчёт</h3>
-                    <p>Еженедельный отчёт сотрудников</p>
+                    <p>Подача еженедельного отчета о проделанной работе в отделе.</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="main-card" data-type="promotion">
                     <div class="main-card-icon">⬆️</div>
                     <h3>Отчёт на повышение</h3>
-                    <p>Отчёт на повышение</p>
+                    <p>Отправка отчета на повышение в должности с предоставлением всех ссылок.</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="main-card" data-type="pilot">
                     <div class="main-card-icon">🛩️</div>
                     <h3>Квалификация пилота</h3>
-                    <p>Повышение лётной категории</p>
+                    <p>Отчет на повышение категории пилота с указанием налета часов и прикреплением доказательств.</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="main-card" data-type="route">
                     <div class="main-card-icon">🗺️</div>
                     <h3>Отчёт о маршруте</h3>
-                    <p>Прохождение воздушного маршрута</p>
+                    <p>Отчет о прохождении летного маршрута с прикреплением видео и выбором маршрута.</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
             </div>
@@ -1177,7 +1177,7 @@
             if (type === 'weekly') {
                 title.innerHTML = '<i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт USAF';
                 fieldsDiv.innerHTML = `
-                    <div class="input-group"><label><i class="fas fa-user"></i> ИМЯ ФАМИЛИЯ (никнейм)</label><input type="text" id="wName" placeholder="John Doe"></div>
+                    <div class="input-group"><label><i class="fas fa-user"></i> ИМЯ ФАМИЛИЯ (никнейм)</label><input type="text" id="wName" placeholder="Alexandr DeHaus"></div>
                     <div class="input-group"><label><i class="fas fa-medal"></i> ВАШЕ ЗВАНИЕ</label><select id="wRank"><option value="">-- Выберите --</option>${rankOptions}</select></div>
                     <div class="period-row"><div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА НАЧАЛА</label><input type="date" id="wStart"></div>
                     <div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА ОКОНЧАНИЯ</label><input type="date" id="wEnd"></div></div>
@@ -1191,7 +1191,7 @@
             } else if (type === 'promotion') {
                 title.innerHTML = '<i class="fas fa-arrow-up"></i> ⭐ Запрос на повышение звания USAF';
                 fieldsDiv.innerHTML = `
-                    <div class="input-group"><label><i class="fas fa-user"></i> ПОЛНОЕ ИМЯ</label><input type="text" id="pName" placeholder="Иван Соколов"></div>
+                    <div class="input-group"><label><i class="fas fa-user"></i> ПОЛНОЕ ИМЯ</label><input type="text" id="pName" placeholder="Alexandr DeHaus"></div>
                     <div class="input-group"><label><i class="fas fa-arrow-down"></i> ТЕКУЩЕЕ ЗВАНИЕ</label><select id="pCurrentRank"><option value="">-- Выберите --</option>${rankOptions}</select></div>
                     <div class="input-group"><label><i class="fas fa-arrow-up"></i> ЖЕЛАЕМОЕ ЗВАНИЕ</label><select id="pDesiredRank"><option value="">-- Выберите --</option>${rankOptions}</select></div>
                     <div class="input-group"><label><i class="fas fa-history"></i> ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="pLastDate"></div>
@@ -1201,7 +1201,7 @@
             } else if (type === 'pilot') {
                 title.innerHTML = '<i class="fas fa-wings"></i> 🛩️ Повышение лётной категории';
                 fieldsDiv.innerHTML = `
-                    <div class="input-group"><label><i class="fas fa-user"></i> ПИЛОТ (Имя Фамилия)</label><input type="text" id="pilName" placeholder="Michael Johnson"></div>
+                    <div class="input-group"><label><i class="fas fa-user"></i> ПИЛОТ (Имя Фамилия)</label><input type="text" id="pilName" placeholder="Alexandr DeHaus"></div>
                     <div class="input-group"><label><i class="fas fa-chart-line"></i> ТЕКУЩАЯ КАТЕГОРИЯ</label>
                         <select id="pilCurrentCat"><option>Пилот третьей категории</option><option>Пилот второй категории</option><option>Пилот первой категории</option><option>Пилот высшей категории</option><option>Пилот АС</option></select>
                     </div>
@@ -1217,7 +1217,7 @@
             } else if (type === 'route') {
                 title.innerHTML = '<i class="fas fa-map-marked-alt"></i> 🗺️ Отчёт о прохождении воздушного маршрута';
                 fieldsDiv.innerHTML = `
-                    <div class="input-group"><label><i class="fas fa-user"></i> ПИЛОТ (Имя Фамилия)</label><input type="text" id="rPilotName" placeholder="Emily Clark"></div>
+                    <div class="input-group"><label><i class="fas fa-user"></i> ПИЛОТ (Имя Фамилия)</label><input type="text" id="rPilotName" placeholder="Alexandr DeHaus"></div>
                     <div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА ВЫПОЛНЕНИЯ</label><input type="date" id="rDate"></div>
                     <div class="input-group"><label><i class="fas fa-route"></i> НОМЕР МАРШРУТА</label>
                         <select id="rType"><option>Маршрут №1</option><option>Маршрут №2.1</option><option>Маршрут №2.2</option><option>Маршрут №3</option><option>Маршрут №4</option><option>Маршрут К+[H]</option><option>Маршрут К+[P]</option></select>
