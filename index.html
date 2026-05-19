@@ -722,13 +722,12 @@
             <p class="subtitle">United States Air Force | Система отчетов</p>
         </div>
 
-        <!-- Главное меню -->
         <div id="mainPage" class="page">
             <div class="main-cards-grid">
                 <div class="main-card" data-type="weekly">
                     <div class="main-card-icon"><i class="fas fa-calendar-week"></i></div>
                     <h3>📊 Еженедельный отчёт</h3>
-                    <p>Отчёт о лётной и служебной деятельности с бальной системой</p>
+                    <p>Отчёт о служебной деятельности с бальной системой</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="main-card" data-type="promotion">
@@ -752,11 +751,8 @@
             </div>
         </div>
 
-        <!-- Форма отчёта -->
         <div id="formPage" class="page">
-            <div class="back-btn" id="backBtn">
-                <i class="fas fa-arrow-left"></i> На главную
-            </div>
+            <div class="back-btn" id="backBtn"><i class="fas fa-arrow-left"></i> На главную</div>
             <div class="glass-card">
                 <div class="card-header">
                     <h2 id="formTitle"><i class="fas fa-file-alt"></i> Форма отчёта</h2>
@@ -779,45 +775,32 @@
                         <span class="total-points-value" id="totalPoints">0</span>
                     </div>
                     <button class="submit-btn" id="submitBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ ОТЧЁТ</button>
-                    <div class="footer-signature">
-                        <i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i>
-                    </div>
+                    <div class="footer-signature"><i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // БАЛЬНАЯ СИСТЕМА USAF (полный список)
+        // БАЛЬНАЯ СИСТЕМА
         const ACTIVITY_POINTS = {
-            "Патруль": 10,
-            "Нахождение регруппа, который напал на ФЗ во время КЧ": 15,
-            "Участие в поставке NG": 5,
-            "Участие в поставке EMS": 5,
-            "Эвакуация солдата NG": 2,
-            "Дежурство на ДВ во время КЧ": 4,
-            "Участие в вечернем построении": 2,
-            "Фиксация взятие ЛА с нарушением": 4,
-            "Проведение тренировки/лекции": 4,
-            "Участие на тренировках/лекциях": 2,
-            "Участие на гос. тренировке": 5,
+            "Патруль": 10, "Нахождение регруппа, который напал на ФЗ во время КЧ": 15,
+            "Участие в поставке NG": 5, "Участие в поставке EMS": 5, "Эвакуация солдата NG": 2,
+            "Дежурство на ДВ во время КЧ": 4, "Участие в вечернем построении": 2,
+            "Фиксация взятие ЛА с нарушением": 4, "Проведение тренировки/лекции": 4,
+            "Участие на тренировках/лекциях": 2, "Участие на гос. тренировке": 5,
             "Проведение ареста (Нашивка должна быть в рации департамента)": 6,
-            "Участие в рейде/отбитии захвата гос. структуры": 10,
-            "Участие в усиленном патруле": 6,
-            "Участие на отбитие анальгетики": 5,
-            "Удачное отбитие ФЗ/ФТ": 10,
-            "Участие на Дроп/Поезде": 3,
-            "Участие на Черный рынок": 10,
-            "Участие в МП": 5,
-            "Участие в ГМП": 10,
-            "Проведение экзамена": 5,
-            "Проверка маршрута": 3,
-            "Проверка отчета": 3,
-            "Участие в прок/мед проверках": 3
+            "Участие в рейде/отбитии захвата гос. структуры": 10, "Участие в усиленном патруле": 6,
+            "Участие на отбитие анальгетики": 5, "Удачное отбитие ФЗ/ФТ": 10,
+            "Участие на Дроп/Поезде": 3, "Участие на Черный рынок": 10,
+            "Участие в МП": 5, "Участие в ГМП": 10, "Проведение экзамена": 5,
+            "Проверка маршрута": 3, "Проверка отчета": 3, "Участие в прок/мед проверках": 3
         };
         const ACTIVITY_NAMES = Object.keys(ACTIVITY_POINTS);
+        
+        // Ранги
+        const RANKS = ["Специалист (3)", "Капрал (4)", "Сержант (5)", "Штаб-сержант (6)", "Уорент-офицер (7)", "Старший Уорент-офицер (8)", "Лейтенант (9)", "Капитан (10)", "Майор (11)", "Подполковник (12)"];
 
-        // Вебхуки (замените на свои)
         const WEBHOOKS = {
             weekly: 'https://discord.com/api/webhooks/1500899546031591688/wpkBFTZbOGyCFvhJ-SfYbPvbJFikcwDCLv983roAS7zj-AelGhtwWltVZ8JUOEmCvAEv',
             promotion: 'https://discord.com/api/webhooks/1500900181086961846/YJt7paNvrerqttykZ2Qk8q11ogdP-qMU8vBAwdPHf8hXcIoL-WsJbchkP-igh5L4R4gv',
@@ -849,113 +832,160 @@
             document.getElementById('mainPage').style.display = 'block';
         }
 
-        function renderActionsList() {
-            const container = document.getElementById('actionsList');
-            const empty = document.getElementById('emptyActions');
-            if (!container) return;
-            
-            if (currentActions.length === 0) {
-                empty.style.display = 'block';
-                container.innerHTML = '';
-                return;
-            }
-            empty.style.display = 'none';
-            
-            container.innerHTML = currentActions.map((a, i) => `
-                <div class="action-item" data-idx="${i}">
+        // Создание HTML для одного действия
+        function createActionHTML(a, idx) {
+            return `
+                <div class="action-item" data-idx="${idx}">
                     <div class="action-header">
-                        <div class="action-title"><i class="fas fa-tag"></i> ДЕЙСТВИЕ #${i+1}</div>
-                        <button class="remove-action" data-idx="${i}"><i class="fas fa-trash"></i> Удалить</button>
+                        <div class="action-title"><i class="fas fa-tag"></i> ДЕЙСТВИЕ #${idx+1}</div>
+                        <button class="remove-action" data-idx="${idx}"><i class="fas fa-trash"></i> Удалить</button>
                     </div>
                     <div class="action-fields">
                         <div class="action-field">
                             <label>ТИП АКТИВНОСТИ</label>
-                            <select class="action-type" data-idx="${i}">
+                            <select class="action-type" data-idx="${idx}">
                                 <option value="">-- Выберите --</option>
                                 ${ACTIVITY_NAMES.map(n => `<option value="${n}" data-points="${ACTIVITY_POINTS[n]}" ${a.type === n ? 'selected' : ''}>${n} (${ACTIVITY_POINTS[n]} баллов)</option>`).join('')}
                             </select>
                         </div>
                         <div class="action-field">
                             <label>КОЛ-ВО</label>
-                            <input type="number" class="action-count" data-idx="${i}" value="${a.count || 1}" min="1">
+                            <input type="number" class="action-count" data-idx="${idx}" value="${a.count || 1}" min="1">
                         </div>
                         <div class="proofs-section">
                             <label><i class="fas fa-images"></i> ДОКАЗАТЕЛЬСТВА (ссылки)</label>
                             <div class="proofs-list">
                                 ${(a.proofs || ['']).map((p, pi) => `
                                     <div class="proof-item">
-                                        <input type="text" class="proof-input" data-action="${i}" data-proof="${pi}" value="${escapeHtml(p)}" placeholder="https://пример.com/скриншот">
-                                        ${(a.proofs.length > 1) ? `<button class="remove-proof" data-action="${i}" data-proof="${pi}"><i class="fas fa-times"></i></button>` : ''}
+                                        <input type="text" class="proof-input" data-action="${idx}" data-proof="${pi}" value="${escapeHtml(p)}" placeholder="https://пример.com/скриншот">
+                                        ${(a.proofs.length > 1) ? `<button class="remove-proof" data-action="${idx}" data-proof="${pi}"><i class="fas fa-times"></i></button>` : ''}
                                     </div>
                                 `).join('')}
                             </div>
-                            <button class="add-proof-btn" data-action="${i}"><i class="fas fa-plus"></i> Добавить доказательство</button>
+                            <button class="add-proof-btn" data-action="${idx}"><i class="fas fa-plus"></i> Добавить доказательство</button>
                         </div>
                     </div>
                     <div class="points-row">
                         <span class="points-badge"><i class="fas fa-star"></i> БАЛЛЫ: ${calcPoints(a)}</span>
                     </div>
                 </div>
-            `).join('');
-            
-            attachActionEvents();
+            `;
         }
 
-        function attachActionEvents() {
-            document.querySelectorAll('.remove-action').forEach(btn => {
-                btn.onclick = () => {
-                    const idx = parseInt(btn.dataset.idx);
+        // Добавление нового действия (без перерисовки всего списка)
+        function addAction() {
+            const newIdx = currentActions.length;
+            currentActions.push({ type: '', count: 1, proofs: [''] });
+            
+            const container = document.getElementById('actionsList');
+            const emptyDiv = document.getElementById('emptyActions');
+            
+            if (emptyDiv.style.display !== 'none') {
+                emptyDiv.style.display = 'none';
+                container.innerHTML = '';
+            }
+            
+            const newHTML = createActionHTML(currentActions[newIdx], newIdx);
+            container.insertAdjacentHTML('beforeend', newHTML);
+            
+            const newElement = container.lastElementChild;
+            newElement.style.animation = 'actionSlideIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+            
+            attachActionEvents(newElement, newIdx);
+            updateTotalDisplay();
+        }
+
+        // Привязка событий к конкретному элементу действия
+        function attachActionEvents(element, idx) {
+            const removeBtn = element.querySelector('.remove-action');
+            removeBtn.onclick = () => {
+                element.style.animation = 'actionRemove 0.3s ease forwards';
+                setTimeout(() => {
                     currentActions.splice(idx, 1);
-                    renderActionsList();
+                    renderFullActionsList();
                     updateTotalDisplay();
-                };
+                }, 300);
+            };
+            
+            const typeSelect = element.querySelector('.action-type');
+            typeSelect.onchange = () => {
+                currentActions[idx].type = typeSelect.value;
+                const pointsSpan = element.querySelector('.points-badge');
+                pointsSpan.innerHTML = `<i class="fas fa-star"></i> БАЛЛЫ: ${calcPoints(currentActions[idx])}`;
+                updateTotalDisplay();
+            };
+            
+            const countInput = element.querySelector('.action-count');
+            countInput.oninput = () => {
+                currentActions[idx].count = Math.max(1, parseInt(countInput.value) || 1);
+                const pointsSpan = element.querySelector('.points-badge');
+                pointsSpan.innerHTML = `<i class="fas fa-star"></i> БАЛЛЫ: ${calcPoints(currentActions[idx])}`;
+                updateTotalDisplay();
+            };
+            
+            const addProofBtn = element.querySelector('.add-proof-btn');
+            addProofBtn.onclick = () => {
+                if (!currentActions[idx].proofs) currentActions[idx].proofs = [''];
+                const newProofIdx = currentActions[idx].proofs.length;
+                currentActions[idx].proofs.push('');
+                const proofsList = element.querySelector('.proofs-list');
+                const newProofHTML = `
+                    <div class="proof-item" style="animation: proofFadeIn 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1)">
+                        <input type="text" class="proof-input" data-action="${idx}" data-proof="${newProofIdx}" value="" placeholder="https://пример.com/скриншот">
+                        <button class="remove-proof" data-action="${idx}" data-proof="${newProofIdx}"><i class="fas fa-times"></i></button>
+                    </div>
+                `;
+                proofsList.insertAdjacentHTML('beforeend', newProofHTML);
+                attachProofEvents(proofsList.lastElementChild, idx, newProofIdx);
+            };
+            
+            element.querySelectorAll('.proof-input').forEach(inp => {
+                const pi = parseInt(inp.dataset.proof);
+                inp.onchange = () => { if (currentActions[idx]?.proofs) currentActions[idx].proofs[pi] = inp.value; };
             });
-            document.querySelectorAll('.action-type').forEach(sel => {
-                sel.onchange = () => {
-                    const idx = parseInt(sel.dataset.idx);
-                    currentActions[idx].type = sel.value;
-                    renderActionsList();
-                    updateTotalDisplay();
-                };
-            });
-            document.querySelectorAll('.action-count').forEach(inp => {
-                inp.oninput = () => {
-                    const idx = parseInt(inp.dataset.idx);
-                    currentActions[idx].count = Math.max(1, parseInt(inp.value) || 1);
-                    renderActionsList();
-                    updateTotalDisplay();
-                };
-            });
-            document.querySelectorAll('.add-proof-btn').forEach(btn => {
+            
+            element.querySelectorAll('.remove-proof').forEach(btn => {
                 btn.onclick = () => {
-                    const idx = parseInt(btn.dataset.action);
-                    if (!currentActions[idx].proofs) currentActions[idx].proofs = [''];
-                    currentActions[idx].proofs.push('');
-                    renderActionsList();
-                };
-            });
-            document.querySelectorAll('.proof-input').forEach(inp => {
-                inp.onchange = () => {
-                    const ai = parseInt(inp.dataset.action);
-                    const pi = parseInt(inp.dataset.proof);
-                    if (currentActions[ai]?.proofs) currentActions[ai].proofs[pi] = inp.value;
-                };
-            });
-            document.querySelectorAll('.remove-proof').forEach(btn => {
-                btn.onclick = () => {
-                    const ai = parseInt(btn.dataset.action);
                     const pi = parseInt(btn.dataset.proof);
-                    if (currentActions[ai]?.proofs?.length > 1) {
-                        currentActions[ai].proofs.splice(pi, 1);
-                        renderActionsList();
+                    if (currentActions[idx].proofs.length > 1) {
+                        const proofItem = btn.closest('.proof-item');
+                        proofItem.style.animation = 'proofRemove 0.25s ease forwards';
+                        setTimeout(() => {
+                            currentActions[idx].proofs.splice(pi, 1);
+                            renderFullActionsList();
+                        }, 250);
                     }
                 };
             });
         }
+        
+        function attachProofEvents(proofItem, actionIdx, proofIdx) {
+            const inp = proofItem.querySelector('.proof-input');
+            inp.onchange = () => { if (currentActions[actionIdx]?.proofs) currentActions[actionIdx].proofs[proofIdx] = inp.value; };
+            const removeBtn = proofItem.querySelector('.remove-proof');
+            removeBtn.onclick = () => {
+                if (currentActions[actionIdx].proofs.length > 1) {
+                    proofItem.style.animation = 'proofRemove 0.25s ease forwards';
+                    setTimeout(() => {
+                        currentActions[actionIdx].proofs.splice(proofIdx, 1);
+                        renderFullActionsList();
+                    }, 250);
+                }
+            };
+        }
 
-        function addAction() {
-            currentActions.push({ type: '', count: 1, proofs: [''] });
-            renderActionsList();
+        function renderFullActionsList() {
+            const container = document.getElementById('actionsList');
+            const emptyDiv = document.getElementById('emptyActions');
+            if (currentActions.length === 0) {
+                emptyDiv.style.display = 'block';
+                container.innerHTML = '';
+                updateTotalDisplay();
+                return;
+            }
+            emptyDiv.style.display = 'none';
+            container.innerHTML = currentActions.map((a, i) => createActionHTML(a, i)).join('');
+            container.querySelectorAll('.action-item').forEach((el, i) => attachActionEvents(el, i));
             updateTotalDisplay();
         }
 
@@ -984,61 +1014,52 @@
             try {
                 if (currentType === 'weekly') {
                     const name = document.getElementById('wName')?.value.trim();
-                    const rank = document.getElementById('wRank')?.value.trim() || 'Не указано';
+                    const rank = document.getElementById('wRank')?.value || 'Не указано';
                     const start = document.getElementById('wStart')?.value || '';
                     const end = document.getElementById('wEnd')?.value || '';
                     const period = (start && end) ? `${formatDate(start)} – ${formatDate(end)}` : 'Не указан';
-                    
-                    let actionsText = '';
-                    let total = 0;
+                    if (!name) throw new Error('Введите имя пилота');
+                    let acts = '', total = 0;
                     currentActions.forEach((a, i) => {
                         const pts = calcPoints(a);
                         total += pts;
                         const proofs = (a.proofs?.filter(p => p).map(p => `• ${p}`).join('\n') || 'Нет');
-                        actionsText += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
+                        acts += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
                     });
-                    if (currentActions.length === 0) actionsText = 'Нет действий';
-                    if (!name) throw new Error('Введите имя пилота');
-                    
+                    if (currentActions.length === 0) acts = 'Нет действий';
                     await sendToDiscord(WEBHOOKS.weekly, '📅 Еженедельный рапорт USAF', [
                         { name: '👨‍✈️ Пилот', value: name, inline: true },
                         { name: '🏅 Звание', value: rank, inline: true },
                         { name: '📆 Период', value: period, inline: true },
-                        { name: '📊 Активности', value: actionsText.substring(0, 900) },
+                        { name: '📊 Активности', value: acts.substring(0, 900) },
                         { name: '🏆 ИТОГО БАЛЛОВ', value: `${total}`, inline: true }
                     ]);
                     showAlert(alertId, '✅ Отчёт отправлен!', 'success');
                     resetForm();
-                    
                 } else if (currentType === 'promotion') {
                     const name = document.getElementById('pName')?.value.trim();
-                    const curRank = document.getElementById('pCurrentRank')?.value.trim();
-                    const desRank = document.getElementById('pDesiredRank')?.value.trim();
+                    const curRank = document.getElementById('pCurrentRank')?.value;
+                    const desRank = document.getElementById('pDesiredRank')?.value;
                     const lastDate = document.getElementById('pLastDate')?.value || '';
-                    
                     if (!name || !curRank || !desRank) throw new Error('Заполните все поля');
-                    
-                    let actionsText = '';
-                    let total = 0;
+                    let acts = '', total = 0;
                     currentActions.forEach((a, i) => {
                         const pts = calcPoints(a);
                         total += pts;
                         const proofs = (a.proofs?.filter(p => p).map(p => `• ${p}`).join('\n') || 'Нет');
-                        actionsText += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
+                        acts += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
                     });
-                    if (currentActions.length === 0) actionsText = 'Нет достижений';
-                    
+                    if (currentActions.length === 0) acts = 'Нет достижений';
                     await sendToDiscord(WEBHOOKS.promotion, '⭐ Запрос на повышение звания USAF', [
                         { name: '👤 Военнослужащий', value: name, inline: true },
                         { name: '🎖️ Текущее звание', value: curRank, inline: true },
                         { name: '⭐ Желаемое звание', value: desRank, inline: true },
                         { name: '📅 Последнее повышение', value: formatDate(lastDate) || 'Не указано', inline: true },
-                        { name: '📜 Достижения', value: actionsText.substring(0, 900) },
+                        { name: '📜 Достижения', value: acts.substring(0, 900) },
                         { name: '🏆 Сумма баллов', value: `${total}`, inline: true }
                     ]);
                     showAlert(alertId, '✅ Запрос отправлен!', 'success');
                     resetForm();
-                    
                 } else if (currentType === 'pilot') {
                     const name = document.getElementById('pilName')?.value.trim();
                     const currentCat = document.getElementById('pilCurrentCat')?.value;
@@ -1046,9 +1067,7 @@
                     const hours = document.getElementById('pilHours')?.value;
                     const audit = document.getElementById('pilAudit')?.value.trim() || 'Не указано';
                     const date = document.getElementById('pilDate')?.value || new Date().toISOString().slice(0,10);
-                    
                     if (!name || !hours) throw new Error('Введите имя пилота и налёт часов');
-                    
                     await sendToDiscord(WEBHOOKS.pilot, '🛩️ Аттестация на повышение лётной категории', [
                         { name: '✈️ Пилот', value: name, inline: true },
                         { name: '📊 Текущая категория', value: currentCat, inline: true },
@@ -1057,18 +1076,15 @@
                         { name: '🔗 Ссылка на аудит', value: audit },
                         { name: '📅 Дата подачи', value: date, inline: true }
                     ]);
-                    showAlert(alertId, '✅ Заявка на повышение квалификации отправлена!', 'success');
+                    showAlert(alertId, '✅ Заявка отправлена!', 'success');
                     resetForm();
-                    
                 } else if (currentType === 'route') {
                     const pilot = document.getElementById('rPilotName')?.value.trim();
                     const routeDate = document.getElementById('rDate')?.value || '';
                     const routeType = document.getElementById('rType')?.value;
                     const video = document.getElementById('rVideo')?.value.trim();
                     const notes = document.getElementById('rNotes')?.value.trim() || '—';
-                    
                     if (!pilot || !video) throw new Error('Укажите имя пилота и ссылку на видео');
-                    
                     await sendToDiscord(WEBHOOKS.route, '🗺️ Отчёт о прохождении воздушного маршрута', [
                         { name: '👨‍✈️ Пилот', value: pilot, inline: true },
                         { name: '📅 Дата полёта', value: routeDate || 'Не указана', inline: true },
@@ -1089,8 +1105,7 @@
 
         function resetForm() {
             currentActions = [];
-            renderActionsList();
-            updateTotalDisplay();
+            renderFullActionsList();
             if (currentType === 'weekly') {
                 const wName = document.getElementById('wName');
                 const wRank = document.getElementById('wRank');
@@ -1162,15 +1177,15 @@
             const actionsSection = document.getElementById('actionsSection');
             const totalBar = document.getElementById('totalPointsBar');
             
+            const rankOptions = RANKS.map(r => `<option>${r}</option>`).join('');
+            
             if (type === 'weekly') {
                 title.innerHTML = '<i class="fas fa-calendar-week"></i> 📊 Еженедельный отчёт USAF';
                 fieldsDiv.innerHTML = `
                     <div class="input-group"><label><i class="fas fa-user"></i> ИМЯ ФАМИЛИЯ (никнейм)</label><input type="text" id="wName" placeholder="John Doe"></div>
-                    <div class="input-group"><label><i class="fas fa-medal"></i> ВАШЕ ЗВАНИЕ</label><input type="text" id="wRank" placeholder="Лейтенант / Капитан"></div>
-                    <div class="period-row">
-                        <div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА НАЧАЛА</label><input type="date" id="wStart"></div>
-                        <div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА ОКОНЧАНИЯ</label><input type="date" id="wEnd"></div>
-                    </div>
+                    <div class="input-group"><label><i class="fas fa-medal"></i> ВАШЕ ЗВАНИЕ</label><select id="wRank"><option value="">-- Выберите --</option>${rankOptions}</select></div>
+                    <div class="period-row"><div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА НАЧАЛА</label><input type="date" id="wStart"></div>
+                    <div class="input-group"><label><i class="fas fa-calendar-alt"></i> ДАТА ОКОНЧАНИЯ</label><input type="date" id="wEnd"></div></div>
                     <div class="period-info" id="periodInfo"></div>
                 `;
                 actionsSection.style.display = 'block';
@@ -1182,8 +1197,8 @@
                 title.innerHTML = '<i class="fas fa-arrow-up"></i> ⭐ Запрос на повышение звания USAF';
                 fieldsDiv.innerHTML = `
                     <div class="input-group"><label><i class="fas fa-user"></i> ПОЛНОЕ ИМЯ</label><input type="text" id="pName" placeholder="Иван Соколов"></div>
-                    <div class="input-group"><label><i class="fas fa-arrow-down"></i> ТЕКУЩЕЕ ЗВАНИЕ</label><input type="text" id="pCurrentRank" placeholder="Лейтенант"></div>
-                    <div class="input-group"><label><i class="fas fa-arrow-up"></i> ЖЕЛАЕМОЕ ЗВАНИЕ</label><input type="text" id="pDesiredRank" placeholder="Капитан"></div>
+                    <div class="input-group"><label><i class="fas fa-arrow-down"></i> ТЕКУЩЕЕ ЗВАНИЕ</label><select id="pCurrentRank"><option value="">-- Выберите --</option>${rankOptions}</select></div>
+                    <div class="input-group"><label><i class="fas fa-arrow-up"></i> ЖЕЛАЕМОЕ ЗВАНИЕ</label><select id="pDesiredRank"><option value="">-- Выберите --</option>${rankOptions}</select></div>
                     <div class="input-group"><label><i class="fas fa-history"></i> ДАТА ПОСЛЕДНЕГО ПОВЫШЕНИЯ</label><input type="date" id="pLastDate"></div>
                 `;
                 actionsSection.style.display = 'block';
@@ -1219,8 +1234,7 @@
                 totalBar.style.display = 'none';
             }
             
-            renderActionsList();
-            updateTotalDisplay();
+            renderFullActionsList();
         }
 
         document.getElementById('backBtn').onclick = showMainPage;
@@ -1249,7 +1263,7 @@
         }
         
         showMainPage();
-        renderActionsList();
+        renderFullActionsList();
     </script>
 </body>
 </html>
