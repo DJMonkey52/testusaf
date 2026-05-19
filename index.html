@@ -717,13 +717,13 @@
                 <div class="main-card" data-type="weekly">
                     <div class="main-card-icon">📊</div>
                     <h3>Еженедельный отчёт</h3>
-                    <p>Отчёт о служебной деятельности с бальной системой</p>
+                    <p>Еженедельный отчёт сотрудников</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="main-card" data-type="promotion">
                     <div class="main-card-icon">⬆️</div>
                     <h3>Отчёт на повышение</h3>
-                    <p>Повышение в звании / должности</p>
+                    <p>Отчёт на повышение</p>
                     <div class="main-card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="main-card" data-type="pilot">
@@ -765,7 +765,7 @@
                         <span class="total-points-value" id="totalPoints">0</span>
                     </div>
                     <button class="submit-btn" id="submitBtn"><i class="fab fa-discord"></i> ОТПРАВИТЬ ОТЧЁТ</button>
-                    <div class="footer-signature"><i class="fas fa-code"></i> USAF High Command <i class="fas fa-heart"></i></div>
+                    <div class="footer-signature"><i class="fas fa-code"></i> By Alexandr DeHaus & Evgeny Bauer <i class="fas fa-heart"></i></div>
                 </div>
             </div>
         </div>
@@ -990,7 +990,7 @@
         }
 
         async function sendToDiscord(webhook, title, fields, color = 0xD4AF37) {
-            const embed = { title, color, fields, footer: { text: "USAF Reporting System" }, timestamp: new Date().toISOString() };
+            const embed = { title, color, fields, footer: { text: "USAF | By Alexandr DeHaus & Evgeny Bauer" }, timestamp: new Date().toISOString() };
             const resp = await fetch(webhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -1022,7 +1022,7 @@
                         acts += `**${i+1}. ${a.type || 'Не выбрано'}** ×${a.count || 1} = ${pts} баллов\n📎 Доказательства:\n${proofs}\n\n`;
                     });
                     if (currentActions.length === 0) acts = 'Нет действий';
-                    await sendToDiscord(WEBHOOKS.weekly, '📅 Еженедельный рапорт USAF', [
+                    await sendToDiscord(WEBHOOKS.weekly, '📅 Еженедельный отчёт USAF', [
                         { name: '👨‍✈️ Пилот', value: name, inline: true },
                         { name: '🏅 Звание', value: rank, inline: true },
                         { name: '📆 Период', value: period, inline: true },
